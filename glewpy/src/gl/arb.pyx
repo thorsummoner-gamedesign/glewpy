@@ -1,4 +1,3 @@
-include "../gltypes.pxi"
 include "../glewpy.pxi"
 
 cdef extern from "GL/glew.h":
@@ -127,10 +126,8 @@ def glDrawBuffersARB(n, bufs):
 
    if c_GLEW_ARB_draw_buffers:
       args = <GLenum*>PyMem_Malloc(sizeof(GLenum) * n)
-      i = 0
-      for buf in bufs:
-         args[i] = buf
-         i = i + 1
+      for i from 0 <= i < n:
+         args[i] = bufs[i]
       c_glDrawBuffersARB(n, args)
       PyMem_Free(args)
    else:
@@ -520,9 +517,9 @@ def glGetAttachedObjectsARB(containerObj):
       obj = <GLhandleARB*>PyMem_Malloc(sizeof(GLhandleARB) * maxCount)
       c_glGetAttachedObjectsARB(containerObj, maxCount, NULL, obj)
       
-      retval = list()
+      retval = list(xrange(maxCount))
       for i from 0 <= i < maxCount:
-         retval.append(obj[i])
+         retval[i] = obj[i]
       PyMem_Free(obj)
       return retval
    else:
@@ -555,20 +552,20 @@ def glGetInfoLogARB(obj):
       raise GlewpyError('GLEW_ARB_shader_objects', 'glGetInfoLogARB')
 
 def glGetObjectParameterfvARB(obj, pname):
-   cdef GLfloat params
+   cdef GLfloat param
 
    if c_GLEW_ARB_shader_objects:
-      c_glGetObjectParameterfvARB(obj, pname, &params)
-      return params
+      c_glGetObjectParameterfvARB(obj, pname, &param)
+      return param
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glGetObjectParameterfvARB')
 
 def glGetObjectParameterivARB(programObj, location):
-   cdef GLint params
+   cdef GLint param
    
    if c_GLEW_ARB_shader_objects:
-      c_glGetObjectParameterivARB(programObj, location, &params)
-      return params
+      c_glGetObjectParameterivARB(programObj, location, &param)
+      return param
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glGetObjectParameterfvARB')
 
@@ -598,20 +595,20 @@ def glGetUniformLocationARB(programObj, name):
       raise GlewpyError('GLEW_ARB_shader_objects', 'glGetUniformLocationARB')
 
 def glGetUniformfvARB(programObj, location):
-   cdef GLfloat params
+   cdef GLfloat param
 
    if c_GLEW_ARB_shader_objects:
-      c_glGetUniformfvARB(programObj, location, &params)
-      return params 
+      c_glGetUniformfvARB(programObj, location, &param)
+      return param
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glGetUniformfvARB')
 
 def glGetUniformivARB(programObj, location):
-   cdef GLint params
+   cdef GLint param
 
    if c_GLEW_ARB_shader_objects:
-      c_glGetUniformivARB(programObj, location, &params)
-      return params
+      c_glGetUniformivARB(programObj, location, &param)
+      return param
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glGetUniformivARB')
 
@@ -677,10 +674,8 @@ def glUniform2fvARB(location, count, value):
    cdef int i
 
    if c_GLEW_ARB_shader_objects:
-      i = 0
-      for val in value:
-         args[i] = val
-         i = i + 1
+      for i from 0 <= i < 2:
+         args[i] = value[i]
       c_glUniform2fvARB(location, count, args)
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform2fvARB')
@@ -696,10 +691,8 @@ def glUniform2ivARB(location, count, value):
    cdef int i
 
    if c_GLEW_ARB_shader_objects:
-      i = 0
-      for val in value:
-         args[i] = val
-         i = i + 1
+      for i from 0 <= i < 2:
+         args[i] = value[i]
       c_glUniform2ivARB(location, count, args)
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform2ivARB')
@@ -715,10 +708,9 @@ def glUniform3fvARB(location, count, value):
    cdef int i
 
    if c_GLEW_ARB_shader_objects:
-      i = 0
-      for val in value:
-         args[i] = val
-         i = i + 1
+      for i from 0 <= i < 3:
+         args[i] = value[i]
+         print args[i]
       c_glUniform3fvARB(location, count, args)
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform3fvARB')
@@ -734,10 +726,8 @@ def glUniform3ivARB(location, count, value):
    cdef int i
 
    if c_GLEW_ARB_shader_objects:
-      i = 0
-      for val in value:
-         args[i] = val
-         i = i + 1
+      for i from 0 <= i < 3:
+         args[i] = value[i]
       c_glUniform3ivARB(location, count, args)
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform3ivARB')
@@ -753,10 +743,8 @@ def glUniform4fvARB(location, count, value):
    cdef int i
 
    if c_GLEW_ARB_shader_objects:
-      i = 0
-      for val in value:
-         args[i] = val
-         i = i + 1
+      for i from 0 <= i < 4:
+         args[i] = value[i]
       c_glUniform4fvARB(location, count, args)
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform4fvARB')
@@ -772,10 +760,8 @@ def glUniform4ivARB(location, count, value):
    cdef int i
 
    if c_GLEW_ARB_shader_objects:
-      i = 0
-      for val in value:
-         args[i] = val
-         i = i + 1
+      for i from 0 <= i < 4:
+         args[i] = value[i]
       c_glUniform4ivARB(location, count, args)
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform4ivARB')
@@ -785,10 +771,8 @@ def glUniformMatrix2fvARB(location, count, transpose, value):
    cdef int i
 
    if c_GLEW_ARB_shader_objects:
-      i = 0
-      for val in value:
-         args[i] = val
-         i = i + 1
+      for i from 0 <= i < 4:
+         args[i] = value[i]
       c_glUniformMatrix2fvARB(location, count, transpose, args)
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glUniformMatrix2fvARB')
@@ -798,10 +782,8 @@ def glUniformMatrix3fvARB(location, count, transpose, value):
    cdef int i
 
    if c_GLEW_ARB_shader_objects:
-      i = 0
-      for val in value:
-         args[i] = val
-         i = i + 1
+      for i from 0 <= i < 9:
+         args[i] = value[i]
       c_glUniformMatrix3fvARB(location, count, transpose, args)
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glUniformMatrix3fvARB')
@@ -811,10 +793,8 @@ def glUniformMatrix4fvARB(location, count, transpose, value):
    cdef int i
 
    if c_GLEW_ARB_shader_objects:
-      i = 0
-      for val in value:
-         args[i] = val
-         i = i + 1
+      for i from 0 <= i < 16:
+         args[i] = value[i]
       c_glUniformMatrix4fvARB(location, count, transpose, args)
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glUniformMatrix4fvARB')

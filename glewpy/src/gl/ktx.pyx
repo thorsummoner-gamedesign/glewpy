@@ -1,4 +1,3 @@
-include "../gltypes.pxi"
 include "../glewpy.pxi"
 
 cdef extern from "GL/glew.h":
