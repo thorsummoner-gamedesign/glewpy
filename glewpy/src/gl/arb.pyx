@@ -297,7 +297,7 @@ def glCurrentPaletteMatrixARB(index):
    if c_GLEW_ARB_matrix_palette:
       c_glCurrentPaletteMatrixARB(index)
    else:
-      GlewpyError('GL_ARB_matrix_palette', 'glCurrentPaletteMatrixARB')
+      raise GlewpyError('GL_ARB_matrix_palette', 'glCurrentPaletteMatrixARB')
 
 def glMatrixIndexPointerARB(size, type, stride, pointer):
    cdef char *arr
@@ -306,7 +306,7 @@ def glMatrixIndexPointerARB(size, type, stride, pointer):
       arr = pointer
       c_glMatrixIndexPointerARB(size, type, stride, arr)
    else:
-      GlewpyError('GL_ARB_matrix_palette', 'glMatrixIndexPointerARB')
+      raise GlewpyError('GL_ARB_matrix_palette', 'glMatrixIndexPointerARB')
 
 def glMatrixIndexubvARB(size, indices):
    cdef GLubyte *arr
@@ -319,7 +319,7 @@ def glMatrixIndexubvARB(size, indices):
       c_glMatrixIndexubvARB(size, arr)
       PyMem_Free(arr)
    else:
-      GlewpyError('GL_ARB_matrix_palette', 'glMatrixIndexubvARB')
+      raise GlewpyError('GL_ARB_matrix_palette', 'glMatrixIndexubvARB')
 
 def glMatrixIndexuivARB(size, indices):
    cdef GLuint *arr
@@ -332,7 +332,7 @@ def glMatrixIndexuivARB(size, indices):
       c_glMatrixIndexuivARB(size, arr)
       PyMem_Free(arr)
    else:
-      GlewpyError('GL_ARB_matrix_palette', 'glMatrixIndexuivARB')
+      raise GlewpyError('GL_ARB_matrix_palette', 'glMatrixIndexuivARB')
       
 def glMatrixIndexusvARB(size, indices):
    cdef GLushort *arr
@@ -345,7 +345,7 @@ def glMatrixIndexusvARB(size, indices):
       c_glMatrixIndexusvARB(size, arr)
       PyMem_Free(arr)
    else:
-      GlewpyError('GL_ARB_matrix_palette', 'glMatrixIndexusvARB')
+      raise GlewpyError('GL_ARB_matrix_palette', 'glMatrixIndexusvARB')
 
 # --------------------------- GL_ARB_multisample -------------------------- #
 GL_MULTISAMPLE_ARB = 0x809D
@@ -1457,7 +1457,7 @@ def glVertexBlendARB(count):
    if c_GLEW_ARB_vertex_blend:
       c_glVertexBlendARB(count)
    else:
-      GlewpyError('GL_ARB_vertex_blend', 'glVertexBlendARB')
+      raise GlewpyError('GL_ARB_vertex_blend', 'glVertexBlendARB')
 
 def glWeightPointerARB(size, type, stride, pointer):
    cdef char *arr
@@ -1466,7 +1466,7 @@ def glWeightPointerARB(size, type, stride, pointer):
       arr = pointer
       c_glWeightPointerARB(size, type, stride, arr)
    else:
-      GlewpyError('GL_ARB_vertex_blend', 'glWeightPointerARB')
+      raise GlewpyError('GL_ARB_vertex_blend', 'glWeightPointerARB')
 
 def glWeightbvARB(size, weights):
    cdef GLbyte *arr
@@ -1479,7 +1479,7 @@ def glWeightbvARB(size, weights):
       c_glWeightbvARB(size, arr)
       PyMem_Free(arr)
    else:
-      GlewpyError('GL_ARB_vertex_blend', 'glWeightbvARB')
+      raise GlewpyError('GL_ARB_vertex_blend', 'glWeightbvARB')
 
 def glWeightdvARB(size, weights):
    cdef GLdouble *arr
@@ -1492,7 +1492,7 @@ def glWeightdvARB(size, weights):
       c_glWeightdvARB(size, arr)
       PyMem_Free(arr)
    else:
-      GlewpyError('GL_ARB_vertex_blend', 'glWeightdvARB')
+      raise GlewpyError('GL_ARB_vertex_blend', 'glWeightdvARB')
 
 def glWeightfvARB(size, weights):
    cdef GLfloat *arr
@@ -1505,7 +1505,7 @@ def glWeightfvARB(size, weights):
       c_glWeightfvARB(size, arr)
       PyMem_Free(arr)
    else:
-      GlewpyError('GL_ARB_vertex_blend', 'glWeightfvARB')
+      raise GlewpyError('GL_ARB_vertex_blend', 'glWeightfvARB')
 
 def glWeightivARB(size, weights):
    cdef GLint *arr
@@ -1518,7 +1518,7 @@ def glWeightivARB(size, weights):
       c_glWeightivARB(size, arr)
       PyMem_Free(arr)
    else:
-      GlewpyError('GL_ARB_vertex_blend', 'glWeightivARB')
+      raise GlewpyError('GL_ARB_vertex_blend', 'glWeightivARB')
 
 def glWeightsvARB(size, weights):
    cdef GLshort *arr
@@ -1531,7 +1531,7 @@ def glWeightsvARB(size, weights):
       c_glWeightsvARB(size, arr)
       PyMem_Free(arr)
    else:
-      GlewpyError('GL_ARB_vertex_blend', 'glWeightsvARB')
+      raise GlewpyError('GL_ARB_vertex_blend', 'glWeightsvARB')
 
 def glWeightubvARB(size, weights):
    cdef GLubyte *arr
@@ -1544,7 +1544,7 @@ def glWeightubvARB(size, weights):
       c_glWeightubvARB(size, arr)
       PyMem_Free(arr)
    else:
-      GlewpyError('GL_ARB_vertex_blend', 'glWeightubvARB')
+      raise GlewpyError('GL_ARB_vertex_blend', 'glWeightubvARB')
 
 def glWeightuivARB(size, weights):
    cdef GLuint *arr
@@ -1557,7 +1557,7 @@ def glWeightuivARB(size, weights):
       c_glWeightuivARB(size, arr)
       PyMem_Free(arr)
    else:
-      GlewpyError('GL_ARB_vertex_blend', 'glWeightuivARB')
+      raise GlewpyError('GL_ARB_vertex_blend', 'glWeightuivARB')
 
 def glWeightusvARB(size, weights):
    cdef GLushort *arr
@@ -1570,7 +1570,7 @@ def glWeightusvARB(size, weights):
       c_glWeightusvARB(size, arr)
       PyMem_Free(arr)
    else:
-      GlewpyError('GL_ARB_vertex_blend', 'glWeightusvARB')
+      raise GlewpyError('GL_ARB_vertex_blend', 'glWeightusvARB')
 
 # ---------------------- GL_ARB_vertex_buffer_object ---------------------- #
 GL_BUFFER_SIZE_ARB = 0x8764
@@ -1626,7 +1626,7 @@ def glBindBufferARB(target, buffer):
    if c_GLEW_ARB_vertex_buffer_object:
       c_glBindBufferARB(target, buffer)
    else:
-      GlewpyError('GL_ARB_vertex_buffer_object', 'glBindBufferARB')
+      raise GlewpyError('GL_ARB_vertex_buffer_object', 'glBindBufferARB')
 
 def glBufferDataARB(target, size, data, usage):
    cdef char *arr
@@ -1635,7 +1635,7 @@ def glBufferDataARB(target, size, data, usage):
       arr = data
       c_glBufferDataARB(target, size, arr, usage)
    else:
-      GlewpyError('GL_ARB_vertex_buffer_object', 'glBufferDataARB')
+      raise GlewpyError('GL_ARB_vertex_buffer_object', 'glBufferDataARB')
 
 def glBufferSubDataARB(target, offset, size, data):
    cdef char *arr
@@ -1644,7 +1644,7 @@ def glBufferSubDataARB(target, offset, size, data):
       arr = data
       c_glBufferSubDataARB(target, offset, size, arr)
    else:
-      GlewpyError('GL_ARB_vertex_buffer_object', 'glBufferSubDataARB')
+      raise GlewpyError('GL_ARB_vertex_buffer_object', 'glBufferSubDataARB')
 
 def glDeleteBuffersARB(n, buffers):
    cdef GLuint *arr
@@ -1657,7 +1657,7 @@ def glDeleteBuffersARB(n, buffers):
       c_glDeleteBuffersARB(n, arr)
       PyMem_Free(arr)
    else:
-      GlewpyError('GL_ARB_vertex_buffer_object', 'glDeleteBuffersARB')
+      raise GlewpyError('GL_ARB_vertex_buffer_object', 'glDeleteBuffersARB')
 
 def glGenBuffersARB(n, buffers):
    cdef GLuint *arr
@@ -1670,7 +1670,7 @@ def glGenBuffersARB(n, buffers):
       c_glGenBuffersARB(n, arr)
       PyMem_Free(arr)
    else:
-      GlewpyError('GL_ARB_vertex_buffer_object', 'glGenBuffersARB')
+      raise GlewpyError('GL_ARB_vertex_buffer_object', 'glGenBuffersARB')
 
 def glGetBufferParameterivARB(target, pname):
    cdef GLint params
@@ -1679,7 +1679,7 @@ def glGetBufferParameterivARB(target, pname):
       c_glGetBufferParameterivARB(target, pname, &params)
       return params
    else:
-      GlewpyError('GL_ARB_vertex_buffer_object', 'glGetBufferParameterivARB')
+      raise GlewpyError('GL_ARB_vertex_buffer_object', 'glGetBufferParameterivARB')
 
 def glGetBufferPointervARB(target, pname):
    cdef char *params
@@ -1693,7 +1693,7 @@ def glGetBufferPointervARB(target, pname):
       PyMem_Free(params)
       return result
    else:
-       GlewpyError('GL_ARB_vertex_buffer_object', 'glGetBufferPointervARB')
+      raise GlewpyError('GL_ARB_vertex_buffer_object', 'glGetBufferPointervARB')
 
 def glGetBufferSubDataARB(target, offset, size):
    cdef char *data
@@ -1705,26 +1705,26 @@ def glGetBufferSubDataARB(target, offset, size):
       PyMem_Free(data)
       return result
    else:
-      GlewpyError('GL_ARB_vertex_buffer_object', 'glGetBufferSubDataARB')
+      raise GlewpyError('GL_ARB_vertex_buffer_object', 'glGetBufferSubDataARB')
 
 def glIsBufferARB(buffer):
    if c_GLEW_ARB_vertex_buffer_object:
       return c_glIsBufferARB(buffer)
    else:
-      GlewpyError('GL_ARB_vertex_buffer_object', 'glIsBufferARB')
+      raise GlewpyError('GL_ARB_vertex_buffer_object', 'glIsBufferARB')
 
 def glMapBufferARB(target, access):
    if c_GLEW_ARB_vertex_buffer_object:
       print 'glMapBufferARB not implemented. Let me know if you need it.'
       return 0
    else:
-      GlewpyError('GL_ARB_vertex_buffer_object', 'glMapBufferARB')
+      raise GlewpyError('GL_ARB_vertex_buffer_object', 'glMapBufferARB')
 
 def glUnmapBufferARB(target):
    if c_GLEW_ARB_vertex_buffer_object:
       return c_glUnmapBufferARB(target)
    else:
-      GlewpyError('GL_ARB_vertex_buffer_object', 'glUnmapBufferARB')
+      raise GlewpyError('GL_ARB_vertex_buffer_object', 'glUnmapBufferARB')
 
 # ------------------------- GL_ARB_vertex_program ------------------------- #
 GL_COLOR_SUM_ARB = 0x8458
@@ -1825,7 +1825,7 @@ def glBindAttribLocationARB(programObj, index, name):
    if c_GLEW_ARB_vertex_shader:
       c_glBindAttribLocationARB(programObj, index, name)
    else:
-      GlewpyError('GL_ARB_vertex_shader', 'glBindAttribLocationARB')
+      raise GlewpyError('GL_ARB_vertex_shader', 'glBindAttribLocationARB')
 
 def glGetActiveAttribARB(programObj, index, maxLength):
    cdef GLint size
@@ -1839,13 +1839,13 @@ def glGetActiveAttribARB(programObj, index, maxLength):
       PyMem_Free(name)
       return (size, type, retname)
    else:
-      GlewpyError('GL_ARB_vertex_shader', 'glGetActiveAttribARB')
+      raise GlewpyError('GL_ARB_vertex_shader', 'glGetActiveAttribARB')
 
 def glGetAttribLocationARB(programObj, name):
    if c_GLEW_ARB_vertex_shader:
       return c_glGetAttribLocationARB(programObj, name)
    else:
-      GlewpyError('GL_ARB_vertex_shader', 'glGetAttribLocationARB')
+      raise GlewpyError('GL_ARB_vertex_shader', 'glGetAttribLocationARB')
 
 # --------------------------- GL_ARB_window_pos --------------------------- #
 cdef extern from "GL/glew.h":
@@ -1865,3 +1865,136 @@ cdef extern from "GL/glew.h":
    void c_glWindowPos3ivARB "glWindowPos3ivARB"(GLint* p)
    void c_glWindowPos3sARB "glWindowPos3sARB"(GLshort x, GLshort y, GLshort z)
    void c_glWindowPos3svARB "glWindowPos3svARB"(GLshort* p)
+
+def glWindowPos2dARB(x, y):
+   if c_GLEW_ARB_window_pos:
+      c_glWindowPos2dARB(x, y)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos2dARB')
+
+def glWindowPos2dvARB(p):
+   cdef GLdouble pos[2]
+
+   if c_GLEW_ARB_window_pos:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      c_glWindowPos2dvARB(pos)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos2dvARB')
+
+def glWindowPos2fARB(x, y):
+   if c_GLEW_ARB_window_pos:
+      c_glWindowPos2fARB(x, y)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos2fARB')
+
+def glWindowPos2fvARB(p):
+   cdef GLfloat pos[2]
+
+   if c_GLEW_ARB_window_pos:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      c_glWindowPos2fvARB(pos)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos2fvARB')
+
+def glWindowPos2iARB(x, y):
+   if c_GLEW_ARB_window_pos:
+      c_glWindowPos2iARB(x, y)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos2iARB')
+
+def glWindowPos2fiARB(p):
+   cdef GLint pos[2]
+
+   if c_GLEW_ARB_window_pos:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      c_glWindowPos2ivARB(pos)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos2ivARB')
+
+def glWindowPos2sARB(x, y):
+   if c_GLEW_ARB_window_pos:
+      c_glWindowPos2sARB(x, y)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos2sARB')
+
+def glWindowPos2svARB(p):
+   cdef GLshort pos[2]
+
+   if c_GLEW_ARB_window_pos:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      c_glWindowPos2svARB(pos)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos2svARB')
+
+def glWindowPos3dARB(x, y, z):
+   if c_GLEW_ARB_window_pos:
+      c_glWindowPos3dARB(x, y, z)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos3dARB')
+
+def glWindowPos3dvARB(p):
+   cdef GLdouble pos[3]
+
+   if c_GLEW_ARB_window_pos:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      pos[2] = p[2]
+      c_glWindowPos3dvARB(pos)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos3dvARB')
+
+def glWindowPos3fARB(x, y, z):
+   if c_GLEW_ARB_window_pos:
+      c_glWindowPos3fARB(x, y, z)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos3fARB')
+
+def glWindowPos3fvARB(p):
+   cdef GLfloat pos[3]
+
+   if c_GLEW_ARB_window_pos:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      pos[2] = p[2]
+      c_glWindowPos3fvARB(pos)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos3fvARB')
+
+def glWindowPos3iARB(x, y, z):
+   if c_GLEW_ARB_window_pos:
+      c_glWindowPos3iARB(x, y, z)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos3iARB')
+
+def glWindowPos3fiARB(p):
+   cdef GLint pos[3]
+
+   if c_GLEW_ARB_window_pos:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      pos[2] = p[2]
+      c_glWindowPos3ivARB(pos)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos3ivARB')
+
+def glWindowPos3sARB(x, y, z):
+   if c_GLEW_ARB_window_pos:
+      c_glWindowPos3sARB(x, y, z)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos3sARB')
+
+def glWindowPos3fsARB(p):
+   cdef GLshort pos[3]
+
+   if c_GLEW_ARB_window_pos:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      pos[2] = p[2]
+      c_glWindowPos3svARB(pos)
+   else:
+      raise GlewpyError('GL_ARB_window_pos', 'glWindowPos3svARB')
+
