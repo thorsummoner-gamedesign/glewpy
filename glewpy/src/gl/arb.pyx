@@ -710,7 +710,6 @@ def glUniform3fvARB(location, count, value):
    if c_GLEW_ARB_shader_objects:
       for i from 0 <= i < 3:
          args[i] = value[i]
-         print args[i]
       c_glUniform3fvARB(location, count, args)
    else:
       raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform3fvARB')
