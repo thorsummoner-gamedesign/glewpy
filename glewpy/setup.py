@@ -10,7 +10,11 @@ setup(
   url = 'http://glewpy.sourceforge.net/',
   ext_package = 'glew',
   packages = ['glew', 'glew.gl', 'glew.glx', 'glew.wgl'],
-  package_dir = {'glew': 'src'},
+  package_dir = {'glew' : 'src'},
+  package_data = {'glew' : ['examples/mandelbrot.py',
+                            'examples/mandelbrot.frag',
+                            'examples/oneshot.py',
+                            'examples/logo2.jpg']},
   ext_modules=[
     Extension('glew', ['src/glew.pyx']),
     Extension('gl.threedfx', ['src/gl/threedfx.pyx']),
