@@ -274,6 +274,335 @@ cdef extern from "GL/glew.h":
    void c_glResetMinmax "glResetMinmax"(GLenum target)
    void c_glSeparableFilter2D "glSeparableFilter2D"(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *row, GLvoid *column)
 
+# Util for finding size of color table components
+def gl_type_size(type):
+   vals = {
+      # GL 1.2
+      GL_UNSIGNED_BYTE_3_3_2 : sizeof(GLubyte),
+      GL_UNSIGNED_BYTE_2_3_3_REV : sizeof(GLubyte),
+      GL_UNSIGNED_SHORT_5_6_5 : sizeof(GLushort),
+      GL_UNSIGNED_SHORT_5_6_5_REV : sizeof(GLushort),
+      GL_UNSIGNED_SHORT_4_4_4_4 : sizeof(GLushort),
+      GL_UNSIGNED_SHORT_4_4_4_4_REV : sizeof(GLushort),
+      GL_UNSIGNED_SHORT_5_5_5_1 : sizeof(GLushort),
+      GL_UNSIGNED_SHORT_1_5_5_5_REV : sizeof(GLushort),
+      GL_UNSIGNED_INT_8_8_8_8 : sizeof(GLuint),
+      GL_UNSIGNED_INT_8_8_8_8_REV : sizeof(GLuint),
+      GL_UNSIGNED_INT_10_10_10_2 : sizeof(GLuint),
+      GL_UNSIGNED_INT_2_10_10_10_REV : sizeof(GLuint),
+      # GL 1.1
+      GL_UNSIGNED_BYTE : sizeof(GLubyte),
+      GL_BITMAP : sizeof(GLubyte),
+      GL_BYTE : sizeof(GLbyte),
+      GL_UNSIGNED_SHORT : sizeof(GLushort),
+      GL_SHORT : sizeof(GLshort),
+      GL_UNSIGNED_INT : sizeof(GLuint),
+      GL_INT : sizeof(GLint),
+      GL_FLOAT : sizeof(GLfloat),
+      GL_DOUBLE : sizeof(GLdouble),
+      GL_2_BYTES : 2,
+      GL_3_BYTES : 3,
+      GL_4_BYTES : 4 }
+   return vals[type]
+
+def glColorSubTable(target, start, count, format, type, data):
+   cdef char *arr
+
+   if c_GLEW_ARB_imaging:
+      arr = data
+      c_glColorSubTable(target, start, count, format, type, arr)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glColorSubTable')
+
+def glColorTable(target, internalformat, width, format, type, table):
+   cdef char *arr
+
+   if c_GLEW_ARB_imaging:
+      arr = table
+      c_glColorTable(target, internalformat, width, format, type, arr)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glColorTable')
+
+def glColorTableParameterfv(target, pname, params):
+   cdef GLfloat arg
+
+   if c_GLEW_ARB_imaging:
+      arg = params[0]
+      c_glColorTableParameterfv(target, pname, &arg)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glColorTableParameterfv')
+
+def glColorTableParameteriv(target, pname, params):
+   cdef GLint arg
+
+   if c_GLEW_ARB_imaging:
+      arg = params[0]
+      c_glColorTableParameteriv(target, pname, &arg)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glColorTableParameteriv')
+
+def glConvolutionFilter1D(target, internalformat, width, format, type, image):
+   cdef char *arr
+
+   if c_GLEW_ARB_imaging:
+      arr = image
+      c_glConvolutionFilter1D(target, internalformat, width, format, type, arr)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glConvolutionFilter1D')
+
+def glConvolutionFilter2D(target, internalformat, width, height, format, type, image):
+   cdef char *arr
+
+   if c_GLEW_ARB_imaging:
+      arr = image
+      c_glConvolutionFilter2D(target, internalformat, width, height, format, type, arr)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glConvolutionFilter2D')
+
+def glConvolutionParameterf(target, pname, params):
+   if c_GLEW_ARB_imaging:
+      c_glConvolutionParameterf(target, pname, params)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glConvolutionParameterf')
+
+def glConvolutionParameterfv(target, pname, params):
+   cdef GLfloat arg
+
+   if c_GLEW_ARB_imaging:
+      arg = params[0]
+      c_glConvolutionParameterfv(target, pname, &arg)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glConvolutionParameterfv')
+
+def glConvolutionParameteri(target, pname, params):
+   if c_GLEW_ARB_imaging:
+      c_glConvolutionParameteri(target, pname, params)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glConvolutionParameteri')
+
+def glConvolutionParameteriv(target, pname, params):
+   cdef GLint arg
+
+   if c_GLEW_ARB_imaging:
+      arg = params[0]
+      c_glConvolutionParameteriv(target, pname, &arg)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glConvolutionParameteriv')
+
+def glCopyColorSubTable(target, start, x, y, width):
+   if c_GLEW_ARB_imaging:
+      c_glCopyColorSubTable(target, start, x, y, width)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glCopyColorSubTable')
+
+def glCopyColorTable(target, internalformat, x, y, width):
+   if c_GLEW_ARB_imaging:
+      c_glCopyColorTable(target, internalformat, x, y, width)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glCopyColorTable')
+
+def glCopyConvolutionFilter1D(target, internalformat, x, y, width):
+   if c_GLEW_ARB_imaging:
+      c_glCopyConvolutionFilter1D(target, internalformat, x, y, width)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glCopyConvolutionFilter1D')
+
+def glCopyConvolutionFilter2D(target, internalformat, x, y, width, height):
+   if c_GLEW_ARB_imaging:
+      c_glCopyConvolutionFilter2D(target, internalformat, x, y, width, height)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glCopyConvolutionFilter2D')
+   
+def glGetColorTable(target, format, type):
+   cdef char *result
+   cdef GLint size, width
+   cdef PyObject *retval
+
+   if c_GLEW_ARB_imaging:
+      c_glGetColorTableParameteriv(target, GL_COLOR_TABLE_WIDTH, &width)
+      size = width * gl_type_size(type)
+      result = <char*>PyMem_Malloc(size)
+      c_glGetColorTable(target, format, type, result)
+      retval = PyString_FromStringAndSize(result, size)
+      PyMem_Free(result)
+      return <object>retval
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glGetColorTable')
+
+def glGetColorTableParameterfv(target, pname):
+   cdef GLfloat result
+
+   if c_GLEW_ARB_imaging:
+      c_glGetColorTableParameterfv(target, pname, &result)
+      return result
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glGetColorTableParameterfv')
+
+def glGetColorTableParameteriv(target, pname):
+   cdef GLint result
+
+   if c_GLEW_ARB_imaging:
+      c_glGetColorTableParameteriv(target, pname, &result)
+      return result
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glGetColorTableParameteriv')
+
+def glGetConvolutionFilter(target, format, type):
+   cdef char *result
+   cdef GLint size, width, height
+   cdef PyObject *retval
+
+   if c_GLEW_ARB_imaging:
+      c_glGetColorTableParameteriv(target, GL_CONVOLUTION_WIDTH, &width)
+      if (target == GL_CONVOLUTION_2D):
+         c_glGetColorTableParameteriv(target, GL_CONVOLUTION_HEIGHT, &height)
+      else:
+         height = 1
+      size = width * height * gl_type_size(type)
+      result = <char*>PyMem_Malloc(size)
+      c_glGetConvolutionFilter(target, format, type, result)
+      retval = PyString_FromStringAndSize(result, size)
+      PyMem_Free(result)
+      return <object>retval
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glGetConvolutionFilter')
+
+def glGetConvolutionParameterfv(target, pname):
+   cdef GLfloat arg
+
+   if c_GLEW_ARB_imaging:
+      c_glGetConvolutionParameterfv(target, pname, &arg)
+      return arg
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glGetConvolutionParameterfv')
+
+def glGetConvolutionParameteriv(target, pname):
+   cdef GLint arg
+
+   if c_GLEW_ARB_imaging:
+      c_glGetConvolutionParameteriv(target, pname, &arg)
+      return arg
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glGetConvolutionParameteriv')
+
+def glGetHistogram(target, reset, format, type, values):
+   cdef char *result
+   cdef GLint size, width
+   cdef PyObject *retval
+   
+   if c_GLEW_ARB_imaging:
+      c_glGetHistogramParameteriv(target, GL_HISTOGRAM_WIDTH, &width)
+      size = width * gl_type_size(type)
+      result = <char*>PyMem_Malloc(size)
+      c_glGetHistogram(target, reset, format, type, result)
+      retval = PyString_FromStringAndSize(result, size)
+      PyMem_Free(result)
+      return <object>retval
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glGetHistogram')
+
+def glGetHistogramParameterfv(target, pname):
+   cdef GLfloat arg
+
+   if c_GLEW_ARB_imaging:
+      c_glGetHistogramParameterfv(target, pname, &arg)
+      return arg
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glGetHistogramParameterfv')
+
+def glGetHistogramParameteriv(target, pname):
+   cdef GLint arg
+
+   if c_GLEW_ARB_imaging:
+      c_glGetHistogramParameteriv(target, pname, &arg)
+      return arg
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glGetHistogramParameteriv')
+
+def glGetMinmax(target, reset, format, types):
+   cdef char *result
+   cdef PyObject *retval
+
+   if c_GLEW_ARB_imaging:
+      result = <char*>PyMem_Malloc(2 * gl_type_size(types))
+      c_glGetMinmax(target, reset, format, types, result)
+      retval = PyString_FromStringAndSize(result, 2 * gl_type_size(types))
+      PyMem_Free(result)
+      return <object>retval
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glGetMinmax')
+
+def glGetMinmaxParameterfv(target, pname):
+   cdef GLfloat arg
+
+   if c_GLEW_ARB_imaging:
+      c_glGetMinmaxParameterfv(target, pname, &arg)
+      return arg
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glGetMinmaxParameterfv')
+
+def glGetMinmaxParameteriv(target, pname):
+   cdef GLint arg
+
+   if c_GLEW_ARB_imaging:
+      c_glGetMinmaxParameteriv(target, pname, &arg)
+      return arg
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glGetMinmaxParameteriv')
+
+def glGetSeparableFilter(target, format, type):
+   cdef char *row, *column
+   cdef GLint width, height
+   cdef PyObject *retrow, *retcol
+
+   if c_GLEW_ARB_imaging:
+      c_glGetConvolutionParameteriv(target, GL_CONVOLUTION_WIDTH, &width)
+      c_glGetConvolutionParameteriv(target, GL_CONVOLUTION_HEIGHT, &height)
+      row = <char*>PyMem_Malloc(width * gl_type_size(type))
+      column = <char*>PyMem_Malloc(height * gl_type_size(type))
+      c_glGetSeparableFilter(target, format, type, row, column, NULL)
+      retrow = PyString_FromStringAndSize(row, width)
+      retcol = PyString_FromStringAndSize(column, height)
+      PyMem_Free(row)
+      PyMem_Free(column)
+      return (<object>retrow, <object>retcol)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glGetSeparableFilter')
+
+def glHistogram(target, width, internalformat, sink):
+   if c_GLEW_ARB_imaging:
+      c_glHistogram(target, width, internalformat, sink)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glHistogram')
+
+def glMinmax(target, internalformat, sink):
+   if c_GLEW_ARB_imaging:
+      c_glMinmax(target, internalformat, sink)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glMinmax')
+
+def glResetHistogram(target):
+   if c_GLEW_ARB_imaging:
+      c_glResetHistogram(target)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glResetHistogram')
+
+def glResetMinmax(target):
+   if c_GLEW_ARB_imaging:
+      c_glResetMinmax(target)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glResetMinmax')
+
+def glSeparableFilter2D(target, internalformat, width, height, format, type, row, column):
+   cdef char *rowA, *colA
+
+   if c_GLEW_ARB_imaging:
+      rowA = row
+      colA = column
+      c_glSeparableFilter2D(target, internalformat, width, height, format, type, rowA, colA)
+   else:
+      raise GlewpyError('GL_ARB_imaging', 'glSeparableFilter2D')
+
 # ------------------------- GL_ARB_matrix_palette ------------------------- #
 GL_MATRIX_PALETTE_ARB = 0x8840
 GL_MAX_MATRIX_PALETTE_STACK_DEPTH_ARB = 0x8841
