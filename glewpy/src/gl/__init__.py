@@ -11,3 +11,4 @@ from ingr import *
 from intel import *
 from ktx import *
 from mesa import *
+from nv import *

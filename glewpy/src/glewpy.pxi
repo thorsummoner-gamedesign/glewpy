@@ -49,3 +49,5 @@ ctypedef ptrdiff_t GLsizeiptrARB
 ctypedef ptrdiff_t GLintptrARB
 ctypedef ptrdiff_t GLsizeiptr
 ctypedef ptrdiff_t GLintptr
+
+ctypedef unsigned short GLhalf

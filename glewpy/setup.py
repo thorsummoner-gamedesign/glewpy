@@ -25,7 +25,8 @@ setup(
     Extension('gl.ingr', ['src/gl/ingr.pyx'], libraries = ['GLEW']),
     Extension('gl.intel', ['src/gl/intel.pyx'], libraries = ['GLEW']),
     Extension('gl.ktx', ['src/gl/ktx.pyx'], libraries = ['GLEW']),
-    Extension('gl.mesa', ['src/gl/mesa.pyx'], libraries = ['GLEW'])
+    Extension('gl.mesa', ['src/gl/mesa.pyx'], libraries = ['GLEW']),
+    Extension('gl.nv', ['src/gl/nv.pyx'], libraries = ['GLEW'])
     ],
   cmdclass = {'build_ext': build_ext}
 )
