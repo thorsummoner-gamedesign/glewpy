@@ -1,10 +1,11 @@
 # Include PyMem functions for all files
 cdef extern from "Python.h":
-   ctypedef extern struct PyObject
+   struct PyObject
    
    void* PyMem_Malloc(int n)
    void PyMem_Free(void *p)
    PyObject* PyList_New(int size)
+   PyObject* PyString_FromStringAndSize(char*, int)
 
 class GlewpyError(Exception):
    """Error for catching the use of non supported function calls"""
