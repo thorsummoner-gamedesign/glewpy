@@ -1675,7 +1675,7 @@ def glWindowPos3fs(p):
       c_glWindowPos3sv(pos)
    else:
       raise GlewpyError('GL_VERSION_1_4', 'glWindowPos3sv')
-      
+
 # ----------------------------- GL_VERSION_1_5 ---------------------------- #
 GL_BUFFER_SIZE = 0x8764
 GL_BUFFER_USAGE = 0x8765
@@ -1743,8 +1743,186 @@ cdef extern from "GL/glew.h":
    void c_glGetBufferSubData "glGetBufferSubData"(GLenum target, GLintptr offset, GLsizeiptr size, GLvoid* data)
    void c_glGetQueryObjectiv "glGetQueryObjectiv"(GLuint id, GLenum pname, GLint* params)
    void c_glGetQueryObjectuiv "glGetQueryObjectuiv"(GLuint id, GLenum pname, GLuint* params)
-   void c_glGetQueryiv "glGetQueryiv"(GLenum target, GLenum pname, GLint params)
+   void c_glGetQueryiv "glGetQueryiv"(GLenum target, GLenum pname, GLint* params)
    GLboolean c_glIsBuffer "glIsBuffer"(GLuint buffer)
    GLboolean c_glIsQuery "glIsQuery"(GLuint id)
    GLvoid* c_glMapBuffer "glMapBuffer"(GLenum target, GLenum access)
    GLboolean c_glUnmapBuffer "glUnmapBuffer"(GLenum target)
+
+def glBeginQuery(target, id):
+   if c_GLEW_VERSION_1_5:
+      c_glBeginQuery(target, id)
+   else:
+      GlewpyError('GL_VERSION_1_5', 'glBeginQuery')
+
+def glBindBuffer(target, buffer):
+   if c_GLEW_VERSION_1_5:
+      c_glBindBuffer(target, buffer)
+   else:
+      GlewpyError('GL_VERSION_1_5', 'glBindBuffer')
+
+def glBufferData(target, size, data, usage):
+   cdef char *arr
+   
+   if c_GLEW_VERSION_1_5:
+      arr = data
+      c_glBufferData(target, size, arr, usage)
+   else:
+      GlewpyError('GL_VERSION_1_5', 'glBufferData')
+
+def glBufferSubData(target, offset, size, data):
+   cdef char *arr
+
+   if c_GLEW_VERSION_1_5:
+      arr = data
+      c_glBufferSubData(target, offset, size, arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glBufferSubData')
+
+def glDeleteBuffers(n, buffers):
+   cdef GLuint *arr
+   cdef int i
+
+   if c_GLEW_VERSION_1_5:
+      arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i from 0 <= i < n:
+         arr[i] = buffers[i]
+      c_glDeleteBuffers(n, arr)
+      PyMem_Free(arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glDeleteBuffers')
+
+def glDeleteQueries(n, ids):
+   cdef GLuint *args
+   cdef int i
+
+   if c_GLEW_VERSION_1_5:
+      args = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i from 0 <= i < n:
+         args[i] = ids[i]
+      c_glDeleteQueries(n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glDeleteQueries')
+
+def glEndQuery(target):
+   if c_GLEW_VERSION_1_5:
+      c_glEndQuery(target)
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glEndQuery')
+   
+def glGenBuffers(n, buffers):
+   cdef GLuint *arr
+   cdef int i
+
+   if c_GLEW_VERSION_1_5:
+      arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i from 0 <= i < n:
+         arr[i] = buffers[i]
+      c_glGenBuffers(n, arr)
+      PyMem_Free(arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glGenBuffers')
+
+def glGenQueries(n, ids):
+   cdef GLuint *args
+   cdef int i
+
+   if c_GLEW_VERSION_1_5:
+      args = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i from 0 <= i < n:
+         args[i] = ids[i]
+      c_glGenQueries(n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glGenQueries')
+
+def glGetBufferParameteriv(target, pname):
+   cdef GLint params
+
+   if c_GLEW_VERSION_1_5:
+      c_glGetBufferParameteriv(target, pname, &params)
+      return params
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glGetBufferParameteriv')
+
+def glGetBufferPointerv(target, pname):
+   cdef char *params
+   cdef GLint size
+
+   if c_GLEW_VERSION_1_5:
+      c_glGetBufferParameteriv(target, pname, &size)
+      params = <char*>PyMem_Malloc(size)
+      c_glGetBufferPointerv(target, pname, <void**>&params)
+      result = params
+      PyMem_Free(params)
+      return result
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glGetBufferPointerv')
+   
+def glGetBufferSubData(target, offset, size):
+   cdef char *data
+
+   if c_GLEW_VERSION_1_5:
+      data = <char*>PyMem_Malloc(size)
+      c_glGetBufferSubData(target, offset, size, data)
+      result = data
+      PyMem_Free(data)
+      return result
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glGetBufferSubData')
+   
+def glGetQueryObjectiv(id, pname):
+   cdef GLint params
+
+   if c_GLEW_VERSION_1_5:
+      c_glGetQueryObjectiv(id, pname, &params)
+      return params
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glGetQueryObjectiv')
+
+def glGetQueryObjectuiv(id, pname):
+   cdef GLuint param
+
+   if c_GLEW_VERSION_1_5:
+      c_glGetQueryObjectuiv(id, pname, &param)
+      return param
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glGetQueryObjectuiv')
+
+def glGetQueryiv(target, pname):
+   cdef GLint param
+
+   if c_GLEW_VERSION_1_5:
+      c_glGetQueryiv(id, pname, &param)
+      return param
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glGetQueryiv')
+
+def glIsQuery(id):
+   if c_GLEW_VERSION_1_5:
+      return c_glIsQuery(id)
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glIsQuery')
+
+def glIsBuffer(buffer):
+   if c_GLEW_VERSION_1_5:
+      return c_glIsBuffer(buffer)
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glIsBuffer')
+
+def glMapBuffer(target, access):
+   if c_GLEW_VERSION_1_5:
+      print 'glMapBuffer not implemented. Let me know if you need it.'
+      return 0
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glMapBuffer')
+
+def glUnmapBuffer(target):
+   if c_GLEW_VERSION_1_5:
+      return c_glUnmapBuffer(target)
+   else:
+      raise GlewpyError('GL_VERSION_1_5', 'glUnmapBuffer')
+
+# ----------------------------- GL_VERSION_2_0 ---------------------------- #
+# No funcs or defines.....yet!
