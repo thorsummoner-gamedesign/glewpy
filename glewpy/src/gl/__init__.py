@@ -1,6 +1,7 @@
 from a3dfx import *
 from apple import *
 from arb import *
+from ati import *
 from ext import *
 from gl import *
 from ingr import *

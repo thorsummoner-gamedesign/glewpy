@@ -16,6 +16,7 @@ setup(
     Extension('gl.a3dfx', ['src/gl/a3dfx.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.apple', ['src/gl/apple.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.arb', ['src/gl/arb.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
+    Extension('gl.ati', ['src/gl/ati.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.ext', ['src/gl/ext.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.gl', ['src/gl/gl.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.ingr', ['src/gl/ingr.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),

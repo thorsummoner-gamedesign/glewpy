@@ -16,6 +16,7 @@ setup(
     Extension('gl.a3dfx', ['src/gl/a3dfx.pyx'], libraries = ['GLEW']),
     Extension('gl.apple', ['src/gl/apple.pyx'], libraries = ['GLEW']),
     Extension('gl.arb', ['src/gl/arb.pyx'], libraries = ['GLEW']),
+    Extension('gl.ati', ['src/gl/ati.pyx'], libraries = ['GLEW']),
     Extension('gl.ext', ['src/gl/ext.pyx'], libraries = ['GLEW']),
     Extension('gl.gl', ['src/gl/gl.pyx'], libraries = ['GLEW']),
     Extension('gl.ingr', ['src/gl/ingr.pyx'], libraries = ['GLEW']),
