@@ -3,7 +3,7 @@ from distutils.extension import Extension
 from Pyrex.Distutils import build_ext
 setup(
   name = "glewpy",
-  version = '0.1',
+  version = '0.2',
   description = 'Python Wrapping of GLEW',
   author = 'Charles Moad',
   author_email = 'cmoad@indiana.edu',
