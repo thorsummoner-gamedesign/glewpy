@@ -1306,6 +1306,9 @@ cdef extern from "GL/glew.h":
    void c_glCompressedTexSubImage3DARB "glCompressedTexSubImage3DARB"(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, void* data)
    void c_glGetCompressedTexImageARB "glGetCompressedTexImageARB"(GLenum target, GLint lod, void* img)
 
+   # Needed for glGetCompressedTexImageARB from GL_VERSION_1_1
+   void c_glGetTexLevelParameteriv "glGetTexLevelParameteriv"(GLenum target, GLint level, GLenum pname, GLint *params)
+
 def glCompressedTexImage1DARB(target, level, internalformat, width, border, imageSize, data):
    cdef char *arr
 
@@ -1332,7 +1335,6 @@ def glCompressedTexImage3DARB(target, level, internalformat, width, height, dept
       c_glCompressedTexImage3DARB(target, level, internalformat, width, height, depth, border, imageSize, arr)
    else:
       raise GlewpyError('GL_ARB_texture_compression', 'glCompressedTexImage3DARB')
-
 
 def glCompressedTexSubImage1DARB(target, level, xoffset, width, format, imageSize, data):
    cdef char *arr
@@ -1367,7 +1369,7 @@ def glGetCompressedTexImageARB(target, lod):
    cdef PyObject *retval
 
    if c_GLEW_ARB_texture_compression:
-      c_glGetTexLevelParameteriv(target, lod, GL_TEXTURE_COMPRESSED_IMAGE_SIZE, &size)
+      c_glGetTexLevelParameteriv(target, lod, GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB, &size)
       result = <char*>PyMem_Malloc(size)
       c_glGetCompressedTexImageARB(target, lod, result)
       retval = PyString_FromStringAndSize(result, size)
