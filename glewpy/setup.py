@@ -13,7 +13,8 @@ setup(
   package_dir = {'glew': 'src/'},
   ext_modules=[
     Extension('glew', ['src/glew.pyx'], libraries = ['GLEW']),
-    Extension('gl.3dfx', ['src/gl/3dfx.pyx'], libraries = ['GLEW']),
+    Extension('gl.a3dfx', ['src/gl/a3dfx.pyx'], libraries = ['GLEW']),
+    Extension('gl.apple', ['src/gl/apple.pyx'], libraries = ['GLEW']),
     Extension('gl.arb', ['src/gl/arb.pyx'], libraries = ['GLEW']),
     Extension('gl.ext', ['src/gl/ext.pyx'], libraries = ['GLEW']),
     Extension('gl.gl', ['src/gl/gl.pyx'], libraries = ['GLEW']),
