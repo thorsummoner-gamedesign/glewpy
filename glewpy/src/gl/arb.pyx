@@ -350,6 +350,318 @@ GL_ACTIVE_TEXTURE_ARB = 0x84E0
 GL_CLIENT_ACTIVE_TEXTURE_ARB = 0x84E1
 GL_MAX_TEXTURE_UNITS_ARB = 0x84E2
 
+cdef extern from "GL/glew.h":
+   void c_glActiveTextureARB "glActiveTextureARB"(GLenum texture)
+   void c_glClientActiveTextureARB "glClientActiveTextureARB"(GLenum texture)
+   void c_glMultiTexCoord1dARB "glMultiTexCoord1dARB"(GLenum target, GLdouble s)
+   void c_glMultiTexCoord1dvARB "glMultiTexCoord1dvARB"(GLenum target, GLdouble *v)
+   void c_glMultiTexCoord1fARB "glMultiTexCoord1fARB"(GLenum target, GLfloat s)
+   void c_glMultiTexCoord1fvARB "glMultiTexCoord1fvARB"(GLenum target, GLfloat *v)
+   void c_glMultiTexCoord1iARB "glMultiTexCoord1iARB"(GLenum target, GLint s)
+   void c_glMultiTexCoord1ivARB "glMultiTexCoord1ivARB"(GLenum target, GLint *v)
+   void c_glMultiTexCoord1sARB "glMultiTexCoord1sARB"(GLenum target, GLshort s)
+   void c_glMultiTexCoord1svARB "glMultiTexCoord1svARB"(GLenum target, GLshort *v)
+   void c_glMultiTexCoord2dARB "glMultiTexCoord2dARB"(GLenum target, GLdouble s, GLdouble t)
+   void c_glMultiTexCoord2dvARB "glMultiTexCoord2dvARB"(GLenum target, GLdouble *v)
+   void c_glMultiTexCoord2fARB "glMultiTexCoord2fARB"(GLenum target, GLfloat s, GLfloat t)
+   void c_glMultiTexCoord2fvARB "glMultiTexCoord2fvARB"(GLenum target, GLfloat *v)
+   void c_glMultiTexCoord2iARB "glMultiTexCoord2iARB"(GLenum target, GLint s, GLint t)
+   void c_glMultiTexCoord2ivARB "glMultiTexCoord2ivARB"(GLenum target, GLint *v)
+   void c_glMultiTexCoord2sARB "glMultiTexCoord2sARB"(GLenum target, GLshort s, GLshort t)
+   void c_glMultiTexCoord2svARB "glMultiTexCoord2svARB"(GLenum target, GLshort *v)
+   void c_glMultiTexCoord3dARB "glMultiTexCoord3dARB"(GLenum target, GLdouble s, GLdouble t, GLdouble r)
+   void c_glMultiTexCoord3dvARB "glMultiTexCoord3dvARB"(GLenum target, GLdouble *v)
+   void c_glMultiTexCoord3fARB "glMultiTexCoord3fARB"(GLenum target, GLfloat s, GLfloat t, GLfloat r)
+   void c_glMultiTexCoord3fvARB "glMultiTexCoord3fvARB"(GLenum target, GLfloat *v)
+   void c_glMultiTexCoord3iARB "glMultiTexCoord3iARB"(GLenum target, GLint s, GLint t, GLint r)
+   void c_glMultiTexCoord3ivARB "glMultiTexCoord3ivARB"(GLenum target, GLint *v)
+   void c_glMultiTexCoord3sARB "glMultiTexCoord3sARB"(GLenum target, GLshort s, GLshort t, GLshort r)
+   void c_glMultiTexCoord3svARB "glMultiTexCoord3svARB"(GLenum target, GLshort *v)
+   void c_glMultiTexCoord4dARB "glMultiTexCoord4dARB"(GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q)
+   void c_glMultiTexCoord4dvARB "glMultiTexCoord4dvARB"(GLenum target, GLdouble *v)
+   void c_glMultiTexCoord4fARB "glMultiTexCoord4fARB"(GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q)
+   void c_glMultiTexCoord4fvARB "glMultiTexCoord4fvARB"(GLenum target, GLfloat *v)
+   void c_glMultiTexCoord4iARB "glMultiTexCoord4iARB"(GLenum target, GLint s, GLint t, GLint r, GLint q)
+   void c_glMultiTexCoord4ivARB "glMultiTexCoord4ivARB"(GLenum target, GLint *v)
+   void c_glMultiTexCoord4sARB "glMultiTexCoord4sARB"(GLenum target, GLshort s, GLshort t, GLshort r, GLshort q)
+   void c_glMultiTexCoord4svARB "glMultiTexCoord4svARB"(GLenum target, GLshort *v)
+
+def glActiveTextureARB(texture):
+   if c_GLEW_ARB_multitexture:
+      c_glActiveTextureARB(texture)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glActiveTextureARB')
+
+def glClientActiveTextureARB(texture):
+   if c_GLEW_ARB_multitexture:
+      c_glClientActiveTextureARB(texture)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glClientActiveTextureARB')
+
+def glMultiTexCoord1dARB(target, s):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord1dARB(target, s)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord1dARB')
+
+def glMultiTexCoord1dvARB(target, v):
+   cdef GLdouble arg[1]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      c_glMultiTexCoord1dvARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord1dvARB')
+
+def glMultiTexCoord1fARB(target, s):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord1f(target, s)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord1fARB')
+
+def glMultiTexCoord1fvARB(target, v):
+   cdef GLfloat arg[1]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      c_glMultiTexCoord1fvARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord1fvARB')
+
+def glMultiTexCoord1iARB(target, s):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord1iARB(target, s)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord1iARB')
+
+def glMultiTexCoord1ivARB(target, v):
+   cdef GLint arg[1]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      c_glMultiTexCoord1ivARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord1ivARB')
+
+def glMultiTexCoord1sARB(target, s):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord1sARB(target, s)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord1sARB')
+
+def glMultiTexCoord1svARB(target, v):
+   cdef GLshort arg[1]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      c_glMultiTexCoord1svARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord1svARB')
+
+def glMultiTexCoord2dARB(target, s, t):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord2dARB(target, s, t)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord2dARB')
+
+def glMultiTexCoord2dvARB(target, v):
+   cdef GLdouble arg[2]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      c_glMultiTexCoord2dvARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord2dvARB')
+
+def glMultiTexCoord2fARB(target, s, t):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord2fARB(target, s, t)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord2fARB')
+
+def glMultiTexCoord2fvARB(target, v):
+   cdef GLfloat arg[2]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      c_glMultiTexCoord2fvARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord2fvARB')
+
+def glMultiTexCoord2iARB(target, s, t):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord2iARB(target, s, t)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord2iARB')
+
+def glMultiTexCoord2ivARB(target, v):
+   cdef GLint arg[2]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      c_glMultiTexCoord2ivARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord2ivARB')
+
+def glMultiTexCoord2sARB(target, s, t):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord2sARB(target, s, t)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord2sARB')
+
+def glMultiTexCoord2svARB(target, v):
+   cdef GLshort arg[2]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      c_glMultiTexCoord2svARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord2svARB')
+
+def glMultiTexCoord3dARB(target, s, t, r):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord3dARB(target, s, t, r)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord3dARB')
+
+def glMultiTexCoord3dvARB(target, v):
+   cdef GLdouble arg[3]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      c_glMultiTexCoord3dvARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord3dvARB')
+
+def glMultiTexCoord3fARB(target, s, t, r):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord3fARB(target, s, t, r)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord3fARB')
+
+def glMultiTexCoord3fvARB(target, v):
+   cdef GLfloat arg[3]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      c_glMultiTexCoord3fvARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord3fvARB')
+
+def glMultiTexCoord3iARB(target, s, t, r):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord3iARB(target, s, t, r)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord3iARB')
+
+def glMultiTexCoord3ivARB(target, v):
+   cdef GLint arg[3]
+
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      c_glMultiTexCoord3ivARB(target, arg)      
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord3ivARB')
+
+def glMultiTexCoord3sARB(target, s, t, r):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord3sARB(target, s, t, r)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord3sARB')
+
+def glMultiTexCoord3svARB(target, v):
+   cdef GLshort arg[3]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      c_glMultiTexCoord3svARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord3svARB')
+
+def glMultiTexCoord4dARB(target, s, t, r, q):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord4dARB(target, s, t, r, q)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord4dARB')
+
+def glMultiTexCoord4dvARB(target, v):
+   cdef GLdouble arg[4]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      arg[3] = v[3]
+      c_glMultiTexCoord4dvARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord4dvARB')
+
+def glMultiTexCoord4fARB(target, s, t, r, q):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord4fARB(target, s, t, r, q)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord4fARB')
+
+def glMultiTexCoord4fvARB(target, v):
+   cdef GLfloat arg[4]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      arg[3] = v[3]
+      c_glMultiTexCoord4fvARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord4fvARB')
+
+def glMultiTexCoord4iARB(target, s, t, r, q):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord4iARB(target, s, t, r, q)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord4iARB')
+
+def glMultiTexCoord4ivARB(target, v):
+   cdef GLint arg[4]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      arg[3] = v[3]
+      c_glMultiTexCoord4ivARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord4ivARB')
+
+def glMultiTexCoord4sARB(target, s, t, r, q):
+   if c_GLEW_ARB_multitexture:
+      c_glMultiTexCoord4sARB(target, s, t, r, q)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord4sARB')
+
+def glMultiTexCoord4svARB(target, v):
+   cdef GLshort arg[4]
+   
+   if c_GLEW_ARB_multitexture:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      arg[3] = v[3]
+      c_glMultiTexCoord4svARB(target, arg)
+   else:
+      raise GlewpyError('GL_ARB_multitexture', 'glMultiTexCoord4svARB')
+
 # ------------------------- GL_ARB_occlusion_query ------------------------ #
 GL_QUERY_COUNTER_BITS_ARB = 0x8864
 GL_CURRENT_QUERY_ARB = 0x8865
