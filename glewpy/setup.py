@@ -13,7 +13,7 @@ setup(
   package_dir = {'glew': 'src/'},
   ext_modules=[
     Extension('glew', ['src/glew.pyx'], libraries = ['GLEW']),
-    Extension('gl.a3dfx', ['src/gl/a3dfx.pyx'], libraries = ['GLEW']),
+    Extension('gl.threedfx', ['src/gl/threedfx.pyx'], libraries = ['GLEW']),
     Extension('gl.apple', ['src/gl/apple.pyx'], libraries = ['GLEW']),
     Extension('gl.arb', ['src/gl/arb.pyx'], libraries = ['GLEW']),
     Extension('gl.ati', ['src/gl/ati.pyx'], libraries = ['GLEW']),
@@ -21,6 +21,7 @@ setup(
     Extension('gl.ext', ['src/gl/ext.pyx'], libraries = ['GLEW']),
     Extension('gl.gl', ['src/gl/gl.pyx'], libraries = ['GLEW']),
     Extension('gl.hp', ['src/gl/hp.pyx'], libraries = ['GLEW']),
+    Extension('gl.ibm', ['src/gl/ibm.pyx'], libraries = ['GLEW']),
     Extension('gl.ingr', ['src/gl/ingr.pyx'], libraries = ['GLEW']),
     Extension('gl.intel', ['src/gl/intel.pyx'], libraries = ['GLEW']),
     Extension('gl.ktx', ['src/gl/ktx.pyx'], libraries = ['GLEW'])
