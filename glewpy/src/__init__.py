@@ -15,10 +15,9 @@ __doc__ = """
 """
 
 # include base GLEW methods
-import GLEW
+from glew import *
 
 # include support for each extension class
-import GL
-import ARB
-import INTEL
-
+from gl import *
+from arb import *
+from intel import *

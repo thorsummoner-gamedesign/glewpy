@@ -4,7 +4,7 @@ import sys
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-from GLEW import *
+from glew import *
 
 MAXITER = 200
 WINSIZE = (512, 512)
