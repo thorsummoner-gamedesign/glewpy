@@ -1306,6 +1306,76 @@ cdef extern from "GL/glew.h":
    void c_glCompressedTexSubImage3DARB "glCompressedTexSubImage3DARB"(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, void* data)
    void c_glGetCompressedTexImageARB "glGetCompressedTexImageARB"(GLenum target, GLint lod, void* img)
 
+def glCompressedTexImage1DARB(target, level, internalformat, width, border, imageSize, data):
+   cdef char *arr
+
+   if c_GLEW_ARB_texture_compression:
+      arr = data
+      c_glCompressedTexImage1DARB(target, level, internalformat, width, border, imageSize, arr)
+   else:
+      raise GlewpyError('GL_ARB_texture_compression', 'glCompressedTexImage1DARB')
+
+def glCompressedTexImage2DARB(target, level, internalformat, width, height, border, imageSize, data):
+   cdef char *arr
+
+   if c_GLEW_ARB_texture_compression:
+      arr = data
+      c_glCompressedTexImage2DARB(target, level, internalformat, width, height, border, imageSize, arr)
+   else:
+      raise GlewpyError('GL_ARB_texture_compression', 'glCompressedTexImage2DARB')
+
+def glCompressedTexImage3DARB(target, level, internalformat, width, height, depth, border, imageSize, data):
+   cdef char *arr
+
+   if c_GLEW_ARB_texture_compression:
+      arr = data
+      c_glCompressedTexImage3DARB(target, level, internalformat, width, height, depth, border, imageSize, arr)
+   else:
+      raise GlewpyError('GL_ARB_texture_compression', 'glCompressedTexImage3DARB')
+
+
+def glCompressedTexSubImage1DARB(target, level, xoffset, width, format, imageSize, data):
+   cdef char *arr
+
+   if c_GLEW_ARB_texture_compression:
+      arr = data
+      c_glCompressedTexSubImage1DARB(target, level, xoffset, width, format, imageSize, arr)
+   else:
+      raise GlewpyError('GL_ARB_texture_compression', 'glCompressedTexSubImage1DARB')
+
+def glCompressedTexSubImage2DARB(target, level, xoffset, yoffset, width, height, format, imageSize, data):
+   cdef char *arr
+
+   if c_GLEW_ARB_texture_compression:
+      arr = data
+      c_glCompressedTexSubImage2DARB(target, level, xoffset, yoffset, width, height, format, imageSize, arr)
+   else:
+      raise GlewpyError('GL_ARB_texture_compression', 'glCompressedTexSubImage2DARB')
+
+def glCompressedTexSubImage3DARB(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data):
+   cdef char *arr
+
+   if c_GLEW_ARB_texture_compression:
+      arr = data
+      c_glCompressedTexSubImage3DARB(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, arr)
+   else:
+      raise GlewpyError('GL_ARB_texture_compression', 'glCompressedTexSubImage3DARB')
+
+def glGetCompressedTexImageARB(target, lod):
+   cdef char *result
+   cdef GLint size
+   cdef PyObject *retval
+
+   if c_GLEW_ARB_texture_compression:
+      c_glGetTexLevelParameteriv(target, lod, GL_TEXTURE_COMPRESSED_IMAGE_SIZE, &size)
+      result = <char*>PyMem_Malloc(size)
+      c_glGetCompressedTexImageARB(target, lod, result)
+      retval = PyString_FromStringAndSize(result, size)
+      PyMem_Free(result)
+      return <object>retval
+   else:
+      raise GlewpyError('GL_ARB_texture_compression', 'glGetCompressedTexImageARB')
+
 # ------------------------ GL_ARB_texture_cube_map ------------------------ #
 GL_NORMAL_MAP_ARB = 0x8511
 GL_REFLECTION_MAP_ARB = 0x8512
