@@ -367,6 +367,77 @@ cdef extern from "GL/glew.h":
    void c_glGetQueryivARB "glGetQueryivARB"(GLenum target, GLenum pname, GLint* params)
    GLboolean c_glIsQueryARB "glIsQueryARB"(GLuint id)
 
+def glBeginQueryARB(target, id):
+   if c_GLEW_ARB_occlusion_query:
+      c_glBeginQueryARB(target, id)
+   else:
+      raise GlewpyError('GL_ARB_occlusion_query', 'glBeginQueryARB')
+
+def glDeleteQueriesARB(n, ids):
+   cdef GLuint *args
+   cdef int i
+
+   if c_GLEW_ARB_occlusion_query:
+      args = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i from 0 <= i < n:
+         args[i] = ids[i]
+      c_glDeleteQueriesARB(n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_ARB_occlusion_query', 'glDeleteQueriesARB')
+
+def glEndQueryARB(target):
+   if c_GLEW_ARB_occlusion_query:
+      c_glEndQueryARB(target)
+   else:
+      raise GlewpyError('GL_ARB_occlusion_query', 'glEndQueryARB')
+
+def glGenQueriesARB(n, ids):
+   cdef GLuint *args
+   cdef int i
+
+   if c_GLEW_ARB_occlusion_query:
+      args = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i from 0 <= i < n:
+         args[i] = ids[i]
+      c_glGenQueriesARB(n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_ARB_occlusion_query', 'glGenQueriesARB')
+
+def glGetQueryObjectivARB(id, pname):
+   cdef GLint param
+
+   if c_GLEW_ARB_occlusion_query:
+      c_glGetQueryObjectivARB(id, pname, &param)
+      return param
+   else:
+      raise GlewpyError('GL_ARB_occlusion_query', 'glGetQueryObjectivARB')
+
+def glGetQueryObjectuivARB(id, pname):
+   cdef GLuint param
+
+   if c_GLEW_ARB_occlusion_query:
+      c_glGetQueryObjectuivARB(id, pname, &param)
+      return param
+   else:
+      raise GlewpyError('GL_ARB_occlusion_query', 'glGetQueryObjectuivARB')
+
+def glGetQueryivARB(target, pname):
+   cdef GLint param
+
+   if c_GLEW_ARB_occlusion_query:
+      c_glGetQueryivARB(id, pname, &param)
+      return param
+   else:
+      raise GlewpyError('GL_ARB_occlusion_query', 'glGetQueryivARB')
+
+def glIsQueryARB(id):
+   if c_GLEW_ARB_occlusion_query:
+      return c_glIsQueryARB(id)
+   else:
+      raise GlewpyError('GL_ARB_occlusion_query', 'glIsQueryARB')
+
 # ------------------------ GL_ARB_point_parameters ------------------------ #
 GL_POINT_SIZE_MIN_ARB = 0x8126
 GL_POINT_SIZE_MAX_ARB = 0x8127
@@ -376,6 +447,26 @@ GL_POINT_DISTANCE_ATTENUATION_ARB = 0x8129
 cdef extern from "GL/glew.h":
    void c_glPointParameterfARB "glPointParameterfARB"(GLenum pname, GLfloat param)
    void c_glPointParameterfvARB "glPointParameterfvARB"(GLenum pname, GLfloat* params)
+
+def glPointParameterfARB(pname, param):
+   if c_GLEW_ARB_point_parameters:
+      c_glPointParameterfARB(pname, param)
+   else:
+      raise GlewpyError('GL_ARB_point_parameters', 'glPointParameterfARB')
+
+def glPointParameterfvARB(pname, params):
+   cdef GLfloat args[3]
+   cdef int i
+   
+   if c_GLEW_ARB_point_parameters:
+      if (pname == POINT_DISTANCE_ATTENUATION_ARB): # 3 args
+         for i from 0 <= i < 3:
+            args[i] = params[i]
+      else: # Just one arg
+         args[0] = params[0]
+      c_glPointParameterfvARB(pname, args)
+   else:
+      raise GlewpyError('GL_ARB_point_parameters', 'glPointParameterfvARB')
 
 # -------------------------- GL_ARB_point_sprite -------------------------- #
 GL_POINT_SPRITE_ARB = 0x8861

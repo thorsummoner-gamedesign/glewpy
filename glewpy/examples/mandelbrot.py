@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import sys
 from OpenGL.GL import *
 from OpenGL.GLU import *
