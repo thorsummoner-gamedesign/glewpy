@@ -1,0 +1,4 @@
+include README
+include INSTALL
+include examples/mandelbrot.py
+include examples/mandelbrot.frag
