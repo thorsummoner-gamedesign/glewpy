@@ -310,9 +310,12 @@ def glMatrixIndexPointerARB(size, type, stride, pointer):
 
 def glMatrixIndexubvARB(size, indices):
    cdef GLubyte *arr
+   cdef int i
    
    if c_GLEW_ARB_matrix_palette:
       arr = <GLubyte*>PyMem_Malloc(sizeof(GLubyte) * size)
+      for i from 0 <= i < size:
+         arr[i] = indices[i]
       c_glMatrixIndexubvARB(size, arr)
       PyMem_Free(arr)
    else:
@@ -320,9 +323,12 @@ def glMatrixIndexubvARB(size, indices):
 
 def glMatrixIndexuivARB(size, indices):
    cdef GLuint *arr
+   cdef int i
    
    if c_GLEW_ARB_matrix_palette:
       arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * size)
+      for i from 0 <= i < size:
+         arr[i] = indices[i]
       c_glMatrixIndexuivARB(size, arr)
       PyMem_Free(arr)
    else:
@@ -330,9 +336,12 @@ def glMatrixIndexuivARB(size, indices):
       
 def glMatrixIndexusvARB(size, indices):
    cdef GLushort *arr
+   cdef int i
    
    if c_GLEW_ARB_matrix_palette:
       arr = <GLushort*>PyMem_Malloc(sizeof(GLushort) * size)
+      for i from 0 <= i < size:
+         arr[i] = indices[i]
       c_glMatrixIndexusvARB(size, arr)
       PyMem_Free(arr)
    else:
@@ -1461,9 +1470,12 @@ def glWeightPointerARB(size, type, stride, pointer):
 
 def glWeightbvARB(size, weights):
    cdef GLbyte *arr
+   cdef int i
 
    if c_GLEW_ARB_vertex_blend:
       arr = <GLbyte*>PyMem_Malloc(sizeof(GLbyte) * size)
+      for i from 0 <= i < size:
+         arr[i] = weights[i]
       c_glWeightbvARB(size, arr)
       PyMem_Free(arr)
    else:
@@ -1471,9 +1483,12 @@ def glWeightbvARB(size, weights):
 
 def glWeightdvARB(size, weights):
    cdef GLdouble *arr
+   cdef int i
 
    if c_GLEW_ARB_vertex_blend:
       arr = <GLdouble*>PyMem_Malloc(sizeof(GLdouble) * size)
+      for i from 0 <= i < size:
+         arr[i] = weights[i]
       c_glWeightdvARB(size, arr)
       PyMem_Free(arr)
    else:
@@ -1481,9 +1496,12 @@ def glWeightdvARB(size, weights):
 
 def glWeightfvARB(size, weights):
    cdef GLfloat *arr
+   cdef int i
 
    if c_GLEW_ARB_vertex_blend:
       arr = <GLfloat*>PyMem_Malloc(sizeof(GLfloat) * size)
+      for i from 0 <= i < size:
+         arr[i] = weights[i]
       c_glWeightfvARB(size, arr)
       PyMem_Free(arr)
    else:
@@ -1491,9 +1509,12 @@ def glWeightfvARB(size, weights):
 
 def glWeightivARB(size, weights):
    cdef GLint *arr
+   cdef int i
 
    if c_GLEW_ARB_vertex_blend:
       arr = <GLint*>PyMem_Malloc(sizeof(GLint) * size)
+      for i from 0 <= i < size:
+         arr[i] = weights[i]
       c_glWeightivARB(size, arr)
       PyMem_Free(arr)
    else:
@@ -1501,9 +1522,12 @@ def glWeightivARB(size, weights):
 
 def glWeightsvARB(size, weights):
    cdef GLshort *arr
+   cdef int i
 
    if c_GLEW_ARB_vertex_blend:
       arr = <GLshort*>PyMem_Malloc(sizeof(GLshort) * size)
+      for i from 0 <= i < size:
+         arr[i] = weights[i]
       c_glWeightsvARB(size, arr)
       PyMem_Free(arr)
    else:
@@ -1511,9 +1535,12 @@ def glWeightsvARB(size, weights):
 
 def glWeightubvARB(size, weights):
    cdef GLubyte *arr
+   cdef int i
 
    if c_GLEW_ARB_vertex_blend:
       arr = <GLubyte*>PyMem_Malloc(sizeof(GLubyte) * size)
+      for i from 0 <= i < size:
+         arr[i] = weights[i]
       c_glWeightubvARB(size, arr)
       PyMem_Free(arr)
    else:
@@ -1521,9 +1548,12 @@ def glWeightubvARB(size, weights):
 
 def glWeightuivARB(size, weights):
    cdef GLuint *arr
+   cdef int i
 
    if c_GLEW_ARB_vertex_blend:
       arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * size)
+      for i from 0 <= i < size:
+         arr[i] = weights[i]
       c_glWeightuivARB(size, arr)
       PyMem_Free(arr)
    else:
@@ -1531,9 +1561,12 @@ def glWeightuivARB(size, weights):
 
 def glWeightusvARB(size, weights):
    cdef GLushort *arr
+   cdef int i
 
    if c_GLEW_ARB_vertex_blend:
       arr = <GLushort*>PyMem_Malloc(sizeof(GLushort) * size)
+      for i from 0 <= i < size:
+         arr[i] = weights[i]
       c_glWeightusvARB(size, arr)
       PyMem_Free(arr)
    else:
@@ -1588,6 +1621,110 @@ cdef extern from "GL/glew.h":
    GLboolean c_glIsBufferARB "glIsBufferARB"(GLuint buffer)
    GLvoid* c_glMapBufferARB "glMapBufferARB"(GLenum target, GLenum access)
    GLboolean c_glUnmapBufferARB "glUnmapBufferARB"(GLenum target)
+
+def glBindBufferARB(target, buffer):
+   if c_GLEW_ARB_vertex_buffer_object:
+      c_glBindBufferARB(target, buffer)
+   else:
+      GlewpyError('GL_ARB_vertex_buffer_object', 'glBindBufferARB')
+
+def glBufferDataARB(target, size, data, usage):
+   cdef char *arr
+   
+   if c_GLEW_ARB_vertex_buffer_object:
+      arr = data
+      c_glBufferDataARB(target, size, arr, usage)
+   else:
+      GlewpyError('GL_ARB_vertex_buffer_object', 'glBufferDataARB')
+
+def glBufferSubDataARB(target, offset, size, data):
+   cdef char *arr
+
+   if c_GLEW_ARB_vertex_buffer_object:
+      arr = data
+      c_glBufferSubDataARB(target, offset, size, arr)
+   else:
+      GlewpyError('GL_ARB_vertex_buffer_object', 'glBufferSubDataARB')
+
+def glDeleteBuffersARB(n, buffers):
+   cdef GLuint *arr
+   cdef int i
+
+   if c_GLEW_ARB_vertex_buffer_object:
+      arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i from 0 <= i < n:
+         arr[i] = buffers[i]
+      c_glDeleteBuffersARB(n, arr)
+      PyMem_Free(arr)
+   else:
+      GlewpyError('GL_ARB_vertex_buffer_object', 'glDeleteBuffersARB')
+
+def glGenBuffersARB(n, buffers):
+   cdef GLuint *arr
+   cdef int i
+
+   if c_GLEW_ARB_vertex_buffer_object:
+      arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i from 0 <= i < n:
+         arr[i] = buffers[i]
+      c_glGenBuffersARB(n, arr)
+      PyMem_Free(arr)
+   else:
+      GlewpyError('GL_ARB_vertex_buffer_object', 'glGenBuffersARB')
+
+def glGetBufferParameterivARB(target, pname):
+   cdef GLint params
+
+   if c_GLEW_ARB_vertex_buffer_object:
+      c_glGetBufferParameterivARB(target, pname, &params)
+      return params
+   else:
+      GlewpyError('GL_ARB_vertex_buffer_object', 'glGetBufferParameterivARB')
+
+def glGetBufferPointervARB(target, pname):
+   cdef char *params
+   cdef GLint size
+
+   if c_GLEW_ARB_vertex_buffer_object:
+      c_glGetBufferParameterivARB(target, pname, &size)
+      params = <char*>PyMem_Malloc(size)
+      c_glGetBufferPointervARB(target, pname, <void**>&params)
+      result = params
+      PyMem_Free(params)
+      return result
+   else:
+       GlewpyError('GL_ARB_vertex_buffer_object', 'glGetBufferPointervARB')
+
+def glGetBufferSubDataARB(target, offset, size):
+   cdef char *data
+
+   if c_GLEW_ARB_vertex_buffer_object:
+      data = <char*>PyMem_Malloc(size)
+      c_glGetBufferSubDataARB(target, offset, size, data)
+      result = data
+      PyMem_Free(data)
+      return result
+   else:
+      GlewpyError('GL_ARB_vertex_buffer_object', 'glGetBufferSubDataARB')
+
+def glIsBufferARB(buffer):
+   if c_GLEW_ARB_vertex_buffer_object:
+      return c_glIsBufferARB(buffer)
+   else:
+      GlewpyError('GL_ARB_vertex_buffer_object', 'glIsBufferARB')
+
+def glMapBufferARB(target, access):
+   if c_GLEW_ARB_vertex_buffer_object:
+      print 'glMapBufferARB not implemented. Let me know if you need it.'
+      return 0
+   else:
+      GlewpyError('GL_ARB_vertex_buffer_object', 'glMapBufferARB')
+
+def glUnmapBufferARB(target):
+   if c_GLEW_ARB_vertex_buffer_object:
+      return c_glUnmapBufferARB(target)
+   else:
+      GlewpyError('GL_ARB_vertex_buffer_object', 'glUnmapBufferARB')
 
 # ------------------------- GL_ARB_vertex_program ------------------------- #
 GL_COLOR_SUM_ARB = 0x8458
