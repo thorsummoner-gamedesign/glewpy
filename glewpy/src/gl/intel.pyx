@@ -1,5 +1,5 @@
-include "gltypes.pxi"
-include "glewpy.pxi"
+include "../gltypes.pxi"
+include "../glewpy.pxi"
 
 # ------------------------ GL_INTEL_texture_scissor ----------------------- #
 cdef extern from "GL/glew.h":

@@ -19,5 +19,5 @@ from glew import *
 
 # include support for each extension class
 from gl import *
-from arb import *
-from intel import *
+from glx import *
+from wgl import *

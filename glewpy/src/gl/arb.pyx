@@ -1,5 +1,5 @@
-include "gltypes.pxi"
-include "glewpy.pxi"
+include "../gltypes.pxi"
+include "../glewpy.pxi"
 
 # ------------------------ GL_ARB_fragment_program ------------------------ #
 GL_FRAGMENT_PROGRAM_ARB = 0x8804
