@@ -2246,3 +2246,39 @@ def glGetShaderSource(obj, maxLength):
    else:
       raise GlewpyError('GL_VERSION_2_0', 'glGetShaderSource')
 
+def glGetUniformLocation(programObj, name):
+   if c_GLEW_VERSION_2_0:
+      return c_glGetUniformLocation(programObj, name)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glGetUniformLocation')
+
+def glGetUniformfv(program, location, size):
+   cdef GLfloat *params
+   cdef i
+   
+   if c_GLEW_VERSION_2_0:
+      params = <GLfloat*>PyMem_Malloc(sizeof(GLfloat) * size)
+      c_glGetUniformfv(program, location, params)
+      res = []
+      for i from 0 <= i < size:
+         res.append(params[i])
+      PyMem_Free(params)
+      return tuple(res)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glGetUniformfv')
+
+def glGetUniformiv(program, location, size):
+   cdef GLint *params
+   cdef i
+   
+   if c_GLEW_VERSION_2_0:
+      params = <GLint*>PyMem_Malloc(sizeof(GLint) * size)
+      c_glGetUniformiv(program, location, params)
+      res = []
+      for i from 0 <= i < size:
+         res.append(params[i])
+      PyMem_Free(params)
+      return tuple(res)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glGetUniformiv')
+
