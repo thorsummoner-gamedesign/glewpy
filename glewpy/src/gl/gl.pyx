@@ -1302,6 +1302,380 @@ cdef extern from "GL/glew.h":
    void c_glWindowPos3s "glWindowPos3s"(GLshort x, GLshort y, GLshort z)
    void c_glWindowPos3sv "glWindowPos3sv"(GLshort *p)
 
+def glBlendColor(red, green, blue, alpha):
+   if c_GLEW_VERSION_1_4:
+      c_glBlendColor(red, green, blue, alpha)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glBlendColor')
+
+def glBlendEquation(mode):
+   if c_GLEW_VERSION_1_4:
+      c_glBlendEquation(mode)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glBlendEquation')
+
+def glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha):
+   if c_GLEW_VERSION_1_4:
+      c_glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glBlendFuncSeparate')
+
+def glFogCoordPointer(type, stride, pointer):
+   cdef char *arr
+   
+   if c_GLEW_VERSION_1_4:
+      arr = pointer
+      c_glFogCoordPointer(type, stride, arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glFogCoordPointer')
+
+def glFogCoordd(coord):
+   if c_GLEW_VERSION_1_4:
+      c_glFogCoordd(coord)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glFogCoordd')
+
+def glFogCoorddv(coord):
+   cdef GLdouble arr[1]
+   
+   if c_GLEW_VERSION_1_4:
+      arr[0] = coord[0]
+      c_glFogCoorddv(arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glFogCoorddv')
+
+def glFogCoordf(coord):
+   if c_GLEW_VERSION_1_4:
+      c_glFogCoordf(coord)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glFogCoordf')
+
+def glFogCoordfv(coord):
+   cdef GLfloat arr[1]
+   
+   if c_GLEW_VERSION_1_4:
+      arr[0] = coord[0]
+      c_glFogCoordfv(arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glFogCoordfv')
+
+def glMultiDrawArrays(mode, first, count, primcount):
+   cdef GLint firstArr[1]
+   cdef GLsizei countArr[1]
+
+   if c_GLEW_VERSION_1_4:
+      firstArr[0] = first[0]
+      countArr[0] = count[0]
+      c_glMultiDrawArrays(mode, firstArr, countArr, primcount)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glMultiDrawArrays')
+
+def glMultiDrawElements(mode, count, type, indices, primcount):
+   cdef GLsizei countArr[1]
+   cdef char **indicesArr
+   cdef int i
+
+   if c_GLEW_VERSION_1_4:
+      countArr[0] = count[0]
+      indicesArr = <char**>PyMem_Malloc(countArr[0])
+      for i from 0 <= i < countArr[0]:
+         indicesArr[i] = (<char**>indices)[i] # Who knows if this works
+      c_glMultiDrawElements(mode, countArr, type, <void**>indicesArr, primcount)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glMultiDrawElements')
+
+def glPointParameterf(pname, param):
+   if c_GLEW_VERSION_1_4:
+      c_glPointParameterf(pname, param)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glPointParameterf')
+
+def glPointParameterfv(pname, params):
+   cdef GLfloat arr[1]
+
+   if c_GLEW_VERSION_1_4:
+      arr[0] = params[0]
+      c_glPointParameterfv(pname, arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glPointParameterfv')
+
+def glSecondaryColor3b(red, green, blue):
+   if c_GLEW_VERSION_1_4:
+      c_glSecondaryColor3b(red, green, blue)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3b')
+
+def glSecondaryColor3bv(v):
+   cdef GLbyte arr[3]
+
+   if c_GLEW_VERSION_1_4:
+      arr[0] = v[0]
+      arr[1] = v[1]
+      arr[2] = v[2]
+      c_glSecondaryColor3bv(arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3bv')
+
+def glSecondaryColor3d(red, green, blue):
+   if c_GLEW_VERSION_1_4:
+      c_glSecondaryColor3d(red, green, blue)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3d')
+
+def glSecondaryColor3dv(v):
+   cdef GLdouble arr[3]
+
+   if c_GLEW_VERSION_1_4:
+      arr[0] = v[0]
+      arr[1] = v[1]
+      arr[2] = v[2]
+      c_glSecondaryColor3dv(arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3dv')
+
+def glSecondaryColor3f(red, green, blue):
+   if c_GLEW_VERSION_1_4:
+      c_glSecondaryColor3f(red, green, blue)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3f')
+
+def glSecondaryColor3fv(v):
+   cdef GLfloat arr[3]
+
+   if c_GLEW_VERSION_1_4:
+      arr[0] = v[0]
+      arr[1] = v[1]
+      arr[2] = v[2]
+      c_glSecondaryColor3fv(arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3fv')
+
+def glSecondaryColor3i(red, green, blue):
+   if c_GLEW_VERSION_1_4:
+      c_glSecondaryColor3i(red, green, blue)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3i')
+
+def glSecondaryColor3iv(v):
+   cdef GLint arr[3]
+
+   if c_GLEW_VERSION_1_4:
+      arr[0] = v[0]
+      arr[1] = v[1]
+      arr[2] = v[2]
+      c_glSecondaryColor3iv(arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3iv')
+   
+def glSecondaryColor3s(red, green, blue):
+   if c_GLEW_VERSION_1_4:
+      c_glSecondaryColor3s(red, green, blue)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3s')
+
+def glSecondaryColor3sv(v):
+   cdef GLshort arr[3]
+
+   if c_GLEW_VERSION_1_4:
+      arr[0] = v[0]
+      arr[1] = v[1]
+      arr[2] = v[2]
+      c_glSecondaryColor3sv(arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3sv')
+
+def glSecondaryColor3ub(red, green, blue):
+   if c_GLEW_VERSION_1_4:
+      c_glSecondaryColor3ub(red, green, blue)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3ub')
+
+def glSecondaryColor3ubv(v):
+   cdef GLubyte arr[3]
+
+   if c_GLEW_VERSION_1_4:
+      arr[0] = v[0]
+      arr[1] = v[1]
+      arr[2] = v[2]
+      c_glSecondaryColor3ubv(arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3ubv')
+
+def glSecondaryColor3ui(red, green, blue):
+   if c_GLEW_VERSION_1_4:
+      c_glSecondaryColor3ui(red, green, blue)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3ui')
+
+def glSecondaryColor3uiv(v):
+   cdef GLuint arr[3]
+
+   if c_GLEW_VERSION_1_4:
+      arr[0] = v[0]
+      arr[1] = v[1]
+      arr[2] = v[2]
+      c_glSecondaryColor3uiv(arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3uiv')
+
+def glSecondaryColor3us(red, green, blue):
+   if c_GLEW_VERSION_1_4:
+      c_glSecondaryColor3us(red, green, blue)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3us')
+
+def glSecondaryColor3usv(v):
+   cdef GLushort arr[3]
+
+   if c_GLEW_VERSION_1_4:
+      arr[0] = v[0]
+      arr[1] = v[1]
+      arr[2] = v[2]
+      c_glSecondaryColor3usv(arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColor3usv')
+
+def glSecondaryColorPointer(size, type, stride, pointer):
+   cdef char *arr
+
+   if c_GLEW_VERSION_1_4:
+      arr = pointer
+      c_glSecondaryColorPointer(size, type, stride, arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glSecondaryColorPointer')
+
+def glWindowPos2d(x, y):
+   if c_GLEW_VERSION_1_4:
+      c_glWindowPos2d(x, y)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos2d')
+
+def glWindowPos2dv(p):
+   cdef GLdouble pos[2]
+
+   if c_GLEW_VERSION_1_4:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      c_glWindowPos2dv(pos)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos2dv')
+
+def glWindowPos2f(x, y):
+   if c_GLEW_VERSION_1_4:
+      c_glWindowPos2f(x, y)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos2f')
+
+def glWindowPos2fv(p):
+   cdef GLfloat pos[2]
+
+   if c_GLEW_VERSION_1_4:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      c_glWindowPos2fv(pos)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos2fv')
+
+def glWindowPos2i(x, y):
+   if c_GLEW_VERSION_1_4:
+      c_glWindowPos2i(x, y)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos2i')
+
+def glWindowPos2fi(p):
+   cdef GLint pos[2]
+
+   if c_GLEW_VERSION_1_4:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      c_glWindowPos2iv(pos)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos2iv')
+
+def glWindowPos2s(x, y):
+   if c_GLEW_VERSION_1_4:
+      c_glWindowPos2s(x, y)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos2s')
+
+def glWindowPos2sv(p):
+   cdef GLshort pos[2]
+
+   if c_GLEW_VERSION_1_4:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      c_glWindowPos2sv(pos)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos2sv')
+
+def glWindowPos3d(x, y, z):
+   if c_GLEW_VERSION_1_4:
+      c_glWindowPos3d(x, y, z)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos3d')
+
+def glWindowPos3dv(p):
+   cdef GLdouble pos[3]
+
+   if c_GLEW_VERSION_1_4:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      pos[2] = p[2]
+      c_glWindowPos3dv(pos)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos3dv')
+
+def glWindowPos3f(x, y, z):
+   if c_GLEW_VERSION_1_4:
+      c_glWindowPos3f(x, y, z)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos3f')
+
+def glWindowPos3fv(p):
+   cdef GLfloat pos[3]
+
+   if c_GLEW_VERSION_1_4:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      pos[2] = p[2]
+      c_glWindowPos3fv(pos)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos3fv')
+
+def glWindowPos3i(x, y, z):
+   if c_GLEW_VERSION_1_4:
+      c_glWindowPos3i(x, y, z)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos3i')
+
+def glWindowPos3fi(p):
+   cdef GLint pos[3]
+
+   if c_GLEW_VERSION_1_4:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      pos[2] = p[2]
+      c_glWindowPos3iv(pos)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos3iv')
+
+def glWindowPos3s(x, y, z):
+   if c_GLEW_VERSION_1_4:
+      c_glWindowPos3s(x, y, z)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos3s')
+
+def glWindowPos3fs(p):
+   cdef GLshort pos[3]
+
+   if c_GLEW_VERSION_1_4:
+      pos[0] = p[0]
+      pos[1] = p[1]
+      pos[2] = p[2]
+      c_glWindowPos3sv(pos)
+   else:
+      raise GlewpyError('GL_VERSION_1_4', 'glWindowPos3sv')
+      
 # ----------------------------- GL_VERSION_1_5 ---------------------------- #
 GL_BUFFER_SIZE = 0x8764
 GL_BUFFER_USAGE = 0x8765
