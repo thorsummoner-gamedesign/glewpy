@@ -1,6 +1,73 @@
 include "../gltypes.pxi"
 include "../glewpy.pxi"
 
+# ----------------------- GL_ARB_color_buffer_float ----------------------- #
+GL_RGBA_FLOAT_MODE_ARB = 0x8820
+GL_CLAMP_VERTEX_COLOR_ARB = 0x891A
+GL_CLAMP_FRAGMENT_COLOR_ARB = 0x891B
+GL_CLAMP_READ_COLOR_ARB = 0x891C
+GL_FIXED_ONLY_ARB = 0x891D
+
+cdef extern from "GL/glew.h":
+   cdef enum:
+      GLEW_ARB_color_buffer_float
+
+   void c_glClampColorARB "glClampColorARB"(GLenum target, GLenum clamp)
+
+def glClampColorARB(target, clamp):
+   """glClampColorARB(GLenum target, GLenum clamp)"""
+   if GLEW_ARB_color_buffer_float:
+      c_glClampColorARB(target, clamp)
+   else:
+      raise GlewpyError('GL_ARB_color_buffer_float', 'glClampColorARB')
+
+# -------------------------- GL_ARB_depth_texture ------------------------- #
+GL_DEPTH_COMPONENT16_ARB = 0x81A5
+GL_DEPTH_COMPONENT24_ARB = 0x81A6
+GL_DEPTH_COMPONENT32_ARB = 0x81A7
+GL_TEXTURE_DEPTH_SIZE_ARB = 0x884A
+GL_DEPTH_TEXTURE_MODE_ARB = 0x884B
+
+# -------------------------- GL_ARB_draw_buffers -------------------------- #
+GL_MAX_DRAW_BUFFERS_ARB = 0x8824
+GL_DRAW_BUFFER0_ARB = 0x8825
+GL_DRAW_BUFFER1_ARB = 0x8826
+GL_DRAW_BUFFER2_ARB = 0x8827
+GL_DRAW_BUFFER3_ARB = 0x8828
+GL_DRAW_BUFFER4_ARB = 0x8829
+GL_DRAW_BUFFER5_ARB = 0x882A
+GL_DRAW_BUFFER6_ARB = 0x882B
+GL_DRAW_BUFFER7_ARB = 0x882C
+GL_DRAW_BUFFER8_ARB = 0x882D
+GL_DRAW_BUFFER9_ARB = 0x882E
+GL_DRAW_BUFFER10_ARB = 0x882F
+GL_DRAW_BUFFER11_ARB = 0x8830
+GL_DRAW_BUFFER12_ARB = 0x8831
+GL_DRAW_BUFFER13_ARB = 0x8832
+GL_DRAW_BUFFER14_ARB = 0x8833
+GL_DRAW_BUFFER15_ARB = 0x8834
+
+cdef extern from "GL/glew.h":
+   cdef enum:
+      GLEW_ARB_draw_buffers
+
+   void c_glDrawBuffersARB "glDrawBuffersARB"(GLsizei n, GLenum* bufs)
+
+def glDrawBuffersARB(n, bufs):
+   cdef GLenum *args
+   cdef int i
+
+   if GLEW_ARB_draw_buffers:
+      args = <GLenum*>PyMem_Malloc(sizeof(GLenum) * n)
+      i = 0
+      for buf in bufs:
+         args[i] = buf
+         i = i + 1
+      c_glDrawBuffersARB(n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_ARB_draw_buffers', 'glDrawBuffersARB')
+
 # ------------------------ GL_ARB_fragment_program ------------------------ #
 GL_FRAGMENT_PROGRAM_ARB = 0x8804
 GL_PROGRAM_ALU_INSTRUCTIONS_ARB = 0x8805
