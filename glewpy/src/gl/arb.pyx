@@ -293,6 +293,51 @@ cdef extern from "GL/glew.h":
    void c_glMatrixIndexuivARB "glMatrixIndexuivARB"(GLint size, GLuint *indices)
    void c_glMatrixIndexusvARB "glMatrixIndexusvARB"(GLint size, GLushort *indices)
 
+def glCurrentPaletteMatrixARB(index):
+   if c_GLEW_ARB_matrix_palette:
+      c_glCurrentPaletteMatrixARB(index)
+   else:
+      GlewpyError('GL_ARB_matrix_palette', 'glCurrentPaletteMatrixARB')
+
+def glMatrixIndexPointerARB(size, type, stride, pointer):
+   cdef char *arr
+   
+   if c_GLEW_ARB_matrix_palette:
+      arr = pointer
+      c_glMatrixIndexPointerARB(size, type, stride, arr)
+   else:
+      GlewpyError('GL_ARB_matrix_palette', 'glMatrixIndexPointerARB')
+
+def glMatrixIndexubvARB(size, indices):
+   cdef GLubyte *arr
+   
+   if c_GLEW_ARB_matrix_palette:
+      arr = <GLubyte*>PyMem_Malloc(sizeof(GLubyte) * size)
+      c_glMatrixIndexubvARB(size, arr)
+      PyMem_Free(arr)
+   else:
+      GlewpyError('GL_ARB_matrix_palette', 'glMatrixIndexubvARB')
+
+def glMatrixIndexuivARB(size, indices):
+   cdef GLuint *arr
+   
+   if c_GLEW_ARB_matrix_palette:
+      arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * size)
+      c_glMatrixIndexuivARB(size, arr)
+      PyMem_Free(arr)
+   else:
+      GlewpyError('GL_ARB_matrix_palette', 'glMatrixIndexuivARB')
+      
+def glMatrixIndexusvARB(size, indices):
+   cdef GLushort *arr
+   
+   if c_GLEW_ARB_matrix_palette:
+      arr = <GLushort*>PyMem_Malloc(sizeof(GLushort) * size)
+      c_glMatrixIndexusvARB(size, arr)
+      PyMem_Free(arr)
+   else:
+      GlewpyError('GL_ARB_matrix_palette', 'glMatrixIndexusvARB')
+
 # --------------------------- GL_ARB_multisample -------------------------- #
 GL_MULTISAMPLE_ARB = 0x809D
 GL_SAMPLE_ALPHA_TO_COVERAGE_ARB = 0x809E
