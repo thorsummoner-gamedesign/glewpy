@@ -31,7 +31,8 @@ setup(
     Extension('gl.pgi', ['src/gl/pgi.pyx'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.rend', ['src/gl/rend.pyx'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.s3', ['src/gl/s3.pyx'], extra_link_args = ['-framework', 'OpenGL']),
-    Extension('gl.sgis', ['src/gl/sgis.pyx'], extra_link_args = ['-framework', 'OpenGL'])
+    Extension('gl.sgis', ['src/gl/sgis.pyx'], extra_link_args = ['-framework', 'OpenGL']),
+    Extension('gl.sgix', ['src/gl/sgix.pyx'], extra_link_args = ['-framework', 'OpenGL'])
     ],
   cmdclass = {'build_ext': build_ext}
 )
