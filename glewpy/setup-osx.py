@@ -3,7 +3,7 @@ from distutils.extension import Extension
 from Pyrex.Distutils import build_ext
 setup(
   name = "glewpy",
-  version = '0.6.1',
+  version = '0.7',
   description = 'Python Wrapping of GLEW',
   author = 'Charles Moad',
   author_email = 'cmoad@indiana.edu',
@@ -35,7 +35,8 @@ setup(
     Extension('gl.sgix', ['src/gl/sgix.pyx'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.sgi', ['src/gl/sgi.pyx'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.sunx', ['src/gl/sunx.pyx'], extra_link_args = ['-framework', 'OpenGL']),
-    Extension('gl.sun', ['src/gl/sun.pyx'], extra_link_args = ['-framework', 'OpenGL'])
+    Extension('gl.sun', ['src/gl/sun.pyx'], extra_link_args = ['-framework', 'OpenGL']),
+    Extension('gl.win', ['src/gl/win.pyx'], extra_link_args = ['-framework', 'OpenGL'])
     ],
   cmdclass = {'build_ext': build_ext}
 )

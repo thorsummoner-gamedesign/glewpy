@@ -21,3 +21,4 @@ from sgix import *
 from sgi import *
 from sunx import *
 from sun import *
+from win import *
