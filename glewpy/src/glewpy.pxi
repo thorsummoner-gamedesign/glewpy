@@ -42,7 +42,7 @@ ctypedef double GLclampd
 ctypedef void GLvoid
 
 ctypedef char GLcharARB
-ctypedef int GLhandleARB
+ctypedef unsigned int GLhandleARB
    
 ctypedef int ptrdiff_t
 ctypedef ptrdiff_t GLsizeiptrARB
