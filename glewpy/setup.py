@@ -28,7 +28,8 @@ setup(
     Extension('gl.mesa', ['src/gl/mesa.pyx'], libraries = ['GLEW']),
     Extension('gl.nv', ['src/gl/nv.pyx'], libraries = ['GLEW']),
     Extension('gl.oml', ['src/gl/oml.pyx'], libraries = ['GLEW']),
-    Extension('gl.pgi', ['src/gl/pgi.pyx'], libraries = ['GLEW'])
+    Extension('gl.pgi', ['src/gl/pgi.pyx'], libraries = ['GLEW']),
+    Extension('gl.rend', ['src/gl/rend.pyx'], libraries = ['GLEW'])
     ],
   cmdclass = {'build_ext': build_ext}
 )
