@@ -20,6 +20,7 @@ setup(
     Extension('gl.atix', ['src/gl/atix.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.ext', ['src/gl/ext.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.gl', ['src/gl/gl.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
+    Extension('gl.hp', ['src/gl/hp.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.ingr', ['src/gl/ingr.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.intel', ['src/gl/intel.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.ktx', ['src/gl/ktx.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL'])
