@@ -1,3 +1,8 @@
-# Just run the following commands
-python setup.py build_ext
-python setup.py install
+Requirements:
+  GLEW   >= 1.2.5
+  Pyrex  >= 0.9.3
+
+Just run the following commands
+
+> python setup.py build_ext
+> python setup.py install
