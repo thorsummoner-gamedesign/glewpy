@@ -1443,7 +1443,101 @@ cdef extern from "GL/glew.h":
    void c_glWeightubvARB "glWeightubvARB"(GLint size, GLubyte *weights)
    void c_glWeightuivARB "glWeightuivARB"(GLint size, GLuint *weights)
    void c_glWeightusvARB "glWeightusvARB"(GLint size, GLushort *weights)
+   
+def glVertexBlendARB(count):
+   if c_GLEW_ARB_vertex_blend:
+      c_glVertexBlendARB(count)
+   else:
+      GlewpyError('GL_ARB_vertex_blend', 'glVertexBlendARB')
 
+def glWeightPointerARB(size, type, stride, pointer):
+   cdef char *arr
+   
+   if c_GLEW_ARB_vertex_blend:
+      arr = pointer
+      c_glWeightPointerARB(size, type, stride, arr)
+   else:
+      GlewpyError('GL_ARB_vertex_blend', 'glWeightPointerARB')
+
+def glWeightbvARB(size, weights):
+   cdef GLbyte *arr
+
+   if c_GLEW_ARB_vertex_blend:
+      arr = <GLbyte*>PyMem_Malloc(sizeof(GLbyte) * size)
+      c_glWeightbvARB(size, arr)
+      PyMem_Free(arr)
+   else:
+      GlewpyError('GL_ARB_vertex_blend', 'glWeightbvARB')
+
+def glWeightdvARB(size, weights):
+   cdef GLdouble *arr
+
+   if c_GLEW_ARB_vertex_blend:
+      arr = <GLdouble*>PyMem_Malloc(sizeof(GLdouble) * size)
+      c_glWeightdvARB(size, arr)
+      PyMem_Free(arr)
+   else:
+      GlewpyError('GL_ARB_vertex_blend', 'glWeightdvARB')
+
+def glWeightfvARB(size, weights):
+   cdef GLfloat *arr
+
+   if c_GLEW_ARB_vertex_blend:
+      arr = <GLfloat*>PyMem_Malloc(sizeof(GLfloat) * size)
+      c_glWeightfvARB(size, arr)
+      PyMem_Free(arr)
+   else:
+      GlewpyError('GL_ARB_vertex_blend', 'glWeightfvARB')
+
+def glWeightivARB(size, weights):
+   cdef GLint *arr
+
+   if c_GLEW_ARB_vertex_blend:
+      arr = <GLint*>PyMem_Malloc(sizeof(GLint) * size)
+      c_glWeightivARB(size, arr)
+      PyMem_Free(arr)
+   else:
+      GlewpyError('GL_ARB_vertex_blend', 'glWeightivARB')
+
+def glWeightsvARB(size, weights):
+   cdef GLshort *arr
+
+   if c_GLEW_ARB_vertex_blend:
+      arr = <GLshort*>PyMem_Malloc(sizeof(GLshort) * size)
+      c_glWeightsvARB(size, arr)
+      PyMem_Free(arr)
+   else:
+      GlewpyError('GL_ARB_vertex_blend', 'glWeightsvARB')
+
+def glWeightubvARB(size, weights):
+   cdef GLubyte *arr
+
+   if c_GLEW_ARB_vertex_blend:
+      arr = <GLubyte*>PyMem_Malloc(sizeof(GLubyte) * size)
+      c_glWeightubvARB(size, arr)
+      PyMem_Free(arr)
+   else:
+      GlewpyError('GL_ARB_vertex_blend', 'glWeightubvARB')
+
+def glWeightuivARB(size, weights):
+   cdef GLuint *arr
+
+   if c_GLEW_ARB_vertex_blend:
+      arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * size)
+      c_glWeightuivARB(size, arr)
+      PyMem_Free(arr)
+   else:
+      GlewpyError('GL_ARB_vertex_blend', 'glWeightuivARB')
+
+def glWeightusvARB(size, weights):
+   cdef GLushort *arr
+
+   if c_GLEW_ARB_vertex_blend:
+      arr = <GLushort*>PyMem_Malloc(sizeof(GLushort) * size)
+      c_glWeightusvARB(size, arr)
+      PyMem_Free(arr)
+   else:
+      GlewpyError('GL_ARB_vertex_blend', 'glWeightusvARB')
 
 # ---------------------- GL_ARB_vertex_buffer_object ---------------------- #
 GL_BUFFER_SIZE_ARB = 0x8764
