@@ -716,8 +716,8 @@ def glUniform3fvARB(location, count, value):
 
    if c_GLEW_ARB_shader_objects:
       i = 0
-      for i from 0 <= i < count:
-         args[i] = value[i]
+      for val in value:
+         args[i] = val
          i = i + 1
       c_glUniform3fvARB(location, count, args)
    else:
