@@ -1,5 +1,6 @@
 include README
 include INSTALL
+include setup-osx.py
 include examples/mandelbrot.py
 include examples/mandelbrot.frag
 include src/glewpy.pxi

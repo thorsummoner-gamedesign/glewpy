@@ -1,4 +1,4 @@
-from a3dfx import *
+from threedfx import *
 from apple import *
 from arb import *
 from ati import *
