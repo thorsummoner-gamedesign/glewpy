@@ -14,6 +14,7 @@ setup(
   ext_modules=[
     Extension('glew', ['src/glew.pyx'], libraries = ['GLEW']),
     Extension('gl.arb', ['src/gl/arb.pyx'], libraries = ['GLEW']),
+    Extension('gl.gl', ['src/gl/gl.pyx'], libraries = ['GLEW']),
     Extension('gl.ingr', ['src/gl/ingr.pyx'], libraries = ['GLEW']),
     Extension('gl.intel', ['src/gl/intel.pyx'], libraries = ['GLEW']),
     Extension('gl.ktx', ['src/gl/ktx.pyx'], libraries = ['GLEW'])
