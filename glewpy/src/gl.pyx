@@ -9,6 +9,8 @@ cdef extern from "GL/glew.h":
    cdef extern GLenum c_glGetError "glGetError"()
 
 def glGetError():
+   """glGetError()
+   Returns an error flag if one was set."""
    if GLEW_VERSION_1_1:
       return c_glGetError()
    else:

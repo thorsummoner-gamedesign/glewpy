@@ -10,12 +10,14 @@ cdef extern from "GL/glew.h":
    void c_glTexScissorINTEL "glTexScissorINTEL"(GLenum target, GLclampf tlow, GLclampf thigh)   
    
 def glTexScissorFuncINTEL(target, lfunc, hfunc):
+   """glTexScissorFuncINTEL(GLenum target, GLenum lfunc, GLenum hfunc)"""
    if GLEW_INTEL_texture_scissor:
       c_glTexScissorFuncINTEL(target, lfunc, hfunc)
    else:
       raise GlewpyError('GLEW_INTEL_texture_scissor', 'glTexScissorFuncINTEL')
    
 def glTexScissorINTEL(target, tlow, thigh):
+   """glTexScissorINTEL(GLenum target, GLclampf tlow, GLclampf thigh)"""
    if GLEW_INTEL_texture_scissor:
       c_glTexScissorINTEL(target, tlow, thigh)
    else:

@@ -114,246 +114,377 @@ cdef extern from "GL/glew.h":
    void c_glValidateProgramARB "glValidateProgramARB"(GLhandleARB programObj)
 
 def glAttachObjectARB(containerObj, obj):
-   c_glAttachObjectARB(containerObj, obj)
+   if GLEW_ARB_shader_objects:
+      c_glAttachObjectARB(containerObj, obj)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glAttachObjectARB')
 
 def glCompileShaderARB(shaderObj):
-   c_glCompileShaderARB(shaderObj)
+   if GLEW_ARB_shader_objects:
+      c_glCompileShaderARB(shaderObj)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glCompileShaderARB')
 
 def glCreateProgramObjectARB():
-   return c_glCreateProgramObjectARB()
+   if GLEW_ARB_shader_objects:
+      return c_glCreateProgramObjectARB()
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glCreateProgramObjectARB')
 
 def glCreateShaderObjectARB(shaderType):
-   return c_glCreateShaderObjectARB(shaderType)
+   if GLEW_ARB_shader_objects:
+      return c_glCreateShaderObjectARB(shaderType)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glCreateShaderObjectARB')
 
 def glDeleteObjectARB(obj):
-   c_glDeleteObjectARB(obj)
+   if GLEW_ARB_shader_objects:
+      c_glDeleteObjectARB(obj)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glDeleteObjectARB')
 
 def glDetachObjectARB(containerObj, attachedObj):
-   c_glDetachObjectARB(containerObj, attachedObj)
+   if GLEW_ARB_shader_objects:
+      c_glDetachObjectARB(containerObj, attachedObj)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glDetachObjectARB')
 
 def glGetActiveUniformARB(programObj, index):
    cdef GLsizei maxLength
    cdef GLint size
    cdef GLenum type
    cdef GLcharARB *name
+   
+   if GLEW_ARB_shader_objects:
+      c_glGetObjectParameterivARB(programObj, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB, &maxLength)
+      name = <GLcharARB*>PyMem_Malloc(maxLength+1)
+      c_glGetActiveUniformARB(programObj, index, maxLength, NULL, &size, &type, name)
 
-   c_glGetObjectParameterivARB(programObj, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB, &maxLength)
-   name = <GLcharARB*>PyMem_Malloc(maxLength+1)
-   c_glGetActiveUniformARB(programObj, index, maxLength, NULL, &size, &type, name)
-
-   retname = name
-   PyMem_Free(name)
-   return (size, type, retname)
+      retname = name
+      PyMem_Free(name)
+      return (size, type, retname)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glGetActiveUniformARB')
 
 def glGetAttachedObjectsARB(containerObj):
    cdef GLhandleARB *obj
    cdef int maxCount, i
 
-   c_glGetObjectParameterivARB(containerObj, GL_OBJECT_ATTACHED_OBJECTS_ARB, &maxCount)
-   obj = <GLhandleARB*>PyMem_Malloc(sizeof(GLhandleARB) * maxCount)
-   c_glGetAttachedObjectsARB(containerObj, maxCount, NULL, obj)
-
-   retval = list()
-   for i from 0 <= i < maxCount:
-      retval.append(obj[i])
-   PyMem_Free(obj)
-   return retval
+   if GLEW_ARB_shader_objects:
+      c_glGetObjectParameterivARB(containerObj, GL_OBJECT_ATTACHED_OBJECTS_ARB, &maxCount)
+      obj = <GLhandleARB*>PyMem_Malloc(sizeof(GLhandleARB) * maxCount)
+      c_glGetAttachedObjectsARB(containerObj, maxCount, NULL, obj)
+      
+      retval = list()
+      for i from 0 <= i < maxCount:
+         retval.append(obj[i])
+      PyMem_Free(obj)
+      return retval
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glGetAttachedObjectsARB')
 
 def glGetHandleARB(pname):
-   return c_glGetHandleARB(pname)
+   if GLEW_ARB_shader_objects:
+      return c_glGetHandleARB(pname)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glGetHandleARB')
 
 def glGetInfoLogARB(obj):
    cdef GLsizei infoLogLength
    cdef GLcharARB *infoLog
 
-   c_glGetObjectParameterivARB(obj, GL_OBJECT_INFO_LOG_LENGTH_ARB, &infoLogLength)
-   if (infoLogLength > 0):
-      infoLog = <GLcharARB*>PyMem_Malloc(infoLogLength+1)
-      if (infoLog == NULL):
-         print 'Could not allocate InfoLog buffer'
-         sys.exit()
-      offset = 0
-      c_glGetInfoLogARB(obj, infoLogLength, NULL, infoLog)
-      retLog = infoLog
-      PyMem_Free(infoLog)
-      return retLog
+   if GLEW_ARB_shader_objects:
+      c_glGetObjectParameterivARB(obj, GL_OBJECT_INFO_LOG_LENGTH_ARB, &infoLogLength)
+      if (infoLogLength > 0):
+         infoLog = <GLcharARB*>PyMem_Malloc(infoLogLength+1)
+         if (infoLog == NULL):
+            raise Exception('Could not allocate InfoLog buffer')
+         offset = 0
+         c_glGetInfoLogARB(obj, infoLogLength, NULL, infoLog)
+         retLog = infoLog
+         PyMem_Free(infoLog)
+         return retLog
+      else:
+         return ''
    else:
-      return ''
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glGetInfoLogARB')
 
 def glGetObjectParameterfvARB(obj, pname):
    cdef GLfloat params
-   c_glGetObjectParameterfvARB(obj, pname, &params)
-   return params
+
+   if GLEW_ARB_shader_objects:
+      c_glGetObjectParameterfvARB(obj, pname, &params)
+      return params
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glGetObjectParameterfvARB')
 
 def glGetObjectParameterivARB(programObj, location):
    cdef GLint params
-   c_glGetObjectParameterivARB(programObj, location, &params)
-   return params
+   
+   if GLEW_ARB_shader_objects:
+      c_glGetObjectParameterivARB(programObj, location, &params)
+      return params
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glGetObjectParameterfvARB')
 
 def glGetShaderSourceARB(obj):
    cdef GLsizei length
    cdef GLcharARB *source
    
-   c_glGetObjectParameterivARB(obj, GL_OBJECT_SHADER_SOURCE_LENGTH_ARB, &length)
-   if (length > 0):
-      source = <GLcharARB*>PyMem_Malloc(length+1)
-      if (source == NULL):
-         print 'Could not allocate InfoLog buffer'
-         sys.exit()
-      c_glGetShaderSourceARB(obj, length, NULL, source)
-      retSrc = source
-      PyMem_Free(source)
-      return retSrc
+   if GLEW_ARB_shader_objects:
+      c_glGetObjectParameterivARB(obj, GL_OBJECT_SHADER_SOURCE_LENGTH_ARB, &length)
+      if (length > 0):
+         source = <GLcharARB*>PyMem_Malloc(length+1)
+         if (source == NULL):
+            raise Exception('Could not allocate InfoLog buffer')
+         c_glGetShaderSourceARB(obj, length, NULL, source)
+         retSrc = source
+         PyMem_Free(source)
+         return retSrc
+      else:
+         return ''
    else:
-      return ''
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glGetShaderSourceARB')
 
 def glGetUniformLocationARB(programObj, name):
-   return c_glGetUniformLocationARB(programObj, name)
+   if GLEW_ARB_shader_objects:
+      return c_glGetUniformLocationARB(programObj, name)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glGetUniformLocationARB')
 
 def glGetUniformfvARB(programObj, location):
    cdef GLfloat params
-   c_glGetUniformfvARB(programObj, location, &params)
-   return params
+
+   if GLEW_ARB_shader_objects:
+      c_glGetUniformfvARB(programObj, location, &params)
+      return params 
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glGetUniformfvARB')
 
 def glGetUniformivARB(programObj, location):
    cdef GLint params
-   c_glGetUniformivARB(programObj, location, &params)
-   return params
+
+   if GLEW_ARB_shader_objects:
+      c_glGetUniformivARB(programObj, location, &params)
+      return params
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glGetUniformivARB')
 
 def glLinkProgramARB(programObj):
-   c_glLinkProgramARB(programObj)
+   if GLEW_ARB_shader_objects:
+      c_glLinkProgramARB(programObj)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glLinkProgramARB')
 
 def glShaderSourceARB(shaderObj, count, programs):
    cdef GLcharARB **progList
    cdef int i
-   progList = <GLcharARB**>PyMem_Malloc(4 * count)
-   i = 0
-   for prog in programs:
-      progList[i] = prog
-      i = i + 1
-   c_glShaderSourceARB(shaderObj, count, <GLcharARB**>progList, NULL)
-   PyMem_Free(progList)
+
+   if GLEW_ARB_shader_objects:
+      progList = <GLcharARB**>PyMem_Malloc(4 * count)
+      i = 0
+      for prog in programs:
+         progList[i] = prog
+         i = i + 1
+      c_glShaderSourceARB(shaderObj, count, <GLcharARB**>progList, NULL)
+      PyMem_Free(progList)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glShaderSourceARB')      
 
 def glUniform1fARB(location, v0):
-   c_glUniform1fARB(location, v0)
+   if GLEW_ARB_shader_objects:
+      c_glUniform1fARB(location, v0)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform1fARB')
 
 def glUniform1fvARB(location, count, value):
    cdef GLfloat args[1]
-   args[0] = value[0]
-   c_glUniform1fvARB(location, count, args)
+
+   if GLEW_ARB_shader_objects:
+      args[0] = value[0]
+      c_glUniform1fvARB(location, count, args)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform1fvARB')
 
 def glUniform1iARB(location, v0):
-   c_glUniform1iARB(location, v0)
+   if GLEW_ARB_shader_objects:
+      c_glUniform1iARB(location, v0)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform1iARB')
 
 def glUniform1ivARB(location, count, value):
    cdef GLint args[1]
-   args[0] = value[0]
-   c_glUniform1ivARB(location, count, args)
+
+   if GLEW_ARB_shader_objects:
+      args[0] = value[0]
+      c_glUniform1ivARB(location, count, args)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform1ivARB')
 
 def glUniform2fARB(location, v0, v1):
-   c_glUniform2fARB(location, v0, v1)
+   if GLEW_ARB_shader_objects:
+      c_glUniform2fARB(location, v0, v1)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform2fARB')
 
 def glUniform2fvARB(location, count, value):
    cdef GLfloat args[2]
    cdef int i
-   i = 0
-   for val in value:
-      args[i] = val
-      i = i + 1
-   c_glUniform2fvARB(location, count, args)
+
+   if GLEW_ARB_shader_objects:
+      i = 0
+      for val in value:
+         args[i] = val
+         i = i + 1
+      c_glUniform2fvARB(location, count, args)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform2fvARB')
 
 def glUniform2iARB(location, v0, v1):
-   c_glUniform2iARB(location, v0, v1)
+   if GLEW_ARB_shader_objects:
+      c_glUniform2iARB(location, v0, v1)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform2iARB')   
 
 def glUniform2ivARB(location, count, value):
    cdef GLint args[2]
    cdef int i
-   i = 0
-   for val in value:
-      args[i] = val
-      i = i + 1
-   c_glUniform2ivARB(location, count, args)
+
+   if GLEW_ARB_shader_objects:
+      i = 0
+      for val in value:
+         args[i] = val
+         i = i + 1
+      c_glUniform2ivARB(location, count, args)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform2ivARB')
 
 def glUniform3fARB(location, v0, v1, v2):
-   c_glUniform3fARB(location, v0, v1, v2)
+   if GLEW_ARB_shader_objects:
+      c_glUniform3fARB(location, v0, v1, v2)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform3fARB')
 
 def glUniform3fvARB(location, count, value):
    cdef GLfloat args[3]
    cdef int i
-   i = 0
-   for val in value:
-      args[i] = val
-      i = i + 1
-   c_glUniform3fvARB(location, count, args)
+
+   if GLEW_ARB_shader_objects:
+      i = 0
+      for val in value:
+         args[i] = val
+         i = i + 1
+      c_glUniform3fvARB(location, count, args)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform3fvARB')
 
 def glUniform3iARB(location, v0, v1, v2):
-   c_glUniform3iARB(location, v0, v1, v2)
+   if GLEW_ARB_shader_objects:
+      c_glUniform3iARB(location, v0, v1, v2)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform3iARB')
 
 def glUniform3ivARB(location, count, value):
    cdef GLint args[3]
    cdef int i
-   i = 0
-   for val in value:
-      args[i] = val
-      i = i + 1
-   c_glUniform3ivARB(location, count, args)
+
+   if GLEW_ARB_shader_objects:
+      i = 0
+      for val in value:
+         args[i] = val
+         i = i + 1
+      c_glUniform3ivARB(location, count, args)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform3ivARB')
 
 def glUniform4fARB(location, v0, v1, v2, v3):
-   c_glUniform4fARB(location, v0, v1, v2, v3)
+   if GLEW_ARB_shader_objects:
+      c_glUniform4fARB(location, v0, v1, v2, v3)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform4fARB')
 
 def glUniform4fvARB(location, count, value):
    cdef GLfloat args[4]
    cdef int i
-   i = 0
-   for val in value:
-      args[i] = val
-      i = i + 1
-   c_glUniform4fvARB(location, count, args)
+
+   if GLEW_ARB_shader_objects:
+      i = 0
+      for val in value:
+         args[i] = val
+         i = i + 1
+      c_glUniform4fvARB(location, count, args)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform4fvARB')
 
 def glUniform4iARB(location, v0, v1, v2, v3):
-   c_glUniform4iARB(location, v0, v1, v2, v3)
+   if GLEW_ARB_shader_objects:
+      c_glUniform4iARB(location, v0, v1, v2, v3)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform4iARB')
 
 def glUniform4ivARB(location, count, value):
    cdef GLint args[4]
    cdef int i
-   i = 0
-   for val in value:
-      args[i] = val
-      i = i + 1
-   c_glUniform4ivARB(location, count, args)
+
+   if GLEW_ARB_shader_objects:
+      i = 0
+      for val in value:
+         args[i] = val
+         i = i + 1
+      c_glUniform4ivARB(location, count, args)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniform4ivARB')
 
 def glUniformMatrix2fvARB(location, count, transpose, value):
    cdef GLfloat args[4]
    cdef int i
-   i = 0
-   for val in value:
-      args[i] = val
-      i = i + 1
-   c_glUniformMatrix2fvARB(location, count, transpose, args)
+
+   if GLEW_ARB_shader_objects:
+      i = 0
+      for val in value:
+         args[i] = val
+         i = i + 1
+      c_glUniformMatrix2fvARB(location, count, transpose, args)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniformMatrix2fvARB')
 
 def glUniformMatrix3fvARB(location, count, transpose, value):
    cdef GLfloat args[9]
    cdef int i
-   i = 0
-   for val in value:
-      args[i] = val
-      i = i + 1
-   c_glUniformMatrix3fvARB(location, count, transpose, args)
+
+   if GLEW_ARB_shader_objects:
+      i = 0
+      for val in value:
+         args[i] = val
+         i = i + 1
+      c_glUniformMatrix3fvARB(location, count, transpose, args)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniformMatrix3fvARB')
 
 def glUniformMatrix4fvARB(location, count, transpose, value):
    cdef GLfloat args[16]
    cdef int i
-   i = 0
-   for val in value:
-      args[i] = val
-      i = i + 1
-   c_glUniformMatrix4fvARB(location, count, transpose, args)
+
+   if GLEW_ARB_shader_objects:
+      i = 0
+      for val in value:
+         args[i] = val
+         i = i + 1
+      c_glUniformMatrix4fvARB(location, count, transpose, args)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUniformMatrix4fvARB')
 
 def glUseProgramObjectARB(programObj):
-   c_glUseProgramObjectARB(programObj)
+   if GLEW_ARB_shader_objects:
+      c_glUseProgramObjectARB(programObj)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glUseProgramObjectARB')
 
 def glValidateProgramARB(programObj):
-   c_glValidateProgramARB(programObj)
+   if GLEW_ARB_shader_objects:
+      c_glValidateProgramARB(programObj)
+   else:
+      raise GlewpyError('GLEW_ARB_shader_objects', 'glValidateProgramARB')
 
 # ---------------------- GL_ARB_shading_language_100 ---------------------- #
 GL_SHADING_LANGUAGE_VERSION_ARB = 0x8B8C

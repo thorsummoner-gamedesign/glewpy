@@ -1,3 +1,6 @@
+# These types are pretty much used in every files, so
+# it is easier to make an include file
+
 ctypedef unsigned int GLenum
 ctypedef unsigned char GLboolean
 ctypedef unsigned int GLbitfield
