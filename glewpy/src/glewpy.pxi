@@ -40,3 +40,12 @@ ctypedef float GLclampf
 ctypedef double GLdouble
 ctypedef double GLclampd
 ctypedef void GLvoid
+
+ctypedef char GLcharARB
+ctypedef int GLhandleARB
+   
+ctypedef int ptrdiff_t
+ctypedef ptrdiff_t GLsizeiptrARB
+ctypedef ptrdiff_t GLintptrARB
+ctypedef ptrdiff_t GLsizeiptr
+ctypedef ptrdiff_t GLintptr

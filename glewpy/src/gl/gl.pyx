@@ -1213,3 +1213,164 @@ def glSampleCoverage(value, invert):
       c_glSampleCoverage(value, invert)
    else:
       raise GlewpyError('GL_VERSION_1_3', 'glSampleCoverage')
+
+# ----------------------------- GL_VERSION_1_4 ---------------------------- #
+GL_BLEND_DST_RGB = 0x80C8
+GL_BLEND_SRC_RGB = 0x80C9
+GL_BLEND_DST_ALPHA = 0x80CA
+GL_BLEND_SRC_ALPHA = 0x80CB
+GL_POINT_SIZE_MIN = 0x8126
+GL_POINT_SIZE_MAX = 0x8127
+GL_POINT_FADE_THRESHOLD_SIZE = 0x8128
+GL_POINT_DISTANCE_ATTENUATION = 0x8129
+GL_GENERATE_MIPMAP = 0x8191
+GL_GENERATE_MIPMAP_HINT = 0x8192
+GL_DEPTH_COMPONENT16 = 0x81A5
+GL_DEPTH_COMPONENT24 = 0x81A6
+GL_DEPTH_COMPONENT32 = 0x81A7
+GL_MIRRORED_REPEAT = 0x8370
+GL_FOG_COORDINATE_SOURCE = 0x8450
+GL_FOG_COORDINATE = 0x8451
+GL_FRAGMENT_DEPTH = 0x8452
+GL_CURRENT_FOG_COORDINATE = 0x8453
+GL_FOG_COORDINATE_ARRAY_TYPE = 0x8454
+GL_FOG_COORDINATE_ARRAY_STRIDE = 0x8455
+GL_FOG_COORDINATE_ARRAY_POINTER = 0x8456
+GL_FOG_COORDINATE_ARRAY = 0x8457
+GL_COLOR_SUM = 0x8458
+GL_CURRENT_SECONDARY_COLOR = 0x8459
+GL_SECONDARY_COLOR_ARRAY_SIZE = 0x845A
+GL_SECONDARY_COLOR_ARRAY_TYPE = 0x845B
+GL_SECONDARY_COLOR_ARRAY_STRIDE = 0x845C
+GL_SECONDARY_COLOR_ARRAY_POINTER = 0x845D
+GL_SECONDARY_COLOR_ARRAY = 0x845E
+GL_MAX_TEXTURE_LOD_BIAS = 0x84FD
+GL_TEXTURE_FILTER_CONTROL = 0x8500
+GL_TEXTURE_LOD_BIAS = 0x8501
+GL_INCR_WRAP = 0x8507
+GL_DECR_WRAP = 0x8508
+GL_TEXTURE_DEPTH_SIZE = 0x884A
+GL_DEPTH_TEXTURE_MODE = 0x884B
+GL_TEXTURE_COMPARE_MODE = 0x884C
+GL_TEXTURE_COMPARE_FUNC = 0x884D
+GL_COMPARE_R_TO_TEXTURE = 0x884E
+
+cdef extern from "GL/glew.h":
+   void c_glBlendColor "glBlendColor"(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
+   void c_glBlendEquation "glBlendEquation"(GLenum mode)
+   void c_glBlendFuncSeparate "glBlendFuncSeparate"(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha)
+   void c_glFogCoordPointer "glFogCoordPointer"(GLenum type, GLsizei stride, GLvoid *pointer)
+   void c_glFogCoordd "glFogCoordd"(GLdouble coord)
+   void c_glFogCoorddv "glFogCoorddv"(GLdouble *coord)
+   void c_glFogCoordf "glFogCoordf"(GLfloat coord)
+   void c_glFogCoordfv "glFogCoordfv"(GLfloat *coord)
+   void c_glMultiDrawArrays "glMultiDrawArrays"(GLenum mode, GLint *first, GLsizei *count, GLsizei primcount)
+   void c_glMultiDrawElements "glMultiDrawElements"(GLenum mode, GLsizei *count, GLenum type, GLvoid **indices, GLsizei primcount)
+   void c_glPointParameterf "glPointParameterf"(GLenum pname, GLfloat param)
+   void c_glPointParameterfv "glPointParameterfv"(GLenum pname, GLfloat *params)
+   void c_glSecondaryColor3b "glSecondaryColor3b"(GLbyte red, GLbyte green, GLbyte blue)
+   void c_glSecondaryColor3bv "glSecondaryColor3bv"(GLbyte *v)
+   void c_glSecondaryColor3d "glSecondaryColor3d"(GLdouble red, GLdouble green, GLdouble blue)
+   void c_glSecondaryColor3dv "glSecondaryColor3dv"(GLdouble *v)
+   void c_glSecondaryColor3f "glSecondaryColor3f"(GLfloat red, GLfloat green, GLfloat blue)
+   void c_glSecondaryColor3fv "glSecondaryColor3fv"(GLfloat *v)
+   void c_glSecondaryColor3i "glSecondaryColor3i"(GLint red, GLint green, GLint blue)
+   void c_glSecondaryColor3iv "glSecondaryColor3iv"(GLint *v)
+   void c_glSecondaryColor3s "glSecondaryColor3s"(GLshort red, GLshort green, GLshort blue)
+   void c_glSecondaryColor3sv "glSecondaryColor3sv"(GLshort *v)
+   void c_glSecondaryColor3ub "glSecondaryColor3ub"(GLubyte red, GLubyte green, GLubyte blue)
+   void c_glSecondaryColor3ubv "glSecondaryColor3ubv"(GLubyte *v)
+   void c_glSecondaryColor3ui "glSecondaryColor3ui"(GLuint red, GLuint green, GLuint blue)
+   void c_glSecondaryColor3uiv "glSecondaryColor3uiv"(GLuint *v)
+   void c_glSecondaryColor3us "glSecondaryColor3us"(GLushort red, GLushort green, GLushort blue)
+   void c_glSecondaryColor3usv "glSecondaryColor3usv"(GLushort *v)
+   void c_glSecondaryColorPointer "glSecondaryColorPointer"(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+   void c_glWindowPos2d "glWindowPos2d"(GLdouble x, GLdouble y)
+   void c_glWindowPos2dv "glWindowPos2dv"(GLdouble *p)
+   void c_glWindowPos2f "glWindowPos2f"(GLfloat x, GLfloat y)
+   void c_glWindowPos2fv "glWindowPos2fv"(GLfloat *p)
+   void c_glWindowPos2i "glWindowPos2i"(GLint x, GLint y)
+   void c_glWindowPos2iv "glWindowPos2iv"(GLint *p)
+   void c_glWindowPos2s "glWindowPos2s"(GLshort x, GLshort y)
+   void c_glWindowPos2sv "glWindowPos2sv"(GLshort *p)
+   void c_glWindowPos3d "glWindowPos3d"(GLdouble x, GLdouble y, GLdouble z)
+   void c_glWindowPos3dv "glWindowPos3dv"(GLdouble *p)
+   void c_glWindowPos3f "glWindowPos3f"(GLfloat x, GLfloat y, GLfloat z)
+   void c_glWindowPos3fv "glWindowPos3fv"(GLfloat *p)
+   void c_glWindowPos3i "glWindowPos3i"(GLint x, GLint y, GLint z)
+   void c_glWindowPos3iv "glWindowPos3iv"(GLint *p)
+   void c_glWindowPos3s "glWindowPos3s"(GLshort x, GLshort y, GLshort z)
+   void c_glWindowPos3sv "glWindowPos3sv"(GLshort *p)
+
+# ----------------------------- GL_VERSION_1_5 ---------------------------- #
+GL_BUFFER_SIZE = 0x8764
+GL_BUFFER_USAGE = 0x8765
+GL_QUERY_COUNTER_BITS = 0x8864
+GL_CURRENT_QUERY = 0x8865
+GL_QUERY_RESULT = 0x8866
+GL_QUERY_RESULT_AVAILABLE = 0x8867
+GL_ARRAY_BUFFER = 0x8892
+GL_ELEMENT_ARRAY_BUFFER = 0x8893
+GL_ARRAY_BUFFER_BINDING = 0x8894
+GL_ELEMENT_ARRAY_BUFFER_BINDING = 0x8895
+GL_VERTEX_ARRAY_BUFFER_BINDING = 0x8896
+GL_NORMAL_ARRAY_BUFFER_BINDING = 0x8897
+GL_COLOR_ARRAY_BUFFER_BINDING = 0x8898
+GL_INDEX_ARRAY_BUFFER_BINDING = 0x8899
+GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING = 0x889A
+GL_EDGE_FLAG_ARRAY_BUFFER_BINDING = 0x889B
+GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING = 0x889C
+GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING = 0x889D
+GL_WEIGHT_ARRAY_BUFFER_BINDING = 0x889E
+GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING = 0x889F
+GL_READ_ONLY = 0x88B8
+GL_WRITE_ONLY = 0x88B9
+GL_READ_WRITE = 0x88BA
+GL_BUFFER_ACCESS = 0x88BB
+GL_BUFFER_MAPPED = 0x88BC
+GL_BUFFER_MAP_POINTER = 0x88BD
+GL_STREAM_DRAW = 0x88E0
+GL_STREAM_READ = 0x88E1
+GL_STREAM_COPY = 0x88E2
+GL_STATIC_DRAW = 0x88E4
+GL_STATIC_READ = 0x88E5
+GL_STATIC_COPY = 0x88E6
+GL_DYNAMIC_DRAW = 0x88E8
+GL_DYNAMIC_READ = 0x88E9
+GL_DYNAMIC_COPY = 0x88EA
+GL_SAMPLES_PASSED = 0x8914
+GL_FOG_COORD_SRC = GL_FOG_COORDINATE_SOURCE
+GL_FOG_COORD = GL_FOG_COORDINATE
+GL_FOG_COORD_ARRAY = GL_FOG_COORDINATE_ARRAY
+GL_SRC0_RGB = GL_SOURCE0_RGB
+GL_FOG_COORD_ARRAY_POINTER = GL_FOG_COORDINATE_ARRAY_POINTER
+GL_FOG_COORD_ARRAY_TYPE = GL_FOG_COORDINATE_ARRAY_TYPE
+GL_SRC1_ALPHA = GL_SOURCE1_ALPHA
+GL_CURRENT_FOG_COORD = GL_CURRENT_FOG_COORDINATE
+GL_FOG_COORD_ARRAY_STRIDE = GL_FOG_COORDINATE_ARRAY_STRIDE
+GL_SRC0_ALPHA = GL_SOURCE0_ALPHA
+GL_SRC1_RGB = GL_SOURCE1_RGB
+GL_FOG_COORD_ARRAY_BUFFER_BINDING = GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING
+GL_SRC2_ALPHA = GL_SOURCE2_ALPHA
+GL_SRC2_RGB = GL_SOURCE2_RGB
+
+cdef extern from "GL/glew.h":
+   void c_glBeginQuery "glBeginQuery"(GLenum target, GLuint id)
+   void c_glBindBuffer "glBindBuffer"(GLenum target, GLuint buffer)
+   void c_glBufferData "glBufferData"(GLenum target, GLsizeiptr size, GLvoid* data, GLenum usage)
+   void c_glBufferSubData "glBufferSubData"(GLenum target, GLintptr offset, GLsizeiptr size, GLvoid* data)
+   void c_glDeleteBuffers "glDeleteBuffers"(GLsizei n, GLuint* buffers)
+   void c_glDeleteQueries "glDeleteQueries"(GLsizei n, GLuint* ids)
+   void c_glEndQuery "glEndQuery"(GLenum target)
+   void c_glGenBuffers "glGenBuffers"(GLsizei n, GLuint* buffers)
+   void c_glGenQueries "glGenQueries"(GLsizei n, GLuint* ids)
+   void c_glGetBufferParameteriv "glGetBufferParameteriv"(GLenum target, GLenum pname, GLint* params)
+   void c_glGetBufferPointerv "glGetBufferPointerv"(GLenum target, GLenum pname, GLvoid** params)
+   void c_glGetBufferSubData "glGetBufferSubData"(GLenum target, GLintptr offset, GLsizeiptr size, GLvoid* data)
+   void c_glGetQueryObjectiv "glGetQueryObjectiv"(GLuint id, GLenum pname, GLint* params)
+   void c_glGetQueryObjectuiv "glGetQueryObjectuiv"(GLuint id, GLenum pname, GLuint* params)
+   void c_glGetQueryiv "glGetQueryiv"(GLenum target, GLenum pname, GLint params)
+   GLboolean c_glIsBuffer "glIsBuffer"(GLuint buffer)
+   GLboolean c_glIsQuery "glIsQuery"(GLuint id)
+   GLvoid* c_glMapBuffer "glMapBuffer"(GLenum target, GLenum access)
+   GLboolean c_glUnmapBuffer "glUnmapBuffer"(GLenum target)

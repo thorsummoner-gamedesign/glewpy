@@ -874,9 +874,6 @@ GL_OBJECT_ACTIVE_UNIFORMS_ARB = 0x8B86
 GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB = 0x8B87
 GL_OBJECT_SHADER_SOURCE_LENGTH_ARB = 0x8B88
 
-ctypedef char GLcharARB
-ctypedef int GLhandleARB
-   
 cdef extern from "GL/glew.h":
    void c_glAttachObjectARB "glAttachObjectARB"(GLhandleARB containerObj, GLhandleARB obj)
    void c_glCompileShaderARB "glCompileShaderARB"(GLhandleARB shaderObj)
@@ -1604,10 +1601,6 @@ GL_STATIC_COPY_ARB = 0x88E6
 GL_DYNAMIC_DRAW_ARB = 0x88E8
 GL_DYNAMIC_READ_ARB = 0x88E9
 GL_DYNAMIC_COPY_ARB = 0x88EA
-
-ctypedef int ptrdiff_t
-ctypedef ptrdiff_t GLsizeiptrARB
-ctypedef ptrdiff_t GLintptrARB
 
 cdef extern from "GL/glew.h":
    void c_glBindBufferARB "glBindBufferARB"(GLenum target, GLuint buffer)
