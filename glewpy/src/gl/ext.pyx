@@ -912,6 +912,170 @@ GL_SECONDARY_COLOR_ARRAY_STRIDE_EXT = 0x845C
 GL_SECONDARY_COLOR_ARRAY_POINTER_EXT = 0x845D
 GL_SECONDARY_COLOR_ARRAY_EXT = 0x845E
 
+cdef extern from "GL/glew.h":
+   void c_glSecondaryColor3bEXT "glSecondaryColor3bEXT"(GLbyte red, GLbyte green, GLbyte blue)
+   void c_glSecondaryColor3bvEXT "glSecondaryColor3bvEXT"(const GLbyte *v)
+   void c_glSecondaryColor3dEXT "glSecondaryColor3dEXT"(GLdouble red, GLdouble green, GLdouble blue)
+   void c_glSecondaryColor3dvEXT "glSecondaryColor3dvEXT"(const GLdouble *v)
+   void c_glSecondaryColor3fEXT "glSecondaryColor3fEXT"(GLfloat red, GLfloat green, GLfloat blue)
+   void c_glSecondaryColor3fvEXT "glSecondaryColor3fvEXT"(const GLfloat *v)
+   void c_glSecondaryColor3iEXT "glSecondaryColor3iEXT"(GLint red, GLint green, GLint blue)
+   void c_glSecondaryColor3ivEXT "glSecondaryColor3ivEXT"(const GLint *v)
+   void c_glSecondaryColor3sEXT "glSecondaryColor3sEXT"(GLshort red, GLshort green, GLshort blue)
+   void c_glSecondaryColor3svEXT "glSecondaryColor3svEXT"(const GLshort *v)
+   void c_glSecondaryColor3ubEXT "glSecondaryColor3ubEXT"(GLubyte red, GLubyte green, GLubyte blue)
+   void c_glSecondaryColor3ubvEXT "glSecondaryColor3ubvEXT"(const GLubyte *v)
+   void c_glSecondaryColor3uiEXT "glSecondaryColor3uiEXT"(GLuint red, GLuint green, GLuint blue)
+   void c_glSecondaryColor3uivEXT "glSecondaryColor3uivEXT"(const GLuint *v)
+   void c_glSecondaryColor3usEXT "glSecondaryColor3usEXT"(GLushort red, GLushort green, GLushort blue)
+   void c_glSecondaryColor3usvEXT "glSecondaryColor3usvEXT"(const GLushort *v)
+   void c_glSecondaryColorPointerEXT "glSecondaryColorPointerEXT"(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+
+def glSecondaryColor3bEXT(red, green, blue):
+   if c_GLEW_EXT_secondary_color:
+      c_glSecondaryColor3bEXT(red, green, blue)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3bEXT')
+
+def glSecondaryColor3bvEXT(v):
+   cdef GLbyte arg[3]
+
+   if c_GLEW_EXT_secondary_color:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      c_glSecondaryColor3bvEXT(arg)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3bvEXT')
+
+def glSecondaryColor3dEXT(red, green, blue):
+   if c_GLEW_EXT_secondary_color:
+      c_glSecondaryColor3dEXT(red, green, blue)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3dEXT')
+
+def glSecondaryColor3dvEXT(v):
+   cdef GLdouble arg[3]
+
+   if c_GLEW_EXT_secondary_color:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      c_glSecondaryColor3dvEXT(arg)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3dvEXT')
+
+def glSecondaryColor3fEXT(red, green, blue):
+   if c_GLEW_EXT_secondary_color:
+      c_glSecondaryColor3fEXT(red, green, blue)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3fEXT')
+
+def glSecondaryColor3fvEXT(v):
+   cdef GLfloat arg[3]
+
+   if c_GLEW_EXT_secondary_color:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      c_glSecondaryColor3fvEXT(arg)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3fvEXT')
+
+def glSecondaryColor3iEXT(red, green, blue):
+   if c_GLEW_EXT_secondary_color:
+      c_glSecondaryColor3iEXT(red, green, blue)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3iEXT')
+
+def glSecondaryColor3ivEXT(v):
+   cdef GLint arg[3]
+
+   if c_GLEW_EXT_secondary_color:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      c_glSecondaryColor3ivEXT(arg)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3ivEXT')
+
+def glSecondaryColor3sEXT(red, green, blue):
+   if c_GLEW_EXT_secondary_color:
+      c_glSecondaryColor3sEXT(red, green, blue)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3sEXT')
+
+def glSecondaryColor3svEXT(v):
+   cdef GLshort arg[3]
+
+   if c_GLEW_EXT_secondary_color:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      c_glSecondaryColor3svEXT(arg)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3svEXT')
+
+def glSecondaryColor3ubEXT(red, green, blue):
+   if c_GLEW_EXT_secondary_color:
+      c_glSecondaryColor3ubEXT(red, green, blue)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3ubEXT')
+
+def glSecondaryColor3ubvEXT(v):
+   cdef GLubyte arg[3]
+
+   if c_GLEW_EXT_secondary_color:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      c_glSecondaryColor3ubvEXT(arg)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3ubvEXT')
+
+def glSecondaryColor3uiEXT(red, green, blue):
+   if c_GLEW_EXT_secondary_color:
+      c_glSecondaryColor3uiEXT(red, green, blue)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3uiEXT')
+
+def glSecondaryColor3uivEXT(v):
+   cdef GLuint arg[3]
+
+   if c_GLEW_EXT_secondary_color:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      c_glSecondaryColor3uivEXT(arg)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3uivEXT')
+
+def glSecondaryColor3usEXT(red, green, blue):
+   if c_GLEW_EXT_secondary_color:
+      c_glSecondaryColor3usEXT(red, green, blue)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3usEXT')
+
+def glSecondaryColor3usvEXT(v):
+   cdef GLushort arg[3]
+
+   if c_GLEW_EXT_secondary_color:
+      arg[0] = v[0]
+      arg[1] = v[1]
+      arg[2] = v[2]
+      c_glSecondaryColor3usvEXT(arg)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColor3usvEXT')
+
+def glSecondaryColorPointerEXT(size, type, stride, pointer):
+   cdef char *arr
+
+   if c_GLEW_EXT_secondary_color:
+      arr = pointer
+      c_glSecondaryColorPointerEXT(size, type, stride, arr)
+   else:
+      raise GlewpyError('GL_EXT_secondary_color', 'glSecondaryColorPointerEXT')
+
 # --------------------- GL_EXT_separate_specular_color -------------------- #
 GL_LIGHT_MODEL_COLOR_CONTROL_EXT = 0x81F8
 GL_SINGLE_COLOR_EXT = 0x81F9
