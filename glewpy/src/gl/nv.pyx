@@ -969,3 +969,1157 @@ def glPrimitiveRestartNV():
     else:
         raise GlewpyError('GL_NV_primitive_restart', 'glPrimitiveRestartNV')
 
+# ------------------------ GL_NV_register_combiners ----------------------- #
+GL_REGISTER_COMBINERS_NV = 0x8522
+GL_VARIABLE_A_NV = 0x8523
+GL_VARIABLE_B_NV = 0x8524
+GL_VARIABLE_C_NV = 0x8525
+GL_VARIABLE_D_NV = 0x8526
+GL_VARIABLE_E_NV = 0x8527
+GL_VARIABLE_F_NV = 0x8528
+GL_VARIABLE_G_NV = 0x8529
+GL_CONSTANT_COLOR0_NV = 0x852A
+GL_CONSTANT_COLOR1_NV = 0x852B
+GL_PRIMARY_COLOR_NV = 0x852C
+GL_SECONDARY_COLOR_NV = 0x852D
+GL_SPARE0_NV = 0x852E
+GL_SPARE1_NV = 0x852F
+GL_DISCARD_NV = 0x8530
+GL_E_TIMES_F_NV = 0x8531
+GL_SPARE0_PLUS_SECONDARY_COLOR_NV = 0x8532
+GL_UNSIGNED_IDENTITY_NV = 0x8536
+GL_UNSIGNED_INVERT_NV = 0x8537
+GL_EXPAND_NORMAL_NV = 0x8538
+GL_EXPAND_NEGATE_NV = 0x8539
+GL_HALF_BIAS_NORMAL_NV = 0x853A
+GL_HALF_BIAS_NEGATE_NV = 0x853B
+GL_SIGNED_IDENTITY_NV = 0x853C
+GL_SIGNED_NEGATE_NV = 0x853D
+GL_SCALE_BY_TWO_NV = 0x853E
+GL_SCALE_BY_FOUR_NV = 0x853F
+GL_SCALE_BY_ONE_HALF_NV = 0x8540
+GL_BIAS_BY_NEGATIVE_ONE_HALF_NV = 0x8541
+GL_COMBINER_INPUT_NV = 0x8542
+GL_COMBINER_MAPPING_NV = 0x8543
+GL_COMBINER_COMPONENT_USAGE_NV = 0x8544
+GL_COMBINER_AB_DOT_PRODUCT_NV = 0x8545
+GL_COMBINER_CD_DOT_PRODUCT_NV = 0x8546
+GL_COMBINER_MUX_SUM_NV = 0x8547
+GL_COMBINER_SCALE_NV = 0x8548
+GL_COMBINER_BIAS_NV = 0x8549
+GL_COMBINER_AB_OUTPUT_NV = 0x854A
+GL_COMBINER_CD_OUTPUT_NV = 0x854B
+GL_COMBINER_SUM_OUTPUT_NV = 0x854C
+GL_MAX_GENERAL_COMBINERS_NV = 0x854D
+GL_NUM_GENERAL_COMBINERS_NV = 0x854E
+GL_COLOR_SUM_CLAMP_NV = 0x854F
+GL_COMBINER0_NV = 0x8550
+GL_COMBINER1_NV = 0x8551
+GL_COMBINER2_NV = 0x8552
+GL_COMBINER3_NV = 0x8553
+GL_COMBINER4_NV = 0x8554
+GL_COMBINER5_NV = 0x8555
+GL_COMBINER6_NV = 0x8556
+GL_COMBINER7_NV = 0x8557
+
+cdef extern from "GL/glew.h":
+   void c_glCombinerInputNV "glCombinerInputNV"(GLenum stage, GLenum portion, GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage)
+   void c_glCombinerOutputNV "glCombinerOutputNV"(GLenum stage, GLenum portion, GLenum abOutput, GLenum cdOutput, GLenum sumOutput, GLenum scale, GLenum bias, GLboolean abDotProduct, GLboolean cdDotProduct, GLboolean muxSum)
+   void c_glCombinerParameterfNV "glCombinerParameterfNV"(GLenum pname, GLfloat param)
+   void c_glCombinerParameterfvNV "glCombinerParameterfvNV"(GLenum pname, GLfloat* params)
+   void c_glCombinerParameteriNV "glCombinerParameteriNV"(GLenum pname, GLint param)
+   void c_glCombinerParameterivNV "glCombinerParameterivNV"(GLenum pname, GLint* params)
+   void c_glFinalCombinerInputNV "glFinalCombinerInputNV"(GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage)
+   void c_glGetCombinerInputParameterfvNV "glGetCombinerInputParameterfvNV"(GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLfloat* params)
+   void c_glGetCombinerInputParameterivNV "glGetCombinerInputParameterivNV"(GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLint* params)
+   void c_glGetCombinerOutputParameterfvNV "glGetCombinerOutputParameterfvNV"(GLenum stage, GLenum portion, GLenum pname, GLfloat* params)
+   void c_glGetCombinerOutputParameterivNV "glGetCombinerOutputParameterivNV"(GLenum stage, GLenum portion, GLenum pname, GLint* params)
+   void c_glGetFinalCombinerInputParameterfvNV "glGetFinalCombinerInputParameterfvNV"(GLenum variable, GLenum pname, GLfloat* params)
+   void c_glGetFinalCombinerInputParameterivNV "glGetFinalCombinerInputParameterivNV"(GLenum variable, GLenum pname, GLint* params)
+
+def glCombinerInputNV(stage, portion, variable, input, mapping, componentUsage):
+   if c_GLEW_NV_register_combiners:
+      c_glCombinerInputNV(stage, portion, variable, input, mapping, componentUsage)
+   else:
+      raise GlewpyError('GL_NV_register_combiners', 'glCombinerInputNV')
+
+def glCombinerOutputNV(stage, portion, abOutput, cdOutput, sumOutput, scale, bias, abDotProduct, cdDotProduct, muxSum):
+   if c_GLEW_NV_register_combiners:
+      c_glCombinerOutputNV(stage, portion, abOutput, cdOutput, sumOutput, scale, bias, abDotProduct, cdDotProduct, muxSum)
+   else:
+      raise GlewpyError('GL_NV_register_combiners', 'glCombinerOutputNV')
+
+def glCombinerParameterfNV(pname, param):
+   if c_GLEW_NV_register_combiners:
+      c_glCombinerParameterfNV(pname, param)
+   else:
+      raise GlewpyError('GL_NV_register_combiners', 'glCombinerParameterfNV')
+
+def glCombinerParameterfvNV(pname, params):
+   cdef GLfloat arg[1]
+
+   if c_GLEW_NV_register_combiners:
+      arg[0] = params[0]
+      c_glCombinerParameterfvNV(pname, arg)
+   else:
+      raise GlewpyError('GL_NV_register_combiners', 'glCombinerParameterfvNV')
+
+def glCombinerParameteriNV(pname, param):
+   if c_GLEW_NV_register_combiners:
+      c_glCombinerParameteriNV(pname, param)
+   else:
+      raise GlewpyError('GL_NV_register_combiners', 'glCombinerParameteriNV')
+
+def glCombinerParameterivNV(pname, params):
+   cdef GLint arg[1]
+
+   if c_GLEW_NV_register_combiners:
+      arg[0] = params[0]
+      c_glCombinerParameterivNV(pname, arg)
+   else:
+      raise GlewpyError('GL_NV_register_combiners', 'glCombinerParameterivNV')
+
+def glFinalCombinerInputNV(variable, input, mapping, componentUsage):
+   if c_GLEW_NV_register_combiners:
+      c_glFinalCombinerInputNV(variable, input, mapping, componentUsage)
+   else:
+      raise GlewpyError('GL_NV_register_combiners', 'glFinalCombinerInputNV')
+
+def glGetCombinerInputParameterfvNV(stage, portion, variable, pname):
+   cdef GLfloat params[1]
+
+   if c_GLEW_NV_register_combiners:
+      c_glGetCombinerInputParameterfvNV(stage, portion, variable, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_register_combiners', 'glGetCombinerInputParameterfvNV')
+
+def glGetCombinerInputParameterivNV(stage, portion, variable, pname):
+   cdef GLint params[1]
+
+   if c_GLEW_NV_register_combiners:
+      c_glGetCombinerInputParameterivNV(stage, portion, variable, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_register_combiners', 'glGetCombinerInputParameterivNV')
+
+def glGetCombinerOutputParameterfvNV(stage, portion, pname):
+   cdef GLfloat params[1]
+
+   if c_GLEW_NV_register_combiners:
+      c_glGetCombinerOutputParameterfvNV(stage, portion, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_register_combiners', 'glGetCombinerOutputParameterfvNV')
+
+def glGetCombinerOutputParameterivNV(stage, portion, pname):
+   cdef GLint params[1]
+
+   if c_GLEW_NV_register_combiners:
+      c_glGetCombinerOutputParameterivNV(stage, portion, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_register_combiners', 'glGetCombinerOutputParameterivNV')
+
+def glGetFinalCombinerInputParameterfvNV(variable, pname):
+   cdef GLfloat params[1]
+
+   if c_GLEW_NV_register_combiners:
+      c_glGetFinalCombinerInputParameterfvNV(variable, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_register_combiners', 'glGetFinalCombinerInputParameterfvNV')
+
+def glGetFinalCombinerInputParameterivNV(variable, pname):
+   cdef GLint params[1]
+
+   if c_GLEW_NV_register_combiners:
+      c_glGetFinalCombinerInputParameterivNV(variable, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_register_combiners', 'glGetFinalCombinerInputParameterivNV')
+
+# ----------------------- GL_NV_register_combiners2 ----------------------- #
+GL_PER_STAGE_CONSTANTS_NV = 0x8535
+
+cdef extern from "GL/glew.h":
+   void c_glCombinerStageParameterfvNV "glCombinerStageParameterfvNV"(GLenum stage, GLenum pname, GLfloat* params)
+   void c_glGetCombinerStageParameterfvNV "glGetCombinerStageParameterfvNV"(GLenum stage, GLenum pname, GLfloat* params)
+
+def glCombinerStageParameterfvNV(stage, pname):
+   cdef GLfloat params[1]
+   
+   if c_GLEW_NV_register_combiners2:
+      c_glCombinerStageParameterfvNV(stage, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_register_combiners2', 'glCombinerStageParameterfvNV')
+
+def glGetCombinerStageParameterfvNV(stage, pname):
+   cdef GLfloat params[1]
+   
+   if c_GLEW_NV_register_combiners2:
+      c_glGetCombinerStageParameterfvNV(stage, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_register_combiners2', 'glGetCombinerStageParameterfvNV')
+
+# -------------------------- GL_NV_texgen_emboss -------------------------- #
+GL_EMBOSS_LIGHT_NV = 0x855D
+GL_EMBOSS_CONSTANT_NV = 0x855E
+GL_EMBOSS_MAP_NV = 0x855F
+
+# ------------------------ GL_NV_texgen_reflection ------------------------ #
+GL_NORMAL_MAP_NV = 0x8511
+GL_REFLECTION_MAP_NV = 0x8512
+
+# --------------------- GL_NV_texture_compression_vtc --------------------- #
+
+# ----------------------- GL_NV_texture_env_combine4 ---------------------- #
+GL_COMBINE4_NV = 0x8503
+GL_SOURCE3_RGB_NV = 0x8583
+GL_SOURCE3_ALPHA_NV = 0x858B
+GL_OPERAND3_RGB_NV = 0x8593
+GL_OPERAND3_ALPHA_NV = 0x859B
+
+# ---------------------- GL_NV_texture_expand_normal ---------------------- #
+GL_TEXTURE_UNSIGNED_REMAP_MODE_NV = 0x888F
+
+# ------------------------ GL_NV_texture_rectangle ------------------------ #
+GL_TEXTURE_RECTANGLE_NV = 0x84F5
+GL_TEXTURE_BINDING_RECTANGLE_NV = 0x84F6
+GL_PROXY_TEXTURE_RECTANGLE_NV = 0x84F7
+GL_MAX_RECTANGLE_TEXTURE_SIZE_NV = 0x84F8
+
+# -------------------------- GL_NV_texture_shader ------------------------- #
+GL_OFFSET_TEXTURE_RECTANGLE_NV = 0x864C
+GL_OFFSET_TEXTURE_RECTANGLE_SCALE_NV = 0x864D
+GL_DOT_PRODUCT_TEXTURE_RECTANGLE_NV = 0x864E
+GL_RGBA_UNSIGNED_DOT_PRODUCT_MAPPING_NV = 0x86D9
+GL_UNSIGNED_INT_S8_S8_8_8_NV = 0x86DA
+GL_UNSIGNED_INT_8_8_S8_S8_REV_NV = 0x86DB
+GL_DSDT_MAG_INTENSITY_NV = 0x86DC
+GL_SHADER_CONSISTENT_NV = 0x86DD
+GL_TEXTURE_SHADER_NV = 0x86DE
+GL_SHADER_OPERATION_NV = 0x86DF
+GL_CULL_MODES_NV = 0x86E0
+GL_OFFSET_TEXTURE_MATRIX_NV = 0x86E1
+GL_OFFSET_TEXTURE_SCALE_NV = 0x86E2
+GL_OFFSET_TEXTURE_BIAS_NV = 0x86E3
+GL_PREVIOUS_TEXTURE_INPUT_NV = 0x86E4
+GL_CONST_EYE_NV = 0x86E5
+GL_PASS_THROUGH_NV = 0x86E6
+GL_CULL_FRAGMENT_NV = 0x86E7
+GL_OFFSET_TEXTURE_2D_NV = 0x86E8
+GL_DEPENDENT_AR_TEXTURE_2D_NV = 0x86E9
+GL_DEPENDENT_GB_TEXTURE_2D_NV = 0x86EA
+GL_DOT_PRODUCT_NV = 0x86EC
+GL_DOT_PRODUCT_DEPTH_REPLACE_NV = 0x86ED
+GL_DOT_PRODUCT_TEXTURE_2D_NV = 0x86EE
+GL_DOT_PRODUCT_TEXTURE_CUBE_MAP_NV = 0x86F0
+GL_DOT_PRODUCT_DIFFUSE_CUBE_MAP_NV = 0x86F1
+GL_DOT_PRODUCT_REFLECT_CUBE_MAP_NV = 0x86F2
+GL_DOT_PRODUCT_CONST_EYE_REFLECT_CUBE_MAP_NV = 0x86F3
+GL_HILO_NV = 0x86F4
+GL_DSDT_NV = 0x86F5
+GL_DSDT_MAG_NV = 0x86F6
+GL_DSDT_MAG_VIB_NV = 0x86F7
+GL_HILO16_NV = 0x86F8
+GL_SIGNED_HILO_NV = 0x86F9
+GL_SIGNED_HILO16_NV = 0x86FA
+GL_SIGNED_RGBA_NV = 0x86FB
+GL_SIGNED_RGBA8_NV = 0x86FC
+GL_SIGNED_RGB_NV = 0x86FE
+GL_SIGNED_RGB8_NV = 0x86FF
+GL_SIGNED_LUMINANCE_NV = 0x8701
+GL_SIGNED_LUMINANCE8_NV = 0x8702
+GL_SIGNED_LUMINANCE_ALPHA_NV = 0x8703
+GL_SIGNED_LUMINANCE8_ALPHA8_NV = 0x8704
+GL_SIGNED_ALPHA_NV = 0x8705
+GL_SIGNED_ALPHA8_NV = 0x8706
+GL_SIGNED_INTENSITY_NV = 0x8707
+GL_SIGNED_INTENSITY8_NV = 0x8708
+GL_DSDT8_NV = 0x8709
+GL_DSDT8_MAG8_NV = 0x870A
+GL_DSDT8_MAG8_INTENSITY8_NV = 0x870B
+GL_SIGNED_RGB_UNSIGNED_ALPHA_NV = 0x870C
+GL_SIGNED_RGB8_UNSIGNED_ALPHA8_NV = 0x870D
+GL_HI_SCALE_NV = 0x870E
+GL_LO_SCALE_NV = 0x870F
+GL_DS_SCALE_NV = 0x8710
+GL_DT_SCALE_NV = 0x8711
+GL_MAGNITUDE_SCALE_NV = 0x8712
+GL_VIBRANCE_SCALE_NV = 0x8713
+GL_HI_BIAS_NV = 0x8714
+GL_LO_BIAS_NV = 0x8715
+GL_DS_BIAS_NV = 0x8716
+GL_DT_BIAS_NV = 0x8717
+GL_MAGNITUDE_BIAS_NV = 0x8718
+GL_VIBRANCE_BIAS_NV = 0x8719
+GL_TEXTURE_BORDER_VALUES_NV = 0x871A
+GL_TEXTURE_HI_SIZE_NV = 0x871B
+GL_TEXTURE_LO_SIZE_NV = 0x871C
+GL_TEXTURE_DS_SIZE_NV = 0x871D
+GL_TEXTURE_DT_SIZE_NV = 0x871E
+GL_TEXTURE_MAG_SIZE_NV = 0x871F
+
+# ------------------------- GL_NV_texture_shader2 ------------------------- #
+GL_UNSIGNED_INT_S8_S8_8_8_NV = 0x86DA
+GL_UNSIGNED_INT_8_8_S8_S8_REV_NV = 0x86DB
+GL_DSDT_MAG_INTENSITY_NV = 0x86DC
+GL_DOT_PRODUCT_TEXTURE_3D_NV = 0x86EF
+GL_HILO_NV = 0x86F4
+GL_DSDT_NV = 0x86F5
+GL_DSDT_MAG_NV = 0x86F6
+GL_DSDT_MAG_VIB_NV = 0x86F7
+GL_HILO16_NV = 0x86F8
+GL_SIGNED_HILO_NV = 0x86F9
+GL_SIGNED_HILO16_NV = 0x86FA
+GL_SIGNED_RGBA_NV = 0x86FB
+GL_SIGNED_RGBA8_NV = 0x86FC
+GL_SIGNED_RGB_NV = 0x86FE
+GL_SIGNED_RGB8_NV = 0x86FF
+GL_SIGNED_LUMINANCE_NV = 0x8701
+GL_SIGNED_LUMINANCE8_NV = 0x8702
+GL_SIGNED_LUMINANCE_ALPHA_NV = 0x8703
+GL_SIGNED_LUMINANCE8_ALPHA8_NV = 0x8704
+GL_SIGNED_ALPHA_NV = 0x8705
+GL_SIGNED_ALPHA8_NV = 0x8706
+GL_SIGNED_INTENSITY_NV = 0x8707
+GL_SIGNED_INTENSITY8_NV = 0x8708
+GL_DSDT8_NV = 0x8709
+GL_DSDT8_MAG8_NV = 0x870A
+GL_DSDT8_MAG8_INTENSITY8_NV = 0x870B
+GL_SIGNED_RGB_UNSIGNED_ALPHA_NV = 0x870C
+GL_SIGNED_RGB8_UNSIGNED_ALPHA8_NV = 0x870D
+
+# ------------------------- GL_NV_texture_shader3 ------------------------- #
+GL_OFFSET_PROJECTIVE_TEXTURE_2D_NV = 0x8850
+GL_OFFSET_PROJECTIVE_TEXTURE_2D_SCALE_NV = 0x8851
+GL_OFFSET_PROJECTIVE_TEXTURE_RECTANGLE_NV = 0x8852
+GL_OFFSET_PROJECTIVE_TEXTURE_RECTANGLE_SCALE_NV = 0x8853
+GL_OFFSET_HILO_TEXTURE_2D_NV = 0x8854
+GL_OFFSET_HILO_TEXTURE_RECTANGLE_NV = 0x8855
+GL_OFFSET_HILO_PROJECTIVE_TEXTURE_2D_NV = 0x8856
+GL_OFFSET_HILO_PROJECTIVE_TEXTURE_RECTANGLE_NV = 0x8857
+GL_DEPENDENT_HILO_TEXTURE_2D_NV = 0x8858
+GL_DEPENDENT_RGB_TEXTURE_3D_NV = 0x8859
+GL_DEPENDENT_RGB_TEXTURE_CUBE_MAP_NV = 0x885A
+GL_DOT_PRODUCT_PASS_THROUGH_NV = 0x885B
+GL_DOT_PRODUCT_TEXTURE_1D_NV = 0x885C
+GL_DOT_PRODUCT_AFFINE_DEPTH_REPLACE_NV = 0x885D
+GL_HILO8_NV = 0x885E
+GL_SIGNED_HILO8_NV = 0x885F
+GL_FORCE_BLUE_TO_ONE_NV = 0x8860
+
+# ------------------------ GL_NV_vertex_array_range ----------------------- #
+GL_VERTEX_ARRAY_RANGE_NV = 0x851D
+GL_VERTEX_ARRAY_RANGE_LENGTH_NV = 0x851E
+GL_VERTEX_ARRAY_RANGE_VALID_NV = 0x851F
+GL_MAX_VERTEX_ARRAY_RANGE_ELEMENT_NV = 0x8520
+GL_VERTEX_ARRAY_RANGE_POINTER_NV = 0x8521
+
+cdef extern from "GL/glew.h":
+   void c_glFlushVertexArrayRangeNV "glFlushVertexArrayRangeNV"()
+   void c_glVertexArrayRangeNV "glVertexArrayRangeNV"(GLsizei length, void* pointer)
+
+def glFlushVertexArrayRangeNV():
+   if c_GLEW_NV_vertex_array_range:
+      c_glFlushVertexArrayRangeNV()
+   else:
+      raise GlewpyError('GL_NV_vertex_array_range', 'glFlushVertexArrayRangeNV')
+
+def glVertexArrayRangeNV(length, pointer):
+   cdef char *arr
+
+   if c_GLEW_NV_vertex_array_range:
+      arr = pointer
+      c_glVertexArrayRangeNV(length, arr)
+   else:
+      raise GlewpyError('GL_NV_vertex_array_range', 'glVertexArrayRangeNV')
+
+# ----------------------- GL_NV_vertex_array_range2 ----------------------- #
+GL_VERTEX_ARRAY_RANGE_WITHOUT_FLUSH_NV = 0x8533
+
+# -------------------------- GL_NV_vertex_program ------------------------- #
+GL_VERTEX_PROGRAM_NV = 0x8620
+GL_VERTEX_STATE_PROGRAM_NV = 0x8621
+GL_ATTRIB_ARRAY_SIZE_NV = 0x8623
+GL_ATTRIB_ARRAY_STRIDE_NV = 0x8624
+GL_ATTRIB_ARRAY_TYPE_NV = 0x8625
+GL_CURRENT_ATTRIB_NV = 0x8626
+GL_PROGRAM_LENGTH_NV = 0x8627
+GL_PROGRAM_STRING_NV = 0x8628
+GL_MODELVIEW_PROJECTION_NV = 0x8629
+GL_IDENTITY_NV = 0x862A
+GL_INVERSE_NV = 0x862B
+GL_TRANSPOSE_NV = 0x862C
+GL_INVERSE_TRANSPOSE_NV = 0x862D
+GL_MAX_TRACK_MATRIX_STACK_DEPTH_NV = 0x862E
+GL_MAX_TRACK_MATRICES_NV = 0x862F
+GL_MATRIX0_NV = 0x8630
+GL_MATRIX1_NV = 0x8631
+GL_MATRIX2_NV = 0x8632
+GL_MATRIX3_NV = 0x8633
+GL_MATRIX4_NV = 0x8634
+GL_MATRIX5_NV = 0x8635
+GL_MATRIX6_NV = 0x8636
+GL_MATRIX7_NV = 0x8637
+GL_CURRENT_MATRIX_STACK_DEPTH_NV = 0x8640
+GL_CURRENT_MATRIX_NV = 0x8641
+GL_VERTEX_PROGRAM_POINT_SIZE_NV = 0x8642
+GL_VERTEX_PROGRAM_TWO_SIDE_NV = 0x8643
+GL_PROGRAM_PARAMETER_NV = 0x8644
+GL_ATTRIB_ARRAY_POINTER_NV = 0x8645
+GL_PROGRAM_TARGET_NV = 0x8646
+GL_PROGRAM_RESIDENT_NV = 0x8647
+GL_TRACK_MATRIX_NV = 0x8648
+GL_TRACK_MATRIX_TRANSFORM_NV = 0x8649
+GL_VERTEX_PROGRAM_BINDING_NV = 0x864A
+GL_PROGRAM_ERROR_POSITION_NV = 0x864B
+GL_VERTEX_ATTRIB_ARRAY0_NV = 0x8650
+GL_VERTEX_ATTRIB_ARRAY1_NV = 0x8651
+GL_VERTEX_ATTRIB_ARRAY2_NV = 0x8652
+GL_VERTEX_ATTRIB_ARRAY3_NV = 0x8653
+GL_VERTEX_ATTRIB_ARRAY4_NV = 0x8654
+GL_VERTEX_ATTRIB_ARRAY5_NV = 0x8655
+GL_VERTEX_ATTRIB_ARRAY6_NV = 0x8656
+GL_VERTEX_ATTRIB_ARRAY7_NV = 0x8657
+GL_VERTEX_ATTRIB_ARRAY8_NV = 0x8658
+GL_VERTEX_ATTRIB_ARRAY9_NV = 0x8659
+GL_VERTEX_ATTRIB_ARRAY10_NV = 0x865A
+GL_VERTEX_ATTRIB_ARRAY11_NV = 0x865B
+GL_VERTEX_ATTRIB_ARRAY12_NV = 0x865C
+GL_VERTEX_ATTRIB_ARRAY13_NV = 0x865D
+GL_VERTEX_ATTRIB_ARRAY14_NV = 0x865E
+GL_VERTEX_ATTRIB_ARRAY15_NV = 0x865F
+GL_MAP1_VERTEX_ATTRIB0_4_NV = 0x8660
+GL_MAP1_VERTEX_ATTRIB1_4_NV = 0x8661
+GL_MAP1_VERTEX_ATTRIB2_4_NV = 0x8662
+GL_MAP1_VERTEX_ATTRIB3_4_NV = 0x8663
+GL_MAP1_VERTEX_ATTRIB4_4_NV = 0x8664
+GL_MAP1_VERTEX_ATTRIB5_4_NV = 0x8665
+GL_MAP1_VERTEX_ATTRIB6_4_NV = 0x8666
+GL_MAP1_VERTEX_ATTRIB7_4_NV = 0x8667
+GL_MAP1_VERTEX_ATTRIB8_4_NV = 0x8668
+GL_MAP1_VERTEX_ATTRIB9_4_NV = 0x8669
+GL_MAP1_VERTEX_ATTRIB10_4_NV = 0x866A
+GL_MAP1_VERTEX_ATTRIB11_4_NV = 0x866B
+GL_MAP1_VERTEX_ATTRIB12_4_NV = 0x866C
+GL_MAP1_VERTEX_ATTRIB13_4_NV = 0x866D
+GL_MAP1_VERTEX_ATTRIB14_4_NV = 0x866E
+GL_MAP1_VERTEX_ATTRIB15_4_NV = 0x866F
+GL_MAP2_VERTEX_ATTRIB0_4_NV = 0x8670
+GL_MAP2_VERTEX_ATTRIB1_4_NV = 0x8671
+GL_MAP2_VERTEX_ATTRIB2_4_NV = 0x8672
+GL_MAP2_VERTEX_ATTRIB3_4_NV = 0x8673
+GL_MAP2_VERTEX_ATTRIB4_4_NV = 0x8674
+GL_MAP2_VERTEX_ATTRIB5_4_NV = 0x8675
+GL_MAP2_VERTEX_ATTRIB6_4_NV = 0x8676
+GL_MAP2_VERTEX_ATTRIB7_4_NV = 0x8677
+GL_MAP2_VERTEX_ATTRIB8_4_NV = 0x8678
+GL_MAP2_VERTEX_ATTRIB9_4_NV = 0x8679
+GL_MAP2_VERTEX_ATTRIB10_4_NV = 0x867A
+GL_MAP2_VERTEX_ATTRIB11_4_NV = 0x867B
+GL_MAP2_VERTEX_ATTRIB12_4_NV = 0x867C
+GL_MAP2_VERTEX_ATTRIB13_4_NV = 0x867D
+GL_MAP2_VERTEX_ATTRIB14_4_NV = 0x867E
+GL_MAP2_VERTEX_ATTRIB15_4_NV = 0x867F
+
+cdef extern from "GL/glew.h":
+   GLboolean c_glAreProgramsResidentNV "glAreProgramsResidentNV"(GLsizei n, GLuint* ids, GLboolean *residences)
+   void c_glBindProgramNV "glBindProgramNV"(GLenum target, GLuint id)
+   void c_glDeleteProgramsNV "glDeleteProgramsNV"(GLsizei n, GLuint* ids)
+   void c_glExecuteProgramNV "glExecuteProgramNV"(GLenum target, GLuint id, GLfloat* params)
+   void c_glGenProgramsNV "glGenProgramsNV"(GLsizei n, GLuint* ids)
+   void c_glGetProgramParameterdvNV "glGetProgramParameterdvNV"(GLenum target, GLuint index, GLenum pname, GLdouble* params)
+   void c_glGetProgramParameterfvNV "glGetProgramParameterfvNV"(GLenum target, GLuint index, GLenum pname, GLfloat* params)
+   void c_glGetProgramStringNV "glGetProgramStringNV"(GLuint id, GLenum pname, GLubyte* program)
+   void c_glGetProgramivNV "glGetProgramivNV"(GLuint id, GLenum pname, GLint* params)
+   void c_glGetTrackMatrixivNV "glGetTrackMatrixivNV"(GLenum target, GLuint address, GLenum pname, GLint* params)
+   void c_glGetVertexAttribPointervNV "glGetVertexAttribPointervNV"(GLuint index, GLenum pname, GLvoid** pointer)
+   void c_glGetVertexAttribdvNV "glGetVertexAttribdvNV"(GLuint index, GLenum pname, GLdouble* params)
+   void c_glGetVertexAttribfvNV "glGetVertexAttribfvNV"(GLuint index, GLenum pname, GLfloat* params)
+   void c_glGetVertexAttribivNV "glGetVertexAttribivNV"(GLuint index, GLenum pname, GLint* params)
+   GLboolean c_glIsProgramNV "glIsProgramNV"(GLuint id)
+   void c_glLoadProgramNV "glLoadProgramNV"(GLenum target, GLuint id, GLsizei len, char* program)
+   void c_glProgramParameter4dNV "glProgramParameter4dNV"(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+   void c_glProgramParameter4dvNV "glProgramParameter4dvNV"(GLenum target, GLuint index, GLdouble* params)
+   void c_glProgramParameter4fNV "glProgramParameter4fNV"(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+   void c_glProgramParameter4fvNV "glProgramParameter4fvNV"(GLenum target, GLuint index, GLfloat* params)
+   void c_glProgramParameters4dvNV "glProgramParameters4dvNV"(GLenum target, GLuint index, GLuint num, GLdouble* params)
+   void c_glProgramParameters4fvNV "glProgramParameters4fvNV"(GLenum target, GLuint index, GLuint num, GLfloat* params)
+   void c_glRequestResidentProgramsNV "glRequestResidentProgramsNV"(GLsizei n, GLuint* ids)
+   void c_glTrackMatrixNV "glTrackMatrixNV"(GLenum target, GLuint address, GLenum matrix, GLenum transform)
+   void c_glVertexAttrib1dNV "glVertexAttrib1dNV"(GLuint index, GLdouble x)
+   void c_glVertexAttrib1dvNV "glVertexAttrib1dvNV"(GLuint index, GLdouble* v)
+   void c_glVertexAttrib1fNV "glVertexAttrib1fNV"(GLuint index, GLfloat x)
+   void c_glVertexAttrib1fvNV "glVertexAttrib1fvNV"(GLuint index, GLfloat* v)
+   void c_glVertexAttrib1sNV "glVertexAttrib1sNV"(GLuint index, GLshort x)
+   void c_glVertexAttrib1svNV "glVertexAttrib1svNV"(GLuint index, GLshort* v)
+   void c_glVertexAttrib2dNV "glVertexAttrib2dNV"(GLuint index, GLdouble x, GLdouble y)
+   void c_glVertexAttrib2dvNV "glVertexAttrib2dvNV"(GLuint index, GLdouble* v)
+   void c_glVertexAttrib2fNV "glVertexAttrib2fNV"(GLuint index, GLfloat x, GLfloat y)
+   void c_glVertexAttrib2fvNV "glVertexAttrib2fvNV"(GLuint index, GLfloat* v)
+   void c_glVertexAttrib2sNV "glVertexAttrib2sNV"(GLuint index, GLshort x, GLshort y)
+   void c_glVertexAttrib2svNV "glVertexAttrib2svNV"(GLuint index, GLshort* v)
+   void c_glVertexAttrib3dNV "glVertexAttrib3dNV"(GLuint index, GLdouble x, GLdouble y, GLdouble z)
+   void c_glVertexAttrib3dvNV "glVertexAttrib3dvNV"(GLuint index, GLdouble* v)
+   void c_glVertexAttrib3fNV "glVertexAttrib3fNV"(GLuint index, GLfloat x, GLfloat y, GLfloat z)
+   void c_glVertexAttrib3fvNV "glVertexAttrib3fvNV"(GLuint index, GLfloat* v)
+   void c_glVertexAttrib3sNV "glVertexAttrib3sNV"(GLuint index, GLshort x, GLshort y, GLshort z)
+   void c_glVertexAttrib3svNV "glVertexAttrib3svNV"(GLuint index, GLshort* v)
+   void c_glVertexAttrib4dNV "glVertexAttrib4dNV"(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+   void c_glVertexAttrib4dvNV "glVertexAttrib4dvNV"(GLuint index, GLdouble* v)
+   void c_glVertexAttrib4fNV "glVertexAttrib4fNV"(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+   void c_glVertexAttrib4fvNV "glVertexAttrib4fvNV"(GLuint index, GLfloat* v)
+   void c_glVertexAttrib4sNV "glVertexAttrib4sNV"(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w)
+   void c_glVertexAttrib4svNV "glVertexAttrib4svNV"(GLuint index, GLshort* v)
+   void c_glVertexAttrib4ubNV "glVertexAttrib4ubNV"(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w)
+   void c_glVertexAttrib4ubvNV "glVertexAttrib4ubvNV"(GLuint index, GLubyte* v)
+   void c_glVertexAttribPointerNV "glVertexAttribPointerNV"(GLuint index, GLint size, GLenum type, GLsizei stride, void* pointer)
+   void c_glVertexAttribs1dvNV "glVertexAttribs1dvNV"(GLuint index, GLsizei n, GLdouble* v)
+   void c_glVertexAttribs1fvNV "glVertexAttribs1fvNV"(GLuint index, GLsizei n, GLfloat* v)
+   void c_glVertexAttribs1svNV "glVertexAttribs1svNV"(GLuint index, GLsizei n, GLshort* v)
+   void c_glVertexAttribs2dvNV "glVertexAttribs2dvNV"(GLuint index, GLsizei n, GLdouble* v)
+   void c_glVertexAttribs2fvNV "glVertexAttribs2fvNV"(GLuint index, GLsizei n, GLfloat* v)
+   void c_glVertexAttribs2svNV "glVertexAttribs2svNV"(GLuint index, GLsizei n, GLshort* v)
+   void c_glVertexAttribs3dvNV "glVertexAttribs3dvNV"(GLuint index, GLsizei n, GLdouble* v)
+   void c_glVertexAttribs3fvNV "glVertexAttribs3fvNV"(GLuint index, GLsizei n, GLfloat* v)
+   void c_glVertexAttribs3svNV "glVertexAttribs3svNV"(GLuint index, GLsizei n, GLshort* v)
+   void c_glVertexAttribs4dvNV "glVertexAttribs4dvNV"(GLuint index, GLsizei n, GLdouble* v)
+   void c_glVertexAttribs4fvNV "glVertexAttribs4fvNV"(GLuint index, GLsizei n, GLfloat* v)
+   void c_glVertexAttribs4svNV "glVertexAttribs4svNV"(GLuint index, GLsizei n, GLshort* v)
+   void c_glVertexAttribs4ubvNV "glVertexAttribs4ubvNV"(GLuint index, GLsizei n, GLubyte* v)
+
+def glAreProgramsResidentNV(n, ids, residences):
+   cdef GLuint *arg2
+   cdef GLboolean *arg3
+   cdef int i
+   cdef GLboolean res
+
+   if c_GLEW_NV_vertex_program:
+      arg2 = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      arg3 = <GLboolean*>PyMem_Malloc(sizeof(GLboolean) * n)
+      for i from 0 <= i < n:
+         arg2[i] = ids[i]
+         arg3[i] = residences[i]
+      res = c_glAreProgramsResidentNV(n, arg2, arg3)
+      PyMem_Free(arg2)
+      PyMem_Free(arg3)
+      return res
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glAreProgramsResidentNV')
+
+def glBindProgramNV(target, id):
+   if c_GLEW_NV_vertex_program:
+      c_glBindProgramNV(target, id)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glBindProgramNV')
+
+def glDeleteProgramsNV(n, ids):
+   cdef GLuint *arg2
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      arg2 = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i from 0 <= i < n:
+         arg2[i] = ids[i]
+      c_glDeleteProgramsNV(n, arg2)
+      PyMem_Free(arg2)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glDeleteProgramsNV')
+
+def glExecuteProgramNV(target, id, params):
+   cdef GLfloat arg3[1]
+
+   if c_GLEW_NV_vertex_program:
+      arg3[0] = params[0]
+      c_glExecuteProgramNV(target, id, arg3)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glExecuteProgramNV')
+
+def glGenProgramsNV(n, ids):
+   cdef GLuint *arr
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i from 0 <= i < n:
+         arr[i] = ids[i]
+      c_glGenProgramsNV(n, arr)
+      PyMem_Free(arr)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glGenProgramsNV')
+
+def glGetProgramParameterdvNV(target, index, pname):
+   cdef GLdouble params[1]
+
+   if c_GLEW_NV_vertex_program:
+      c_glGetProgramParameterdvNV(target, index, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glGetProgramParameterdvNV')
+
+def glGetProgramParameterfvNV(target, index, pname):
+   cdef GLfloat params[1]
+
+   if c_GLEW_NV_vertex_program:
+      c_glGetProgramParameterfvNV(target, index, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glGetProgramParameterfvNV')
+
+def glGetProgramStringNV(id, pname):
+   cdef char program[128]
+
+   if c_GLEW_NV_vertex_program:
+      c_glGetProgramStringNV(id, pname, <unsigned char*>program)
+      return program
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glGetProgramStringNV')
+
+def glGetProgramivNV(id, pname):
+   cdef GLint params[1]
+
+   if c_GLEW_NV_vertex_program:
+      c_glGetProgramivNV(id, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glGetProgramivNV')
+
+def glGetTrackMatrixivNV(target, address, pname):
+   cdef GLint params[1]
+
+   if c_GLEW_NV_vertex_program:
+      c_glGetTrackMatrixivNV(target, address, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glGetTrackMatrixivNV')
+      
+#def glGetVertexAttribPointervNV(id, pname): # void** == save for later
+
+def glGetVertexAttribdvNV(index, pname):
+   cdef GLdouble params[1]
+
+   if c_GLEW_NV_vertex_program:
+      c_glGetVertexAttribdvNV(index, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glGetVertexAttribdvNV')
+
+def glGetVertexAttribfvNV(index, pname):
+   cdef GLfloat params[1]
+
+   if c_GLEW_NV_vertex_program:
+      c_glGetVertexAttribfvNV(index, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glGetVertexAttribfvNV')
+
+def glGetVertexAttribivNV(index, pname):
+   cdef GLint params[1]
+
+   if c_GLEW_NV_vertex_program:
+      c_glGetVertexAttribivNV(index, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glGetVertexAttribivNV')
+
+def glIsProgramNV(id):
+   if c_GLEW_NV_vertex_program:
+      return c_glIsProgramNV(id)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glIsProgramNV')
+
+def glLoadProgramNV(target, id, len, program):
+   if c_GLEW_NV_vertex_program:
+      c_glLoadProgramNV(target, id, len, program)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glLoadProgramNV')
+
+def glProgramParameter4dNV(target, index, x, y, z, w):
+   if c_GLEW_NV_vertex_program:
+      c_glProgramParameter4dNV(target, index, x, y, z, w)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glProgramParameter4dNV')
+
+def glProgramParameter4dvNV(target, index, params):
+   cdef GLdouble args[4]
+
+   if c_GLEW_NV_vertex_program:
+      arg[0] = params[0]
+      arg[1] = params[1]
+      arg[2] = params[2]
+      arg[3] = params[3]
+      c_glProgramParameter4dvNV(target, index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glProgramParameter4dvNV')
+
+def glProgramParameter4fNV(target, index, x, y, z, w):
+   if c_GLEW_NV_vertex_program:
+      c_glProgramParameter4fNV(target, index, x, y, z, w)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glProgramParameter4fNV')
+
+def glProgramParameter4fvNV(target, index, params):
+   cdef GLfloat args[4]
+
+   if c_GLEW_NV_vertex_program:
+      arg[0] = params[0]
+      arg[1] = params[1]
+      arg[2] = params[2]
+      arg[3] = params[3]
+      c_glProgramParameter4fvNV(target, index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glProgramParameter4fvNV')
+
+def glProgramParameters4dvNV(target, index, num, params):
+   cdef GLdouble *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLdouble*>PyMem_Malloc(sizeof(GLdouble) * num)
+      for i from 0 <= i < num:
+         args[i] = params[i]
+      c_glProgramParameters4dvNV(target, index, num, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glProgramParameters4dvNV')
+
+def glProgramParameters4fvNV(target, index, num, params):
+   cdef GLfloat *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLfloat*>PyMem_Malloc(sizeof(GLfloat) * num)
+      for i from 0 <= i < num:
+         args[i] = params[i]
+      c_glProgramParameters4fvNV(target, index, num, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glProgramParameters4fvNV')
+
+def glRequestResidentProgramsNV(n, ids):
+   cdef GLuint *arr
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i from 0 <= i < n:
+         arr[i] = ids[i]
+      c_glRequestResidentProgramsNV(n, arr)
+      PyMem_Free(arr)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glRequestResidentProgramsNV')
+
+def glTrackMatrixNV(target, address, matrix, transform):
+   if c_GLEW_NV_vertex_program:
+      c_glTrackMatrixNV(target, address, matrix, transform)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glTrackMatrixNV')
+
+def glVertexAttrib1dNV(index, x):
+   if c_GLEW_NV_vertex_program:
+      c_glVertexAttrib1dNV(index, x)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib1dNV')
+
+def glVertexAttrib1dvNV(index, v):
+   cdef GLdouble args[1]
+
+   if c_GLEW_NV_vertex_program:
+      args[0] = v[0]
+      c_glVertexAttrib1dvNV(index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib1dvNV')
+
+def glVertexAttrib1fNV(index, x):
+   if c_GLEW_NV_vertex_program:
+      c_glVertexAttrib1fNV(index, x)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib1fNV')
+
+def glVertexAttrib1fvNV(index, v):
+   cdef GLfloat args[1]
+
+   if c_GLEW_NV_vertex_program:
+      args[0] = v[0]
+      c_glVertexAttrib1fvNV(index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib1fvNV')
+
+def glVertexAttrib1sNV(index, x):
+   if c_GLEW_NV_vertex_program:
+      c_glVertexAttrib1sNV(index, x)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib1sNV')
+
+def glVertexAttrib1svNV(index, v):
+   cdef GLshort args[1]
+
+   if c_GLEW_NV_vertex_program:
+      args[0] = v[0]
+      c_glVertexAttrib1svNV(index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib1svNV')
+
+def glVertexAttrib2dNV(index, x, y):
+   if c_GLEW_NV_vertex_program:
+      c_glVertexAttrib2dNV(index, x, y)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib2dNV')
+
+def glVertexAttrib2dvNV(index, v):
+   cdef GLdouble args[2]
+
+   if c_GLEW_NV_vertex_program:
+      args[0] = v[0]
+      args[1] = v[1]
+      c_glVertexAttrib2dvNV(index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib2dvNV')
+
+def glVertexAttrib2fNV(index, x, y):
+   if c_GLEW_NV_vertex_program:
+      c_glVertexAttrib2fNV(index, x, y)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib2fNV')
+
+def glVertexAttrib2fvNV(index, v):
+   cdef GLfloat args[2]
+
+   if c_GLEW_NV_vertex_program:
+      args[0] = v[0]
+      args[1] = v[1]
+      c_glVertexAttrib2fvNV(index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib2fvNV')
+
+def glVertexAttrib2sNV(index, x, y):
+   if c_GLEW_NV_vertex_program:
+      c_glVertexAttrib2sNV(index, x, y)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib2sNV')
+
+def glVertexAttrib2svNV(index, v):
+   cdef GLshort args[2]
+
+   if c_GLEW_NV_vertex_program:
+      args[0] = v[0]
+      args[1] = v[1]
+      c_glVertexAttrib2svNV(index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib2svNV')
+
+def glVertexAttrib3dNV(index, x, y, z):
+   if c_GLEW_NV_vertex_program:
+      c_glVertexAttrib3dNV(index, x, y, z)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib3dNV')
+
+def glVertexAttrib3dvNV(index, v):
+   cdef GLdouble args[3]
+
+   if c_GLEW_NV_vertex_program:
+      args[0] = v[0]
+      args[1] = v[1]
+      args[2] = v[2]
+      c_glVertexAttrib3dvNV(index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib3dvNV')
+
+def glVertexAttrib3fNV(index, x, y, z):
+   if c_GLEW_NV_vertex_program:
+      c_glVertexAttrib3fNV(index, x, y, z)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib3fNV')
+
+def glVertexAttrib3fvNV(index, v):
+   cdef GLfloat args[3]
+
+   if c_GLEW_NV_vertex_program:
+      args[0] = v[0]
+      args[1] = v[1]
+      args[2] = v[2]
+      c_glVertexAttrib3fvNV(index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib3fvNV')
+
+def glVertexAttrib3sNV(index, x, y, z):
+   if c_GLEW_NV_vertex_program:
+      c_glVertexAttrib3sNV(index, x, y, z)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib3sNV')
+
+def glVertexAttrib3svNV(index, v):
+   cdef GLshort args[3]
+
+   if c_GLEW_NV_vertex_program:
+      args[0] = v[0]
+      args[1] = v[1]
+      args[2] = v[2]
+      c_glVertexAttrib3svNV(index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib3svNV')
+
+def glVertexAttrib4dNV(index, x, y, z, w):
+   if c_GLEW_NV_vertex_program:
+      c_glVertexAttrib4dNV(index, x, y, z, w)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib4dNV')
+
+def glVertexAttrib4dvNV(index, v):
+   cdef GLdouble args[4]
+
+   if c_GLEW_NV_vertex_program:
+      args[0] = v[0]
+      args[1] = v[1]
+      args[2] = v[2]
+      args[3] = v[3]
+      c_glVertexAttrib4dvNV(index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib4dvNV')
+
+def glVertexAttrib4fNV(index, x, y, z, w):
+   if c_GLEW_NV_vertex_program:
+      c_glVertexAttrib4fNV(index, x, y, z, w)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib4fNV')
+
+def glVertexAttrib4fvNV(index, v):
+   cdef GLfloat args[4]
+
+   if c_GLEW_NV_vertex_program:
+      args[0] = v[0]
+      args[1] = v[1]
+      args[2] = v[2]
+      args[3] = v[3]
+      c_glVertexAttrib4fvNV(index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib4fvNV')
+
+def glVertexAttrib4sNV(index, x, y, z, w):
+   if c_GLEW_NV_vertex_program:
+      c_glVertexAttrib4sNV(index, x, y, z, w)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib4sNV')
+
+def glVertexAttrib4svNV(index, v):
+   cdef GLshort args[4]
+
+   if c_GLEW_NV_vertex_program:
+      args[0] = v[0]
+      args[1] = v[1]
+      args[2] = v[2]
+      args[3] = v[3]
+      c_glVertexAttrib4svNV(index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib4svNV')
+
+def glVertexAttrib4ubNV(index, x, y, z, w):
+   if c_GLEW_NV_vertex_program:
+      c_glVertexAttrib4ubNV(index, x, y, z, w)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib4ubNV')
+
+def glVertexAttrib4ubvNV(index, v):
+   cdef GLubyte args[4]
+
+   if c_GLEW_NV_vertex_program:
+      args[0] = v[0]
+      args[1] = v[1]
+      args[2] = v[2]
+      args[3] = v[3]
+      c_glVertexAttrib4ubvNV(index, args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttrib4ubvNV')
+
+def glVertexAttribPointerNV(index, size, type, stride, pointer):
+   cdef char *arr
+
+   if c_GLEW_NV_vertex_program:
+      arr = pointer
+      c_glVertexAttribPointerNV(index, size, type, stride, arr)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribPointerNV')
+
+def glVertexAttribs1dvNV(index, n, v):
+   cdef GLdouble *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLdouble*>PyMem_Malloc(sizeof(GLdouble) * n)
+      for i from 0 <= i < n:
+         args[i] = v[i]
+      c_glVertexAttribs1dvNV(index, n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribs1dvNV')
+
+def glVertexAttribs1fvNV(index, n, v):
+   cdef GLfloat *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLfloat*>PyMem_Malloc(sizeof(GLfloat) * n)
+      for i from 0 <= i < n:
+         args[i] = v[i]
+      c_glVertexAttribs1fvNV(index, n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribs1fvNV')
+
+def glVertexAttribs1svNV(index, n, v):
+   cdef GLshort *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLshort*>PyMem_Malloc(sizeof(GLshort) * n)
+      for i from 0 <= i < n:
+         args[i] = v[i]
+      c_glVertexAttribs1svNV(index, n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribs1svNV')
+
+def glVertexAttribs2dvNV(index, n, v):
+   cdef GLdouble *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLdouble*>PyMem_Malloc(sizeof(GLdouble) * n * 2)
+      for i from 0 <= i < n:
+         args[i] = v[i]
+      c_glVertexAttribs2dvNV(index, n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribs2dvNV')
+
+def glVertexAttribs2fvNV(index, n, v):
+   cdef GLfloat *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLfloat*>PyMem_Malloc(sizeof(GLfloat) * n * 2)
+      for i from 0 <= i < n:
+         args[i] = v[i]
+      c_glVertexAttribs2fvNV(index, n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribs2fvNV')
+
+def glVertexAttribs2svNV(index, n, v):
+   cdef GLshort *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLshort*>PyMem_Malloc(sizeof(GLshort) * n * 2)
+      for i from 0 <= i < n:
+         args[i] = v[i]
+      c_glVertexAttribs2svNV(index, n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribs2svNV')
+
+def glVertexAttribs3dvNV(index, n, v):
+   cdef GLdouble *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLdouble*>PyMem_Malloc(sizeof(GLdouble) * n * 3)
+      for i from 0 <= i < n:
+         args[i] = v[i]
+      c_glVertexAttribs3dvNV(index, n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribs3dvNV')
+
+def glVertexAttribs3fvNV(index, n, v):
+   cdef GLfloat *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLfloat*>PyMem_Malloc(sizeof(GLfloat) * n * 3)
+      for i from 0 <= i < n:
+         args[i] = v[i]
+      c_glVertexAttribs3fvNV(index, n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribs3fvNV')
+
+def glVertexAttribs3svNV(index, n, v):
+   cdef GLshort *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLshort*>PyMem_Malloc(sizeof(GLshort) * n * 3)
+      for i from 0 <= i < n:
+         args[i] = v[i]
+      c_glVertexAttribs3svNV(index, n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribs3svNV')
+
+def glVertexAttribs4dvNV(index, n, v):
+   cdef GLdouble *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLdouble*>PyMem_Malloc(sizeof(GLdouble) * n * 4)
+      for i from 0 <= i < n:
+         args[i] = v[i]
+      c_glVertexAttribs4dvNV(index, n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribs4dvNV')
+
+def glVertexAttribs4fvNV(index, n, v):
+   cdef GLfloat *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLfloat*>PyMem_Malloc(sizeof(GLfloat) * n * 4)
+      for i from 0 <= i < n:
+         args[i] = v[i]
+      c_glVertexAttribs4fvNV(index, n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribs4fvNV')
+
+def glVertexAttribs4svNV(index, n, v):
+   cdef GLshort *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLshort*>PyMem_Malloc(sizeof(GLshort) * n * 4)
+      for i from 0 <= i < n:
+         args[i] = v[i]
+      c_glVertexAttribs4svNV(index, n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribs4svNV')
+
+def glVertexAttribs4ubvNV(index, n, v):
+   cdef GLubyte *args
+   cdef int i
+
+   if c_GLEW_NV_vertex_program:
+      args = <GLubyte*>PyMem_Malloc(sizeof(GLubyte) * n * 4)
+      for i from 0 <= i < n:
+         args[i] = v[i]
+      c_glVertexAttribs4ubvNV(index, n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_NV_vertex_program', 'glVertexAttribs4ubvNV')
+
+# ------------------------ GL_NV_vertex_program1_1 ------------------------ #
+
+# ------------------------- GL_NV_vertex_program2 ------------------------- #
+
+# ---------------------- GL_NV_vertex_program2_option --------------------- #
+GL_MAX_PROGRAM_EXEC_INSTRUCTIONS_NV = 0x88F4
+GL_MAX_PROGRAM_CALL_DEPTH_NV = 0x88F5
+
+# ------------------------- GL_NV_vertex_program3 ------------------------- #
+MAX_VERTEX_TEXTURE_IMAGE_UNITS_ARB = 0x8B4C
