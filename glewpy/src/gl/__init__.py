@@ -15,3 +15,4 @@ from nv import *
 from oml import *
 from pgi import *
 from rend import *
+from s3 import *

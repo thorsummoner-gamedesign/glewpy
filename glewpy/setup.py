@@ -29,7 +29,8 @@ setup(
     Extension('gl.nv', ['src/gl/nv.pyx'], libraries = ['GLEW']),
     Extension('gl.oml', ['src/gl/oml.pyx'], libraries = ['GLEW']),
     Extension('gl.pgi', ['src/gl/pgi.pyx'], libraries = ['GLEW']),
-    Extension('gl.rend', ['src/gl/rend.pyx'], libraries = ['GLEW'])
+    Extension('gl.rend', ['src/gl/rend.pyx'], libraries = ['GLEW']),
+    Extension('gl.s3', ['src/gl/s3.pyx'], libraries = ['GLEW'])
     ],
   cmdclass = {'build_ext': build_ext}
 )
