@@ -24,7 +24,8 @@ setup(
     Extension('gl.ibm', ['src/gl/ibm.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.ingr', ['src/gl/ingr.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.intel', ['src/gl/intel.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
-    Extension('gl.ktx', ['src/gl/ktx.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL'])
+    Extension('gl.ktx', ['src/gl/ktx.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
+    Extension('gl.mesa', ['src/gl/mesa.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL'])
     ],
   cmdclass = {'build_ext': build_ext}
 )
