@@ -19,3 +19,5 @@ from s3 import *
 from sgis import *
 from sgix import *
 from sgi import *
+from sunx import *
+from sun import *

@@ -33,7 +33,9 @@ setup(
     Extension('gl.s3', ['src/gl/s3.pyx'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.sgis', ['src/gl/sgis.pyx'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.sgix', ['src/gl/sgix.pyx'], extra_link_args = ['-framework', 'OpenGL']),
-    Extension('gl.sgi', ['src/gl/sgi.pyx'], extra_link_args = ['-framework', 'OpenGL'])
+    Extension('gl.sgi', ['src/gl/sgi.pyx'], extra_link_args = ['-framework', 'OpenGL']),
+    Extension('gl.sunx', ['src/gl/sunx.pyx'], extra_link_args = ['-framework', 'OpenGL']),
+    Extension('gl.sun', ['src/gl/sun.pyx'], extra_link_args = ['-framework', 'OpenGL'])
     ],
   cmdclass = {'build_ext': build_ext}
 )

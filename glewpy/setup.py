@@ -33,7 +33,9 @@ setup(
     Extension('gl.s3', ['src/gl/s3.pyx']),
     Extension('gl.sgis', ['src/gl/sgis.pyx']),
     Extension('gl.sgix', ['src/gl/sgix.pyx']),
-    Extension('gl.sgi', ['src/gl/sgi.pyx'])
+    Extension('gl.sgi', ['src/gl/sgi.pyx']),
+    Extension('gl.sunx', ['src/gl/sunx.pyx']),
+    Extension('gl.sun', ['src/gl/sun.pyx'])
     ],
   cmdclass = {'build_ext': build_ext}
 )
