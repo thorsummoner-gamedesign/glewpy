@@ -1,3 +1,4 @@
+from 3dfx import *
 from arb import *
 from ext import *
 from gl import *
