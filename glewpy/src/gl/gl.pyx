@@ -1925,4 +1925,324 @@ def glUnmapBuffer(target):
       raise GlewpyError('GL_VERSION_1_5', 'glUnmapBuffer')
 
 # ----------------------------- GL_VERSION_2_0 ---------------------------- #
-# No funcs or defines.....yet!
+GL_BLEND_EQUATION_RGB = 0x8009
+GL_VERTEX_ATTRIB_ARRAY_ENABLED = 0x8622
+GL_VERTEX_ATTRIB_ARRAY_SIZE = 0x8623
+GL_VERTEX_ATTRIB_ARRAY_STRIDE = 0x8624
+GL_VERTEX_ATTRIB_ARRAY_TYPE = 0x8625
+GL_CURRENT_VERTEX_ATTRIB = 0x8626
+GL_VERTEX_PROGRAM_POINT_SIZE = 0x8642
+GL_VERTEX_PROGRAM_TWO_SIDE = 0x8643
+GL_VERTEX_ATTRIB_ARRAY_POINTER = 0x8645
+GL_STENCIL_BACK_FUNC = 0x8800
+GL_STENCIL_BACK_FAIL = 0x8801
+GL_STENCIL_BACK_PASS_DEPTH_FAIL = 0x8802
+GL_STENCIL_BACK_PASS_DEPTH_PASS = 0x8803
+GL_MAX_DRAW_BUFFERS = 0x8824
+GL_DRAW_BUFFER0 = 0x8825
+GL_DRAW_BUFFER1 = 0x8826
+GL_DRAW_BUFFER2 = 0x8827
+GL_DRAW_BUFFER3 = 0x8828
+GL_DRAW_BUFFER4 = 0x8829
+GL_DRAW_BUFFER5 = 0x882A
+GL_DRAW_BUFFER6 = 0x882B
+GL_DRAW_BUFFER7 = 0x882C
+GL_DRAW_BUFFER8 = 0x882D
+GL_DRAW_BUFFER9 = 0x882E
+GL_DRAW_BUFFER10 = 0x882F
+GL_DRAW_BUFFER11 = 0x8830
+GL_DRAW_BUFFER12 = 0x8831
+GL_DRAW_BUFFER13 = 0x8832
+GL_DRAW_BUFFER14 = 0x8833
+GL_DRAW_BUFFER15 = 0x8834
+GL_BLEND_EQUATION_ALPHA = 0x883D
+GL_POINT_SPRITE = 0x8861
+GL_COORD_REPLACE = 0x8862
+GL_MAX_VERTEX_ATTRIBS = 0x8869
+GL_VERTEX_ATTRIB_ARRAY_NORMALIZED = 0x886A
+GL_MAX_TEXTURE_COORDS = 0x8871
+GL_MAX_TEXTURE_IMAGE_UNITS = 0x8872
+GL_FRAGMENT_SHADER = 0x8B30
+GL_VERTEX_SHADER = 0x8B31
+GL_MAX_FRAGMENT_UNIFORM_COMPONENTS = 0x8B49
+GL_MAX_VERTEX_UNIFORM_COMPONENTS = 0x8B4A
+GL_MAX_VARYING_FLOATS = 0x8B4B
+GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS = 0x8B4C
+GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS = 0x8B4D
+GL_SHADER_TYPE = 0x8B4E
+GL_FLOAT_VEC2 = 0x8B50
+GL_FLOAT_VEC3 = 0x8B51
+GL_FLOAT_VEC4 = 0x8B52
+GL_INT_VEC2 = 0x8B53
+GL_INT_VEC3 = 0x8B54
+GL_INT_VEC4 = 0x8B55
+GL_BOOL = 0x8B56
+GL_BOOL_VEC2 = 0x8B57
+GL_BOOL_VEC3 = 0x8B58
+GL_BOOL_VEC4 = 0x8B59
+GL_FLOAT_MAT2 = 0x8B5A
+GL_FLOAT_MAT3 = 0x8B5B
+GL_FLOAT_MAT4 = 0x8B5C
+GL_SAMPLER_1D = 0x8B5D
+GL_SAMPLER_2D = 0x8B5E
+GL_SAMPLER_3D = 0x8B5F
+GL_SAMPLER_CUBE = 0x8B60
+GL_SAMPLER_1D_SHADOW = 0x8B61
+GL_SAMPLER_2D_SHADOW = 0x8B62
+GL_DELETE_STATUS = 0x8B80
+GL_COMPILE_STATUS = 0x8B81
+GL_LINK_STATUS = 0x8B82
+GL_VALIDATE_STATUS = 0x8B83
+GL_INFO_LOG_LENGTH = 0x8B84
+GL_ATTACHED_SHADERS = 0x8B85
+GL_ACTIVE_UNIFORMS = 0x8B86
+GL_ACTIVE_UNIFORM_MAX_LENGTH = 0x8B87
+GL_SHADER_SOURCE_LENGTH = 0x8B88
+GL_ACTIVE_ATTRIBUTES = 0x8B89
+GL_ACTIVE_ATTRIBUTE_MAX_LENGTH = 0x8B8A
+GL_FRAGMENT_SHADER_DERIVATIVE_HINT = 0x8B8B
+GL_SHADING_LANGUAGE_VERSION = 0x8B8C
+GL_CURRENT_PROGRAM = 0x8B8D
+GL_POINT_SPRITE_COORD_ORIGIN = 0x8CA0
+GL_LOWER_LEFT = 0x8CA1
+GL_UPPER_LEFT = 0x8CA2
+GL_STENCIL_BACK_REF = 0x8CA3
+GL_STENCIL_BACK_VALUE_MASK = 0x8CA4
+GL_STENCIL_BACK_WRITEMASK = 0x8CA5
+
+cdef extern from "GL/glew.h":
+   void c_glAttachShader "glAttachShader"(GLuint program, GLuint shader)
+   void c_glBindAttribLocation "glBindAttribLocation"(GLuint program, GLuint index, GLchar* name)
+   void c_glBlendEquationSeparate "glBlendEquationSeparate"(GLenum, GLenum)
+   void c_glCompileShader "glCompileShader"(GLuint shader)
+   GLuint c_glCreateProgram "glCreateProgram"()
+   GLuint c_glCreateShader "glCreateShader"(GLenum type)
+   void c_glDeleteProgram "glDeleteProgram"(GLuint program)
+   void c_glDeleteShader "glDeleteShader"(GLuint shader)
+   void c_glDetachShader "glDetachShader"(GLuint program, GLuint shader)
+   void c_glDisableVertexAttribArray "glDisableVertexAttribArray"(GLuint)
+   void c_glDrawBuffers "glDrawBuffers"(GLsizei n, GLenum* bufs)
+   void c_glEnableVertexAttribArray "glEnableVertexAttribArray"(GLuint)
+   void c_glGetActiveAttrib "glGetActiveAttrib"(GLuint program, GLuint index, GLsizei maxLength, GLsizei* length, GLint* size, GLenum* type, GLchar* name)
+   void c_glGetActiveUniform "glGetActiveUniform"(GLuint program, GLuint index, GLsizei maxLength, GLsizei* length, GLint* size, GLenum* type, GLchar* name)
+   void c_glGetAttachedShaders "glGetAttachedShaders"(GLuint program, GLsizei maxCount, GLsizei* count, GLuint* shaders)
+   GLint c_glGetAttribLocation "glGetAttribLocation"(GLuint program, GLchar* name)
+   void c_glGetShaderSource "glGetShaderSource"(GLint obj, GLsizei maxLength, GLsizei* length, GLchar* source)
+   GLint c_glGetUniformLocation "glGetUniformLocation"(GLint programObj, GLchar* name)
+   void c_glGetUniformfv "glGetUniformfv"(GLuint program, GLint location, GLfloat* params)
+   void c_glGetUniformiv "glGetUniformiv"(GLuint program, GLint location, GLint* params)
+   void c_glGetVertexAttribPointerv "glGetVertexAttribPointerv"(GLuint, GLenum, GLvoid*)
+   void c_glGetVertexAttribdv "glGetVertexAttribdv"(GLuint, GLenum, GLdouble*)
+   void c_glGetVertexAttribfv "glGetVertexAttribfv"(GLuint, GLenum, GLfloat*)
+   void c_glGetVertexAttribiv "glGetVertexAttribiv"(GLuint, GLenum, GLint*)
+   GLboolean c_glIsProgram "glIsProgram"(GLuint program)
+   GLboolean c_glIsShader "glIsShader"(GLuint shader)
+   void c_glLinkProgram "glLinkProgram"(GLuint program)
+   void c_glShaderSource "glShaderSource"(GLuint shader, GLsizei count, GLchar** strings, GLint* lengths)
+   void c_glStencilFuncSeparate "glStencilFuncSeparate"(GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask)
+   void c_glStencilMaskSeparate "glStencilMaskSeparate"(GLenum, GLuint)
+   void c_glStencilOpSeparate "glStencilOpSeparate"(GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass)
+   void c_glUniform1f "glUniform1f"(GLint location, GLfloat v0)
+   void c_glUniform1fv "glUniform1fv"(GLint location, GLsizei count, GLfloat* value)
+   void c_glUniform1i "glUniform1i"(GLint location, GLint v0)
+   void c_glUniform1iv "glUniform1iv"(GLint location, GLsizei count, GLint* value)
+   void c_glUniform2f "glUniform2f"(GLint location, GLfloat v0, GLfloat v1)
+   void c_glUniform2fv "glUniform2fv"(GLint location, GLsizei count, GLfloat* value)
+   void c_glUniform2i "glUniform2i"(GLint location, GLint v0, GLint v1)
+   void c_glUniform2iv "glUniform2iv"(GLint location, GLsizei count, GLint* value)
+   void c_glUniform3f "glUniform3f"(GLint location, GLfloat v0, GLfloat v1, GLfloat v2)
+   void c_glUniform3fv "glUniform3fv"(GLint location, GLsizei count, GLfloat* value)
+   void c_glUniform3i "glUniform3i"(GLint location, GLint v0, GLint v1, GLint v2)
+   void c_glUniform3iv "glUniform3iv"(GLint location, GLsizei count, GLint* value)
+   void c_glUniform4f "glUniform4f"(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
+   void c_glUniform4fv "glUniform4fv"(GLint location, GLsizei count, GLfloat* value)
+   void c_glUniform4i "glUniform4i"(GLint location, GLint v0, GLint v1, GLint v2, GLint v3)
+   void c_glUniform4iv "glUniform4iv"(GLint location, GLsizei count, GLint* value)
+   void c_glUniformMatrix2fv "glUniformMatrix2fv"(GLint location, GLsizei count, GLboolean transpose, GLfloat* value)
+   void c_glUniformMatrix3fv "glUniformMatrix3fv"(GLint location, GLsizei count, GLboolean transpose, GLfloat* value)
+   void c_glUniformMatrix4fv "glUniformMatrix4fv"(GLint location, GLsizei count, GLboolean transpose, GLfloat* value)
+   void c_glUseProgram "glUseProgram"(GLuint program)
+   void c_glValidateProgram "glValidateProgram"(GLuint program)
+   void c_glVertexAttrib1d "glVertexAttrib1d"(GLuint index, GLdouble x)
+   void c_glVertexAttrib1dv "glVertexAttrib1dv"(GLuint index, GLdouble* v)
+   void c_glVertexAttrib1f "glVertexAttrib1f"(GLuint index, GLfloat x)
+   void c_glVertexAttrib1fv "glVertexAttrib1fv"(GLuint index, GLfloat* v)
+   void c_glVertexAttrib1s "glVertexAttrib1s"(GLuint index, GLshort x)
+   void c_glVertexAttrib1sv "glVertexAttrib1sv"(GLuint index, GLshort* v)
+   void c_glVertexAttrib2d "glVertexAttrib2d"(GLuint index, GLdouble x, GLdouble y)
+   void c_glVertexAttrib2dv "glVertexAttrib2dv"(GLuint index, GLdouble* v)
+   void c_glVertexAttrib2f "glVertexAttrib2f"(GLuint index, GLfloat x, GLfloat y)
+   void c_glVertexAttrib2fv "glVertexAttrib2fv"(GLuint index, GLfloat* v)
+   void c_glVertexAttrib2s "glVertexAttrib2s"(GLuint index, GLshort x, GLshort y)
+   void c_glVertexAttrib2sv "glVertexAttrib2sv"(GLuint index, GLshort* v)
+   void c_glVertexAttrib3d "glVertexAttrib3d"(GLuint index, GLdouble x, GLdouble y, GLdouble z)
+   void c_glVertexAttrib3dv "glVertexAttrib3dv"(GLuint index, GLdouble* v)
+   void c_glVertexAttrib3f "glVertexAttrib3f"(GLuint index, GLfloat x, GLfloat y, GLfloat z)
+   void c_glVertexAttrib3fv "glVertexAttrib3fv"(GLuint index, GLfloat* v)
+   void c_glVertexAttrib3s "glVertexAttrib3s"(GLuint index, GLshort x, GLshort y, GLshort z)
+   void c_glVertexAttrib3sv "glVertexAttrib3sv"(GLuint index, GLshort* v)
+   void c_glVertexAttrib4Nbv "glVertexAttrib4Nbv"(GLuint index, GLbyte* v)
+   void c_glVertexAttrib4Niv "glVertexAttrib4Niv"(GLuint index, GLint* v)
+   void c_glVertexAttrib4Nsv "glVertexAttrib4Nsv"(GLuint index, GLshort* v)
+   void c_glVertexAttrib4Nub "glVertexAttrib4Nub"(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w)
+   void c_glVertexAttrib4Nubv "glVertexAttrib4Nubv"(GLuint index, GLubyte* v)
+   void c_glVertexAttrib4Nuiv "glVertexAttrib4Nuiv"(GLuint index, GLuint* v)
+   void c_glVertexAttrib4Nusv "glVertexAttrib4Nusv"(GLuint index, GLushort* v)
+   void c_glVertexAttrib4bv "glVertexAttrib4bv"(GLuint index, GLbyte* v)
+   void c_glVertexAttrib4d "glVertexAttrib4d"(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+   void c_glVertexAttrib4dv "glVertexAttrib4dv"(GLuint index, GLdouble* v)
+   void c_glVertexAttrib4f "glVertexAttrib4f"(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+   void c_glVertexAttrib4fv "glVertexAttrib4fv"(GLuint index, GLfloat* v)
+   void c_glVertexAttrib4iv "glVertexAttrib4iv"(GLuint index, GLint* v)
+   void c_glVertexAttrib4s "glVertexAttrib4s"(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w)
+   void c_glVertexAttrib4sv "glVertexAttrib4sv"(GLuint index, GLshort* v)
+   void c_glVertexAttrib4ubv "glVertexAttrib4ubv"(GLuint index, GLubyte* v)
+   void c_glVertexAttrib4uiv "glVertexAttrib4uiv"(GLuint index, GLuint* v)
+   void c_glVertexAttrib4usv "glVertexAttrib4usv"(GLuint index, GLushort* v)
+   void c_glVertexAttribPointer "glVertexAttribPointer"(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLvoid* pointer)
+
+def glAttachShader(program, shader):
+   if c_GLEW_VERSION_2_0:
+      c_glAttachShader(program, shader)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glAttachShader')
+
+def glBindAttribLocation(program, index, name):
+   if c_GLEW_VERSION_2_0:
+      c_glBindAttribLocation(program, index, name)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glBindAttribLocation')
+
+def glBlendEquationSeparate(enum1, enum2):
+   if c_GLEW_VERSION_2_0:
+      c_glBlendEquationSeparate(enum1, enum2)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glBlendEquationSeparate')
+
+def glCompileShader(shader):
+   if c_GLEW_VERSION_2_0:
+      c_glCompileShader(shader)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glCompileShader')
+
+def glCreateProgram():
+   if c_GLEW_VERSION_2_0:
+      return c_glCreateProgram()
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glCreateProgram')
+
+def glCreateShader(type):
+   if c_GLEW_VERSION_2_0:
+      return c_glCreateShader(type)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glCreateShader')
+
+def glDeleteProgram(program):
+   if c_GLEW_VERSION_2_0:
+      c_glDeleteProgram(program)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glDeleteProgram')
+
+def glDeleteShader(shader):
+   if c_GLEW_VERSION_2_0:
+      c_glDeleteShader(shader)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glDeleteShader')
+
+def glDetachShader(program, shader):
+   if c_GLEW_VERSION_2_0:
+      c_glDetachShader(program, shader)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glDetachShader')
+
+def glDisableVertexAttribArray(attr):
+   if c_GLEW_VERSION_2_0:
+      c_glDisableVertexAttribArray(attr)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glDisableVertexAttribArray')
+
+def glDrawBuffers(n, bufs):
+   cdef GLenum *arr
+   cdef int i
+
+   if c_GLEW_VERSION_2_0:
+      arr = <GLenum*>PyMem_Malloc(sizeof(GLenum) * n)
+      for i from 0 <= i < n:
+         arr[i] = bufs[i]
+      c_glDrawBuffers(n, arr)
+      PyMem_Free(arr)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glDrawBuffers')
+
+def glEnableVertexAttribArray(attr):
+   if c_GLEW_VERSION_2_0:
+      c_glEnableVertexAttribArray(attr)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glEnableVertexAttribArray')
+
+def glGetActiveAttrib(program, index, maxLength):
+   cdef GLsizei length[1]
+   cdef GLint size[1]
+   cdef GLenum type[1]
+   cdef char *name
+   
+   if c_GLEW_VERSION_2_0:
+      name = <char*>PyMem_Malloc(sizeof(char) * maxLength)
+      c_glGetActiveAttrib(program, index, maxLength, length, size, type, name)
+      retname = name
+      PyMem_Free(name)
+      return (length[0], size[0], type[0], retname)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glGetActiveAttrib')
+
+def glGetActiveUniform(program, index, maxLength):
+   cdef GLsizei length[1]
+   cdef GLint size[1]
+   cdef GLenum type[1]
+   cdef char *name
+   
+   if c_GLEW_VERSION_2_0:
+      name = <char*>PyMem_Malloc(sizeof(char) * maxLength)
+      c_glGetActiveUniform(program, index, maxLength, length, size, type, name)
+      retname = name
+      PyMem_Free(name)
+      return (length[0], size[0], type[0], retname)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glGetActiveUniform')
+
+def glGetAttachedShaders(program, maxCount):
+   cdef GLsizei count[1]
+   cdef GLuint *shaders
+   cdef int i
+
+   if c_GLEW_VERSION_2_0:
+      shaders = <GLuint*>PyMem_Malloc(sizeof(GLuint) * maxCount)
+      c_glGetAttachedShaders(program, maxCount, count, shaders)
+
+      res = list()
+      for i from 0 <= i < count[0]:
+         res.append(shaders[i])
+      PyMem_Free(shaders)
+      return (count[0], tuple(res))
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glGetAttachedShaders')
+
+def glGetAttribLocation(program, name):
+   if c_GLEW_VERSION_2_0:
+      return c_glGetAttribLocation(program, name)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glGetAttribLocation')
+
+def glGetShaderSource(obj, maxLength):
+   cdef GLsizei length[1]
+   cdef GLchar *source
+
+   if c_GLEW_VERSION_2_0:
+      source = <GLchar*>PyMem_Malloc(sizeof(GLchar) * maxLength)
+      c_glGetShaderSource(obj, maxLength, length, source)
+      retsrc = source
+      PyMem_Free(source)
+      return (length[0], source)
+   else:
+      raise GlewpyError('GL_VERSION_2_0', 'glGetShaderSource')
+

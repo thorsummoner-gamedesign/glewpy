@@ -40,6 +40,7 @@ ctypedef float GLclampf
 ctypedef double GLdouble
 ctypedef double GLclampd
 ctypedef void GLvoid
+ctypedef char GLchar
 
 ctypedef char GLcharARB
 ctypedef unsigned int GLhandleARB

@@ -17,6 +17,8 @@ cdef extern from "GL/glew.h":
    GLbyte* c_glewGetString "glewGetString"(GLenum name)
    GLbyte* c_glewGetErrorString "glewGetErrorString"(GLenum error)
    GLboolean c_glewGetExtension "glewGetExtension"(char* name)
+   # new as of 1.3.0
+   GLboolean c_glewIsSupported "glewIsSupported"(char* name)
    
 def glewInit():
    """Initialize the glew world.  There must be an existing OpenGL
@@ -39,3 +41,13 @@ def glewGetExtension(name):
    """glewGetExtension(ext) -> bool
    Check if extension ext is supported."""
    return c_glewGetExtension(name)
+
+def glewIsSupported(name):
+   """glewIsSupported(ext) -> bool
+   More effictient string query method."""
+   return c_glewIsSupported(name)
+
+def glewIsExtensionSupported(name):
+   """glewIsExtensionSupported(ext) -> bool
+   More effictient string query method."""
+   return c_glewIsSupported(name)
