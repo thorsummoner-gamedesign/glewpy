@@ -307,6 +307,12 @@ GL_MULTISAMPLE_BIT_ARB = 0x20000000
 cdef extern from "GL/glew.h":
    void c_glSampleCoverageARB "glSampleCoverageARB"(GLclampf value, GLboolean invert)
 
+def glSampleCoverageARB(value, invert):
+   if c_GLEW_ARB_multisample:
+      c_glSampleCoverageARB(value, invert)
+   else:
+      raise GlewpyError('GL_ARB_multisample', 'glSampleCoverageARB')
+
 # -------------------------- GL_ARB_multitexture -------------------------- #
 GL_TEXTURE0_ARB = 0x84C0
 GL_TEXTURE1_ARB = 0x84C1
