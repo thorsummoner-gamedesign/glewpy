@@ -2,7 +2,7 @@ from distutils.core import setup
 from distutils.extension import Extension
 from Pyrex.Distutils import build_ext
 setup(
-  name = "GLEWpy",
+  name = "glewpy",
   version = '0.1',
   description = 'Python Wrapping of GLEW',
   author = 'Charles Moad',
