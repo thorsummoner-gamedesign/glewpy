@@ -32,7 +32,8 @@ setup(
     Extension('gl.rend', ['src/gl/rend.pyx']),
     Extension('gl.s3', ['src/gl/s3.pyx']),
     Extension('gl.sgis', ['src/gl/sgis.pyx']),
-    Extension('gl.sgix', ['src/gl/sgix.pyx'])
+    Extension('gl.sgix', ['src/gl/sgix.pyx']),
+    Extension('gl.sgi', ['src/gl/sgi.pyx'])
     ],
   cmdclass = {'build_ext': build_ext}
 )

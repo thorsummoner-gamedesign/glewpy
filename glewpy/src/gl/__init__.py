@@ -18,3 +18,4 @@ from rend import *
 from s3 import *
 from sgis import *
 from sgix import *
+from sgi import *
