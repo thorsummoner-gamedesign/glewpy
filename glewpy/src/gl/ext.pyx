@@ -902,3 +902,595 @@ def glEndSceneEXT():
         c_glEndSceneEXT()
     else:
         raise GlewpyError('GL_EXT_scene_marker', 'glEndSceneEXT')
+
+# ------------------------- GL_EXT_secondary_color ------------------------ #
+GL_COLOR_SUM_EXT = 0x8458
+GL_CURRENT_SECONDARY_COLOR_EXT = 0x8459
+GL_SECONDARY_COLOR_ARRAY_SIZE_EXT = 0x845A
+GL_SECONDARY_COLOR_ARRAY_TYPE_EXT = 0x845B
+GL_SECONDARY_COLOR_ARRAY_STRIDE_EXT = 0x845C
+GL_SECONDARY_COLOR_ARRAY_POINTER_EXT = 0x845D
+GL_SECONDARY_COLOR_ARRAY_EXT = 0x845E
+
+# --------------------- GL_EXT_separate_specular_color -------------------- #
+GL_LIGHT_MODEL_COLOR_CONTROL_EXT = 0x81F8
+GL_SINGLE_COLOR_EXT = 0x81F9
+GL_SEPARATE_SPECULAR_COLOR_EXT = 0x81FA
+
+# -------------------------- GL_EXT_shadow_funcs -------------------------- #
+
+# --------------------- GL_EXT_shared_texture_palette --------------------- #
+GL_SHARED_TEXTURE_PALETTE_EXT = 0x81FB
+
+# ------------------------ GL_EXT_stencil_two_side ------------------------ #
+GL_STENCIL_TEST_TWO_SIDE_EXT = 0x8910
+GL_ACTIVE_STENCIL_FACE_EXT = 0x8911
+
+cdef extern from "GL/glew.h":
+   void c_glActiveStencilFaceEXT "glActiveStencilFaceEXT"(GLenum face)
+
+def glActiveStencilFaceEXT(face):
+   if c_GLEW_EXT_stencil_two_side:
+      c_glActiveStencilFaceEXT(face)
+   else:
+      raise GlewpyError('GL_EXT_stencil_two_side', 'glActiveStencilFaceEXT')
+
+# -------------------------- GL_EXT_stencil_wrap -------------------------- #
+GL_INCR_WRAP_EXT = 0x8507
+GL_DECR_WRAP_EXT = 0x8508
+
+# --------------------------- GL_EXT_subtexture --------------------------- #
+cdef extern from "GL/glew.h":
+   void c_glTexSubImage1DEXT "glTexSubImage1DEXT"(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, void* pixels)
+   void c_glTexSubImage2DEXT "glTexSubImage2DEXT"(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, void* pixels)
+   void c_glTexSubImage3DEXT "glTexSubImage3DEXT"(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, void* pixels)
+
+def glTexSubImage1DEXT(target, level, xoffset, width, format, type, pixels):
+   cdef char *arr
+
+   if c_GLEW_EXT_stencil_wrap:
+      arr = pixels
+      c_glTexSubImage1DEXT(target, level, xoffset, width, format, type, arr)
+   else:
+      raise GlewpyError('GL_EXT_subtexture', 'glTexSubImage1DEXT')
+
+def glTexSubImage2DEXT(target, level, xoffset, yoffset, width, height, format, type, pixels):
+   cdef char *arr
+
+   if c_GLEW_EXT_stencil_wrap:
+      arr = pixels
+      c_glTexSubImage2DEXT(target, level, xoffset, yoffset, width, height, format, type, arr)
+   else:
+      raise GlewpyError('GL_EXT_subtexture', 'glTexSubImage2DEXT')
+
+def glTexSubImage3DEXT(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels):
+   cdef char *arr
+
+   if c_GLEW_EXT_stencil_wrap:
+      arr = pixels
+      c_glTexSubImage3DEXT(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, arr)
+   else:
+      raise GlewpyError('GL_EXT_subtexture', 'glTexSubImage3DEXT')
+
+# ----------------------------- GL_EXT_texture ---------------------------- #
+GL_ALPHA4_EXT = 0x803B
+GL_ALPHA8_EXT = 0x803C
+GL_ALPHA12_EXT = 0x803D
+GL_ALPHA16_EXT = 0x803E
+GL_LUMINANCE4_EXT = 0x803F
+GL_LUMINANCE8_EXT = 0x8040
+GL_LUMINANCE12_EXT = 0x8041
+GL_LUMINANCE16_EXT = 0x8042
+GL_LUMINANCE4_ALPHA4_EXT = 0x8043
+GL_LUMINANCE6_ALPHA2_EXT = 0x8044
+GL_LUMINANCE8_ALPHA8_EXT = 0x8045
+GL_LUMINANCE12_ALPHA4_EXT = 0x8046
+GL_LUMINANCE12_ALPHA12_EXT = 0x8047
+GL_LUMINANCE16_ALPHA16_EXT = 0x8048
+GL_INTENSITY_EXT = 0x8049
+GL_INTENSITY4_EXT = 0x804A
+GL_INTENSITY8_EXT = 0x804B
+GL_INTENSITY12_EXT = 0x804C
+GL_INTENSITY16_EXT = 0x804D
+GL_RGB2_EXT = 0x804E
+GL_RGB4_EXT = 0x804F
+GL_RGB5_EXT = 0x8050
+GL_RGB8_EXT = 0x8051
+GL_RGB10_EXT = 0x8052
+GL_RGB12_EXT = 0x8053
+GL_RGB16_EXT = 0x8054
+GL_RGBA2_EXT = 0x8055
+GL_RGBA4_EXT = 0x8056
+GL_RGB5_A1_EXT = 0x8057
+GL_RGBA8_EXT = 0x8058
+GL_RGB10_A2_EXT = 0x8059
+GL_RGBA12_EXT = 0x805A
+GL_RGBA16_EXT = 0x805B
+GL_TEXTURE_RED_SIZE_EXT = 0x805C
+GL_TEXTURE_GREEN_SIZE_EXT = 0x805D
+GL_TEXTURE_BLUE_SIZE_EXT = 0x805E
+GL_TEXTURE_ALPHA_SIZE_EXT = 0x805F
+GL_TEXTURE_LUMINANCE_SIZE_EXT = 0x8060
+GL_TEXTURE_INTENSITY_SIZE_EXT = 0x8061
+GL_REPLACE_EXT = 0x8062
+GL_PROXY_TEXTURE_1D_EXT = 0x8063
+GL_PROXY_TEXTURE_2D_EXT = 0x8064
+
+# ---------------------------- GL_EXT_texture3D --------------------------- #
+GL_PACK_SKIP_IMAGES_EXT = 0x806B
+GL_PACK_IMAGE_HEIGHT_EXT = 0x806C
+GL_UNPACK_SKIP_IMAGES_EXT = 0x806D
+GL_UNPACK_IMAGE_HEIGHT_EXT = 0x806E
+GL_TEXTURE_3D_EXT = 0x806F
+GL_PROXY_TEXTURE_3D_EXT = 0x8070
+GL_TEXTURE_DEPTH_EXT = 0x8071
+GL_TEXTURE_WRAP_R_EXT = 0x8072
+GL_MAX_3D_TEXTURE_SIZE_EXT = 0x8073
+
+cdef extern from "GL/glew.h":
+   void c_glTexImage3DEXT "glTexImage3DEXT"(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, void* pixels)
+
+def glTexImage3DEXT(target, level, internalformat, width, height, depth, border, format, type, pixels):
+   cdef char *arr
+
+   if c_GLEW_EXT_texture3D:
+      arr = pixels
+      c_glTexImage3DEXT(target, level, internalformat, width, height, depth, border, format, type, arr)
+   else:
+      raise GlewpyError('GL_EXT_texture3D', 'glTexImage3DEXT')
+
+# -------------------- GL_EXT_texture_compression_dxt1 -------------------- #
+GL_COMPRESSED_RGB_S3TC_DXT1_EXT = 0x83F0
+GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = 0x83F1
+
+# -------------------- GL_EXT_texture_compression_s3tc -------------------- #
+GL_COMPRESSED_RGB_S3TC_DXT1_EXT = 0x83F0
+GL_COMPRESSED_RGBA_S3TC_DXT1_EXT = 0x83F1
+GL_COMPRESSED_RGBA_S3TC_DXT3_EXT = 0x83F2
+GL_COMPRESSED_RGBA_S3TC_DXT5_EXT = 0x83F3
+
+# ------------------------ GL_EXT_texture_cube_map ------------------------ #
+GL_NORMAL_MAP_EXT = 0x8511
+GL_REFLECTION_MAP_EXT = 0x8512
+GL_TEXTURE_CUBE_MAP_EXT = 0x8513
+GL_TEXTURE_BINDING_CUBE_MAP_EXT = 0x8514
+GL_TEXTURE_CUBE_MAP_POSITIVE_X_EXT = 0x8515
+GL_TEXTURE_CUBE_MAP_NEGATIVE_X_EXT = 0x8516
+GL_TEXTURE_CUBE_MAP_POSITIVE_Y_EXT = 0x8517
+GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_EXT = 0x8518
+GL_TEXTURE_CUBE_MAP_POSITIVE_Z_EXT = 0x8519
+GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_EXT = 0x851A
+GL_PROXY_TEXTURE_CUBE_MAP_EXT = 0x851B
+GL_MAX_CUBE_MAP_TEXTURE_SIZE_EXT = 0x851C
+
+# ----------------------- GL_EXT_texture_edge_clamp ----------------------- #
+GL_CLAMP_TO_EDGE_EXT = 0x812F
+
+# --------------------------- GL_EXT_texture_env -------------------------- #
+GL_TEXTURE_ENV0_EXT = 0
+GL_ENV_BLEND_EXT = 0
+GL_TEXTURE_ENV_SHIFT_EXT = 0
+GL_ENV_REPLACE_EXT = 0
+GL_ENV_ADD_EXT = 0
+GL_ENV_SUBTRACT_EXT = 0
+GL_TEXTURE_ENV_MODE_ALPHA_EXT = 0
+GL_ENV_REVERSE_SUBTRACT_EXT = 0
+GL_ENV_REVERSE_BLEND_EXT = 0
+GL_ENV_COPY_EXT = 0
+GL_ENV_MODULATE_EXT = 0
+
+# ------------------------- GL_EXT_texture_env_add ------------------------ #
+
+# ----------------------- GL_EXT_texture_env_combine ---------------------- #
+GL_COMBINE_EXT = 0x8570
+GL_COMBINE_RGB_EXT = 0x8571
+GL_COMBINE_ALPHA_EXT = 0x8572
+GL_RGB_SCALE_EXT = 0x8573
+GL_ADD_SIGNED_EXT = 0x8574
+GL_INTERPOLATE_EXT = 0x8575
+GL_CONSTANT_EXT = 0x8576
+GL_PRIMARY_COLOR_EXT = 0x8577
+GL_PREVIOUS_EXT = 0x8578
+GL_SOURCE0_RGB_EXT = 0x8580
+GL_SOURCE1_RGB_EXT = 0x8581
+GL_SOURCE2_RGB_EXT = 0x8582
+GL_SOURCE0_ALPHA_EXT = 0x8588
+GL_SOURCE1_ALPHA_EXT = 0x8589
+GL_SOURCE2_ALPHA_EXT = 0x858A
+GL_OPERAND0_RGB_EXT = 0x8590
+GL_OPERAND1_RGB_EXT = 0x8591
+GL_OPERAND2_RGB_EXT = 0x8592
+GL_OPERAND0_ALPHA_EXT = 0x8598
+GL_OPERAND1_ALPHA_EXT = 0x8599
+GL_OPERAND2_ALPHA_EXT = 0x859A
+
+# ------------------------ GL_EXT_texture_env_dot3 ------------------------ #
+GL_DOT3_RGB_EXT = 0x8740
+GL_DOT3_RGBA_EXT = 0x8741
+
+# ------------------- GL_EXT_texture_filter_anisotropic ------------------- #
+GL_TEXTURE_MAX_ANISOTROPY_EXT = 0x84FE
+GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT = 0x84FF
+
+# ------------------------ GL_EXT_texture_lod_bias ------------------------ #
+GL_MAX_TEXTURE_LOD_BIAS_EXT = 0x84FD
+GL_TEXTURE_FILTER_CONTROL_EXT = 0x8500
+GL_TEXTURE_LOD_BIAS_EXT = 0x8501
+
+# ---------------------- GL_EXT_texture_mirror_clamp ---------------------- #
+GL_MIRROR_CLAMP_EXT = 0x8742
+GL_MIRROR_CLAMP_TO_EDGE_EXT = 0x8743
+GL_MIRROR_CLAMP_TO_BORDER_EXT = 0x8912
+
+# ------------------------- GL_EXT_texture_object ------------------------- #
+GL_TEXTURE_PRIORITY_EXT = 0x8066
+GL_TEXTURE_RESIDENT_EXT = 0x8067
+GL_TEXTURE_1D_BINDING_EXT = 0x8068
+GL_TEXTURE_2D_BINDING_EXT = 0x8069
+GL_TEXTURE_3D_BINDING_EXT = 0x806A
+
+cdef extern from "GL/glew.h":
+   GLboolean c_glAreTexturesResidentEXT "glAreTexturesResidentEXT"(GLsizei n, GLuint* textures, GLboolean* residences)
+   void c_glBindTextureEXT "glBindTextureEXT"(GLenum target, GLuint texture)
+   void c_glDeleteTexturesEXT "glDeleteTexturesEXT"(GLsizei n, GLuint* textures)
+   void c_glGenTexturesEXT "glGenTexturesEXT"(GLsizei n, GLuint* textures)
+   GLboolean c_glIsTextureEXT "glIsTextureEXT"(GLuint texture)
+   void c_glPrioritizeTexturesEXT "glPrioritizeTexturesEXT"(GLsizei n, GLuint* textures, GLclampf* priorities)
+
+def glAreTexturesResidentEXT(n, textures, residences):
+   cdef GLuint *arg1
+   cdef GLboolean *arg2
+   cdef int i
+
+   if c_GLEW_EXT_texture_object:
+      for i from 0 <= i < n:
+         arg1[i] = textures[i]
+         arg2[i] = residences[i]
+      return c_glAreTexturesResidentEXT(n, arg1, arg2)
+   else:
+      raise GlewpyError('GL_EXT_texture_object', 'glAreTexturesResidentEXT')
+
+def glBindTextureEXT(target, texture):
+   if c_GLEW_EXT_texture_object:
+      c_glBindTextureEXT(target, texture)
+   else:
+      raise GlewpyError('GL_EXT_texture_object', 'glBindTextureEXT')
+
+def glDeleteTexturesEXT(n, textures):
+   cdef GLuint *arg1
+   cdef int i
+
+   if c_GLEW_EXT_texture_object:
+      for i from 0 <= i < n:
+         arg1[i] = textures[i]
+      c_glDeleteTexturesEXT(n, arg1)
+   else:
+      raise GlewpyError('GL_EXT_texture_object', 'glDeleteTexturesEXT')
+
+def glGenTexturesEXT(n, textures):
+   cdef GLuint *arg1
+   cdef int i
+
+   if c_GLEW_EXT_texture_object:
+      for i from 0 <= i < n:
+         arg1[i] = textures[i]
+      c_glGenTexturesEXT(n, arg1)
+   else:
+      raise GlewpyError('GL_EXT_texture_object', 'glGenTexturesEXT')
+
+def glIsTextureEXT(texture):
+   if c_GLEW_EXT_texture_object:
+      return c_glIsTextureEXT(texture)
+   else:
+      raise GlewpyError('GL_EXT_texture_object', 'glIsTextureEXT')
+
+def glPrioritizeTexturesEXT(n, textures):
+   cdef GLuint *arg1
+   cdef GLclampf *priorities
+   cdef int i
+
+   if c_GLEW_EXT_texture_object:
+      priorities = <GLclampf*>PyMem_Malloc(sizeof(GLclampf) * n)
+      for i from 0 <= i < n:
+         arg1[i] = textures[i]
+      c_glPrioritizeTexturesEXT(n, arg1, priorities)
+      res = list()
+      for i from 0 <= i < n:
+         res.append(priorities[i])
+      PyMem_Free(priorities)
+      return res
+   else:
+      raise GlewpyError('GL_EXT_texture_object', 'glPrioritizeTexturesEXT')
+
+# --------------------- GL_EXT_texture_perturb_normal --------------------- #
+GL_PERTURB_EXT = 0x85AE
+GL_TEXTURE_NORMAL_EXT = 0x85AF
+
+cdef extern from "GL/glew.h":
+   void c_glTextureNormalEXT "glTextureNormalEXT"(GLenum mode)
+
+def glTextureNormalEXT(mode):
+   if c_GLEW_EXT_texture_perturb_normal:
+      c_glTextureNormalEXT(mode)
+   else:
+      raise GlewpyError('GL_EXT_texture_perturb_normal', 'glTextureNormalEXT')
+
+# ------------------------ GL_EXT_texture_rectangle ----------------------- #
+GL_TEXTURE_RECTANGLE_EXT = 0x84F5
+GL_TEXTURE_BINDING_RECTANGLE_EXT = 0x84F6
+GL_PROXY_TEXTURE_RECTANGLE_EXT = 0x84F7
+GL_MAX_RECTANGLE_TEXTURE_SIZE_EXT = 0x84F8
+
+# -------------------------- GL_EXT_vertex_array -------------------------- #
+GL_DOUBLE_EXT = 0x140A
+GL_VERTEX_ARRAY_EXT = 0x8074
+GL_NORMAL_ARRAY_EXT = 0x8075
+GL_COLOR_ARRAY_EXT = 0x8076
+GL_INDEX_ARRAY_EXT = 0x8077
+GL_TEXTURE_COORD_ARRAY_EXT = 0x8078
+GL_EDGE_FLAG_ARRAY_EXT = 0x8079
+GL_VERTEX_ARRAY_SIZE_EXT = 0x807A
+GL_VERTEX_ARRAY_TYPE_EXT = 0x807B
+GL_VERTEX_ARRAY_STRIDE_EXT = 0x807C
+GL_VERTEX_ARRAY_COUNT_EXT = 0x807D
+GL_NORMAL_ARRAY_TYPE_EXT = 0x807E
+GL_NORMAL_ARRAY_STRIDE_EXT = 0x807F
+GL_NORMAL_ARRAY_COUNT_EXT = 0x8080
+GL_COLOR_ARRAY_SIZE_EXT = 0x8081
+GL_COLOR_ARRAY_TYPE_EXT = 0x8082
+GL_COLOR_ARRAY_STRIDE_EXT = 0x8083
+GL_COLOR_ARRAY_COUNT_EXT = 0x8084
+GL_INDEX_ARRAY_TYPE_EXT = 0x8085
+GL_INDEX_ARRAY_STRIDE_EXT = 0x8086
+GL_INDEX_ARRAY_COUNT_EXT = 0x8087
+GL_TEXTURE_COORD_ARRAY_SIZE_EXT = 0x8088
+GL_TEXTURE_COORD_ARRAY_TYPE_EXT = 0x8089
+GL_TEXTURE_COORD_ARRAY_STRIDE_EXT = 0x808A
+GL_TEXTURE_COORD_ARRAY_COUNT_EXT = 0x808B
+GL_EDGE_FLAG_ARRAY_STRIDE_EXT = 0x808C
+GL_EDGE_FLAG_ARRAY_COUNT_EXT = 0x808D
+GL_VERTEX_ARRAY_POINTER_EXT = 0x808E
+GL_NORMAL_ARRAY_POINTER_EXT = 0x808F
+GL_COLOR_ARRAY_POINTER_EXT = 0x8090
+GL_INDEX_ARRAY_POINTER_EXT = 0x8091
+GL_TEXTURE_COORD_ARRAY_POINTER_EXT = 0x8092
+GL_EDGE_FLAG_ARRAY_POINTER_EXT = 0x8093
+
+cdef extern from "GL/glew.h":
+   void c_glArrayElementEXT "glArrayElementEXT"(GLint i)
+   void c_glColorPointerEXT "glColorPointerEXT"(GLint size, GLenum type, GLsizei stride, GLsizei count, void* pointer)
+   void c_glDrawArraysEXT "glDrawArraysEXT"(GLenum mode, GLint first, GLsizei count)
+   void c_glEdgeFlagPointerEXT "glEdgeFlagPointerEXT"(GLsizei stride, GLsizei count, GLboolean* pointer)
+   void c_glGetPointervEXT "glGetPointervEXT"(GLenum pname, void** params)
+   void c_glIndexPointerEXT "glIndexPointerEXT"(GLenum type, GLsizei stride, GLsizei count, void* pointer)
+   void c_glNormalPointerEXT "glNormalPointerEXT"(GLenum type, GLsizei stride, GLsizei count, void* pointer)
+   void c_glTexCoordPointerEXT "glTexCoordPointerEXT"(GLint size, GLenum type, GLsizei stride, GLsizei count, void* pointer)
+   void c_glVertexPointerEXT "glVertexPointerEXT"(GLint size, GLenum type, GLsizei stride, GLsizei count, void* pointer)
+
+def glArrayElementEXT(i):
+   if c_GLEW_EXT_vertex_array:
+      c_glArrayElementEXT(i)
+   else:
+      raise GlewpyError('GL_EXT_vertex_array', 'glArrayElementEXT')
+
+def glColorPointerEXT(size, type, stride, count, pointer):
+   cdef char *arr
+
+   if c_GLEW_EXT_vertex_array:
+      arr = pointer
+      c_glColorPointerEXT(size, type, stride, count, arr)
+   else:
+      raise GlewpyError('GL_EXT_vertex_array', 'glColorPointerEXT')
+
+def glDrawArraysEXT(mode, first, count):
+   if c_GLEW_EXT_vertex_array:
+      c_glDrawArraysEXT(mode, first, count)
+   else:
+      raise GlewpyError('GL_EXT_vertex_array', 'glDrawArraysEXT')
+
+def glEdgeFlagPointerEXT(stride, count, pointer):
+   cdef GLboolean *arg3
+   cdef int i
+
+   if c_GLEW_EXT_vertex_array:
+      arg3 = <GLboolean*>PyMem_Malloc(sizeof(GLboolean) * count)
+      for i from 0 <= i < count:
+         arg3[i] = pointer[i]
+      c_glEdgeFlagPointerEXT(stride, count, arg3)
+      PyMem_Free(arg3)
+   else:
+      raise GlewpyError('GL_EXT_vertex_array', 'glEdgeFlagPointerEXT')
+
+#def glGetPointervEXT(pname): # We'll save this until someone needs it
+
+def glIndexPointerEXT(type, stride, count, pointer):
+   cdef char *arr
+
+   if c_GLEW_EXT_vertex_array:
+      arr = pointer
+      c_glIndexPointerEXT(type, stride, count, arr)
+   else:
+      raise GlewpyError('GL_EXT_vertex_array', 'glIndexPointerEXT')
+
+def glNormalPointerEXT(type, stride, count, pointer):
+   cdef char *arr
+
+   if c_GLEW_EXT_vertex_array:
+      arr = pointer
+      c_glNormalPointerEXT(type, stride, count, arr)
+   else:
+      raise GlewpyError('GL_EXT_vertex_array', 'glNormalPointerEXT')
+
+def glTexCoordPointerEXT(size, type, stride, count, pointer):
+   cdef char *arr
+
+   if c_GLEW_EXT_vertex_array:
+      arr = pointer
+      c_glTexCoordPointerEXT(size, type, stride, count, arr)
+   else:
+      raise GlewpyError('GL_EXT_vertex_array', 'glTexCoordPointerEXT')
+
+def glVertexPointerEXT(size, type, stride, count, pointer):
+   cdef char *arr
+
+   if c_GLEW_EXT_vertex_array:
+      arr = pointer
+      c_glVertexPointerEXT(size, type, stride, count, arr)
+   else:
+      raise GlewpyError('GL_EXT_vertex_array', 'glVertexPointerEXT')
+
+# -------------------------- GL_EXT_vertex_shader ------------------------- #
+GL_VERTEX_SHADER_EXT = 0x8780
+GL_VERTEX_SHADER_BINDING_EXT = 0x8781
+GL_OP_INDEX_EXT = 0x8782
+GL_OP_NEGATE_EXT = 0x8783
+GL_OP_DOT3_EXT = 0x8784
+GL_OP_DOT4_EXT = 0x8785
+GL_OP_MUL_EXT = 0x8786
+GL_OP_ADD_EXT = 0x8787
+GL_OP_MADD_EXT = 0x8788
+GL_OP_FRAC_EXT = 0x8789
+GL_OP_MAX_EXT = 0x878A
+GL_OP_MIN_EXT = 0x878B
+GL_OP_SET_GE_EXT = 0x878C
+GL_OP_SET_LT_EXT = 0x878D
+GL_OP_CLAMP_EXT = 0x878E
+GL_OP_FLOOR_EXT = 0x878F
+GL_OP_ROUND_EXT = 0x8790
+GL_OP_EXP_BASE_2_EXT = 0x8791
+GL_OP_LOG_BASE_2_EXT = 0x8792
+GL_OP_POWER_EXT = 0x8793
+GL_OP_RECIP_EXT = 0x8794
+GL_OP_RECIP_SQRT_EXT = 0x8795
+GL_OP_SUB_EXT = 0x8796
+GL_OP_CROSS_PRODUCT_EXT = 0x8797
+GL_OP_MULTIPLY_MATRIX_EXT = 0x8798
+GL_OP_MOV_EXT = 0x8799
+GL_OUTPUT_VERTEX_EXT = 0x879A
+GL_OUTPUT_COLOR0_EXT = 0x879B
+GL_OUTPUT_COLOR1_EXT = 0x879C
+GL_OUTPUT_TEXTURE_COORD0_EXT = 0x879D
+GL_OUTPUT_TEXTURE_COORD1_EXT = 0x879E
+GL_OUTPUT_TEXTURE_COORD2_EXT = 0x879F
+GL_OUTPUT_TEXTURE_COORD3_EXT = 0x87A0
+GL_OUTPUT_TEXTURE_COORD4_EXT = 0x87A1
+GL_OUTPUT_TEXTURE_COORD5_EXT = 0x87A2
+GL_OUTPUT_TEXTURE_COORD6_EXT = 0x87A3
+GL_OUTPUT_TEXTURE_COORD7_EXT = 0x87A4
+GL_OUTPUT_TEXTURE_COORD8_EXT = 0x87A5
+GL_OUTPUT_TEXTURE_COORD9_EXT = 0x87A6
+GL_OUTPUT_TEXTURE_COORD10_EXT = 0x87A7
+GL_OUTPUT_TEXTURE_COORD11_EXT = 0x87A8
+GL_OUTPUT_TEXTURE_COORD12_EXT = 0x87A9
+GL_OUTPUT_TEXTURE_COORD13_EXT = 0x87AA
+GL_OUTPUT_TEXTURE_COORD14_EXT = 0x87AB
+GL_OUTPUT_TEXTURE_COORD15_EXT = 0x87AC
+GL_OUTPUT_TEXTURE_COORD16_EXT = 0x87AD
+GL_OUTPUT_TEXTURE_COORD17_EXT = 0x87AE
+GL_OUTPUT_TEXTURE_COORD18_EXT = 0x87AF
+GL_OUTPUT_TEXTURE_COORD19_EXT = 0x87B0
+GL_OUTPUT_TEXTURE_COORD20_EXT = 0x87B1
+GL_OUTPUT_TEXTURE_COORD21_EXT = 0x87B2
+GL_OUTPUT_TEXTURE_COORD22_EXT = 0x87B3
+GL_OUTPUT_TEXTURE_COORD23_EXT = 0x87B4
+GL_OUTPUT_TEXTURE_COORD24_EXT = 0x87B5
+GL_OUTPUT_TEXTURE_COORD25_EXT = 0x87B6
+GL_OUTPUT_TEXTURE_COORD26_EXT = 0x87B7
+GL_OUTPUT_TEXTURE_COORD27_EXT = 0x87B8
+GL_OUTPUT_TEXTURE_COORD28_EXT = 0x87B9
+GL_OUTPUT_TEXTURE_COORD29_EXT = 0x87BA
+GL_OUTPUT_TEXTURE_COORD30_EXT = 0x87BB
+GL_OUTPUT_TEXTURE_COORD31_EXT = 0x87BC
+GL_OUTPUT_FOG_EXT = 0x87BD
+GL_SCALAR_EXT = 0x87BE
+GL_VECTOR_EXT = 0x87BF
+GL_MATRIX_EXT = 0x87C0
+GL_VARIANT_EXT = 0x87C1
+GL_INVARIANT_EXT = 0x87C2
+GL_LOCAL_CONSTANT_EXT = 0x87C3
+GL_LOCAL_EXT = 0x87C4
+GL_MAX_VERTEX_SHADER_INSTRUCTIONS_EXT = 0x87C5
+GL_MAX_VERTEX_SHADER_VARIANTS_EXT = 0x87C6
+GL_MAX_VERTEX_SHADER_INVARIANTS_EXT = 0x87C7
+GL_MAX_VERTEX_SHADER_LOCAL_CONSTANTS_EXT = 0x87C8
+GL_MAX_VERTEX_SHADER_LOCALS_EXT = 0x87C9
+GL_MAX_OPTIMIZED_VERTEX_SHADER_INSTRUCTIONS_EXT = 0x87CA
+GL_MAX_OPTIMIZED_VERTEX_SHADER_VARIANTS_EXT = 0x87CB
+GL_MAX_OPTIMIZED_VERTEX_SHADER_INVARIANTS_EXT = 0x87CC
+GL_MAX_OPTIMIZED_VERTEX_SHADER_LOCAL_CONSTANTS_EXT = 0x87CD
+GL_MAX_OPTIMIZED_VERTEX_SHADER_LOCALS_EXT = 0x87CE
+GL_VERTEX_SHADER_INSTRUCTIONS_EXT = 0x87CF
+GL_VERTEX_SHADER_VARIANTS_EXT = 0x87D0
+GL_VERTEX_SHADER_INVARIANTS_EXT = 0x87D1
+GL_VERTEX_SHADER_LOCAL_CONSTANTS_EXT = 0x87D2
+GL_VERTEX_SHADER_LOCALS_EXT = 0x87D3
+GL_VERTEX_SHADER_OPTIMIZED_EXT = 0x87D4
+GL_X_EXT = 0x87D5
+GL_Y_EXT = 0x87D6
+GL_Z_EXT = 0x87D7
+GL_W_EXT = 0x87D8
+GL_NEGATIVE_X_EXT = 0x87D9
+GL_NEGATIVE_Y_EXT = 0x87DA
+GL_NEGATIVE_Z_EXT = 0x87DB
+GL_NEGATIVE_W_EXT = 0x87DC
+GL_ZERO_EXT = 0x87DD
+GL_ONE_EXT = 0x87DE
+GL_NEGATIVE_ONE_EXT = 0x87DF
+GL_NORMALIZED_RANGE_EXT = 0x87E0
+GL_FULL_RANGE_EXT = 0x87E1
+GL_CURRENT_VERTEX_EXT = 0x87E2
+GL_MVP_MATRIX_EXT = 0x87E3
+GL_VARIANT_VALUE_EXT = 0x87E4
+GL_VARIANT_DATATYPE_EXT = 0x87E5
+GL_VARIANT_ARRAY_STRIDE_EXT = 0x87E6
+GL_VARIANT_ARRAY_TYPE_EXT = 0x87E7
+GL_VARIANT_ARRAY_EXT = 0x87E8
+GL_VARIANT_ARRAY_POINTER_EXT = 0x87E9
+GL_INVARIANT_VALUE_EXT = 0x87EA
+GL_INVARIANT_DATATYPE_EXT = 0x87EB
+GL_LOCAL_CONSTANT_VALUE_EXT = 0x87EC
+GL_LOCAL_CONSTANT_DATATYPE_EXT = 0x87ED
+
+# ------------------------ GL_EXT_vertex_weighting ------------------------ #
+GL_MODELVIEW0_STACK_DEPTH_EXT = 0x0BA3
+GL_MODELVIEW0_MATRIX_EXT = 0x0BA6
+GL_MODELVIEW0_EXT = 0x1700
+GL_MODELVIEW1_STACK_DEPTH_EXT = 0x8502
+GL_MODELVIEW1_MATRIX_EXT = 0x8506
+GL_VERTEX_WEIGHTING_EXT = 0x8509
+GL_MODELVIEW1_EXT = 0x850A
+GL_CURRENT_VERTEX_WEIGHT_EXT = 0x850B
+GL_VERTEX_WEIGHT_ARRAY_EXT = 0x850C
+GL_VERTEX_WEIGHT_ARRAY_SIZE_EXT = 0x850D
+GL_VERTEX_WEIGHT_ARRAY_TYPE_EXT = 0x850E
+GL_VERTEX_WEIGHT_ARRAY_STRIDE_EXT = 0x850F
+GL_VERTEX_WEIGHT_ARRAY_POINTER_EXT = 0x8510
+
+cdef extern from "GL/glew.h":
+   void c_glVertexWeightPointerEXT "glVertexWeightPointerEXT"(GLint size, GLenum type, GLsizei stride, void* pointer)
+   void c_glVertexWeightfEXT "glVertexWeightfEXT"(GLfloat weight)
+   void c_glVertexWeightfvEXT "glVertexWeightfvEXT"(GLfloat* weight)
+
+def glVertexWeightPointerEXT(size, type, stride, pointer):
+   cdef char *arr
+
+   if c_GLEW_EXT_vertex_weighting:
+      arr = pointer
+      c_glVertexWeightPointerEXT(size, type, stride, arr)
+   else:
+      raise GlewpyError('GL_EXT_vertex_weighting', 'glVertexWeightPointerEXT')
+
+def glVertexWeightfEXT(weight):
+   if c_GLEW_EXT_vertex_weighting:
+      c_glVertexWeightfEXT(weight)
+   else:
+      raise GlewpyError('GL_EXT_vertex_weighting', 'GL_EXT_vertex_weighting')
+
+def glVertexWeightfvEXT(weight):
+   cdef GLfloat arg[1]
+
+   if c_GLEW_EXT_vertex_weighting:
+      arg[0] = weight[0]
+      c_glVertexWeightfvEXT(arg)
+   else:
+      raise GlewpyError('GL_EXT_vertex_weighting', 'glVertexWeightfvEXT')
