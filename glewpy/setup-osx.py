@@ -30,7 +30,8 @@ setup(
     Extension('gl.oml', ['src/gl/oml.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.pgi', ['src/gl/pgi.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
     Extension('gl.rend', ['src/gl/rend.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
-    Extension('gl.s3', ['src/gl/s3.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL'])
+    Extension('gl.s3', ['src/gl/s3.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL']),
+    Extension('gl.sgis', ['src/gl/sgis.pyx'], libraries = ['GLEW'], extra_link_args = ['-framework', 'OpenGL'])
     ],
   cmdclass = {'build_ext': build_ext}
 )
