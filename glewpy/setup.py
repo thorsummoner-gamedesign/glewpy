@@ -10,7 +10,7 @@ setup(
   url = 'http://glewpy.sourceforge.net/',
   ext_package = 'glew',
   packages = ['glew', 'glew.gl', 'glew.glx', 'glew.wgl'],
-  package_dir = {'glew': 'src/'},
+  package_dir = {'glew': 'src'},
   ext_modules=[
     Extension('glew', ['src/glew.pyx']),
     Extension('gl.threedfx', ['src/gl/threedfx.pyx']),

@@ -16,7 +16,7 @@ cdef extern from "GL/glew.h":
    GLenum c_glewInit "glewInit"()
    GLbyte* c_glewGetString "glewGetString"(GLenum name)
    GLbyte* c_glewGetErrorString "glewGetErrorString"(GLenum error)
-   GLboolean c_glewGetExtension "glewGetExtension"(char* name)   
+   GLboolean c_glewGetExtension "glewGetExtension"(char* name)
    
 def glewInit():
    """Initialize the glew world.  There must be an existing OpenGL
