@@ -1821,6 +1821,32 @@ cdef extern from "GL/glew.h":
    void c_glGetActiveAttribARB "glGetActiveAttribARB"(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei* length, GLint *size, GLenum *type, GLcharARB *name)
    GLint c_glGetAttribLocationARB "glGetAttribLocationARB"(GLhandleARB programObj, GLcharARB* name)
 
+def glBindAttribLocationARB(programObj, index, name):
+   if c_GLEW_ARB_vertex_shader:
+      c_glBindAttribLocationARB(programObj, index, name)
+   else:
+      GlewpyError('GL_ARB_vertex_shader', 'glBindAttribLocationARB')
+
+def glGetActiveAttribARB(programObj, index, maxLength):
+   cdef GLint size
+   cdef GLenum type
+   cdef GLcharARB *name
+
+   if c_GLEW_ARB_vertex_shader:
+      name = <GLcharARB*>PyMem_Malloc(sizeof(GLcharARB) * maxLength)
+      c_glGetActiveAttribARB(programObj, index, maxLength, NULL, &size, &type, name)
+      retname = name
+      PyMem_Free(name)
+      return (size, type, retname)
+   else:
+      GlewpyError('GL_ARB_vertex_shader', 'glGetActiveAttribARB')
+
+def glGetAttribLocationARB(programObj, name):
+   if c_GLEW_ARB_vertex_shader:
+      return c_glGetAttribLocationARB(programObj, name)
+   else:
+      GlewpyError('GL_ARB_vertex_shader', 'glGetAttribLocationARB')
+
 # --------------------------- GL_ARB_window_pos --------------------------- #
 cdef extern from "GL/glew.h":
    void c_glWindowPos2dARB "glWindowPos2dARB"(GLdouble x, GLdouble y)
