@@ -24,6 +24,7 @@ cdef extern from "GL/glew.h":
       c_GLEW_EXT_draw_range_elements "GLEW_EXT_draw_range_elements"
       c_GLEW_EXT_fog_coord "GLEW_EXT_fog_coord"
       c_GLEW_EXT_fragment_lighting "GLEW_EXT_fragment_lighting"
+      c_GLEW_EXT_framebuffer_object "GLEW_EXT_framebuffer_object"
       c_GLEW_EXT_histogram "GLEW_EXT_histogram"
       c_GLEW_EXT_index_array_formats "GLEW_EXT_index_array_formats"
       c_GLEW_EXT_index_func "GLEW_EXT_index_func"
@@ -91,6 +92,7 @@ def GLEW_EXT_depth_bounds_test(): return c_GLEW_EXT_depth_bounds_test
 def GLEW_EXT_draw_range_elements(): return c_GLEW_EXT_draw_range_elements
 def GLEW_EXT_fog_coord(): return c_GLEW_EXT_fog_coord
 def GLEW_EXT_fragment_lighting(): return c_GLEW_EXT_fragment_lighting
+def GLEW_EXT_framebuffer_object(): return c_GLEW_EXT_framebuffer_object
 def GLEW_EXT_histogram(): return c_GLEW_EXT_histogram
 def GLEW_EXT_index_array_formats(): return c_GLEW_EXT_index_array_formats
 def GLEW_EXT_index_func(): return c_GLEW_EXT_index_func
@@ -622,6 +624,214 @@ def glLightEnviEXT(pname, param):
     else:
         raise GlewpyError('GL_EXT_fragment_lighting', 'glLightEnviEXT')
 
+# ------------------------ GL_EXT_framebuffer_object ----------------------- #
+GL_INVALID_FRAMEBUFFER_OPERATION_EXT = 0x0506
+GL_MAX_RENDERBUFFER_SIZE_EXT = 0x84E8
+GL_FRAMEBUFFER_BINDING_EXT = 0x8CA6
+GL_RENDERBUFFER_BINDING_EXT = 0x8CA7
+GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_EXT = 0x8CD0
+GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT = 0x8CD1
+GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_EXT = 0x8CD2
+GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE_EXT = 0x8CD3
+GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_EXT = 0x8CD4
+GL_FRAMEBUFFER_COMPLETE_EXT = 0x8CD5
+GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT = 0x8CD6
+GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT = 0x8CD7
+GL_FRAMEBUFFER_INCOMPLETE_DUPLICATE_ATTACHMENT_EXT = 0x8CD8
+GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT = 0x8CD9
+GL_FRAMEBUFFER_INCOMPLETE_FORMATS_EXT = 0x8CDA
+GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT = 0x8CDB
+GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT = 0x8CDC
+GL_FRAMEBUFFER_UNSUPPORTED_EXT = 0x8CDD
+GL_FRAMEBUFFER_STATUS_ERROR_EXT = 0x8CDE
+GL_MAX_COLOR_ATTACHMENTS_EXT = 0x8CDF
+GL_COLOR_ATTACHMENT0_EXT = 0x8CE0
+GL_COLOR_ATTACHMENT1_EXT = 0x8CE1
+GL_COLOR_ATTACHMENT2_EXT = 0x8CE2
+GL_COLOR_ATTACHMENT3_EXT = 0x8CE3
+GL_COLOR_ATTACHMENT4_EXT = 0x8CE4
+GL_COLOR_ATTACHMENT5_EXT = 0x8CE5
+GL_COLOR_ATTACHMENT6_EXT = 0x8CE6
+GL_COLOR_ATTACHMENT7_EXT = 0x8CE7
+GL_COLOR_ATTACHMENT8_EXT = 0x8CE8
+GL_COLOR_ATTACHMENT9_EXT = 0x8CE9
+GL_COLOR_ATTACHMENT10_EXT = 0x8CEA
+GL_COLOR_ATTACHMENT11_EXT = 0x8CEB
+GL_COLOR_ATTACHMENT12_EXT = 0x8CEC
+GL_COLOR_ATTACHMENT13_EXT = 0x8CED
+GL_COLOR_ATTACHMENT14_EXT = 0x8CEE
+GL_COLOR_ATTACHMENT15_EXT = 0x8CEF
+GL_DEPTH_ATTACHMENT_EXT = 0x8D00
+GL_STENCIL_ATTACHMENT_EXT = 0x8D20
+GL_FRAMEBUFFER_EXT = 0x8D40
+GL_RENDERBUFFER_EXT = 0x8D41
+GL_RENDERBUFFER_WIDTH_EXT = 0x8D42
+GL_RENDERBUFFER_HEIGHT_EXT = 0x8D43
+GL_RENDERBUFFER_INTERNAL_FORMAT_EXT = 0x8D44
+GL_STENCIL_INDEX_EXT = 0x8D45
+GL_STENCIL_INDEX1_EXT = 0x8D46
+GL_STENCIL_INDEX4_EXT = 0x8D47
+GL_STENCIL_INDEX8_EXT = 0x8D48
+GL_STENCIL_INDEX16_EXT = 0x8D49
+
+cdef extern from "GL/glew.h":
+   void c_glBindFramebufferEXT "glBindFramebufferEXT"(GLenum target, GLuint framebuffer)
+   void c_glBindRenderbufferEXT "glBindRenderbufferEXT"(GLenum target, GLuint renderbuffer)
+   GLenum c_glCheckFramebufferStatusEXT "glCheckFramebufferStatusEXT"(GLenum target)
+   void c_glDeleteFramebuffersEXT "glDeleteFramebuffersEXT"(GLsizei n, GLuint* framebuffers)
+   void c_glDeleteRenderbuffersEXT "glDeleteRenderbuffersEXT"(GLsizei n, GLuint* renderbuffers)
+   void c_glFramebufferRenderbufferEXT "glFramebufferRenderbufferEXT"(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
+   void c_glFramebufferTexture1DEXT "glFramebufferTexture1DEXT"(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
+   void c_glFramebufferTexture2DEXT "glFramebufferTexture2DEXT"(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
+   void c_glFramebufferTexture3DEXT "glFramebufferTexture3DEXT"(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset)
+   void c_glGenFramebuffersEXT "glGenFramebuffersEXT"(GLsizei n, GLuint* framebuffers)
+   void c_glGenRenderbuffersEXT "glGenRenderbuffersEXT"(GLsizei n, GLuint* renderbuffers)
+   void c_glGenerateMipmapEXT "glGenerateMipmapEXT"(GLenum target)
+   void c_glGetFramebufferAttachmentParameterivEXT "glGetFramebufferAttachmentParameterivEXT"(GLenum target, GLenum attachment, GLenum pname, GLint* params)
+   void c_glGetRenderbufferParameterivEXT "glGetRenderbufferParameterivEXT"(GLenum target, GLenum pname, GLint* params)
+   GLboolean c_glIsFramebufferEXT "glIsFramebufferEXT"(GLuint framebuffer)
+   GLboolean c_glIsRenderbufferEXT "glIsRenderbufferEXT"(GLuint renderbuffer)
+   void c_glRenderbufferStorageEXT "glRenderbufferStorageEXT"(GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
+
+def glBindFramebufferEXT(target, framebuffer):
+   if c_GLEW_EXT_framebuffer_object:
+      c_glBindFramebufferEXT(target, framebuffer)
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glBindFramebufferEXT')
+def glBindRenderbufferEXT(target, renderbuffer):
+   if c_GLEW_EXT_framebuffer_object:
+      c_glBindRenderbufferEXT(target, renderbuffer)
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glBindRenderbufferEXT')
+
+def glCheckFramebufferStatusEXT(target):
+   if c_GLEW_EXT_framebuffer_object:
+      return c_glCheckFramebufferStatusEXT(target)
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glCheckFramebufferStatusEXT')
+
+def glDeleteFramebuffersEXT(n, framebuffers):
+   cdef GLuint *args
+   cdef int i
+   
+   if c_GLEW_EXT_framebuffer_object:
+      args = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i from 0 <= i < n:
+         args[i] = framebuffers[i]
+      c_glDeleteFramebuffersEXT(n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glDeleteFramebuffersEXT')
+
+def glDeleteRenderbuffersEXT(n, renderbuffers):
+   cdef GLuint *args
+   cdef int i
+   
+   if c_GLEW_EXT_framebuffer_object:
+      args = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i from 0 <= i < n:
+         args[i] = renderbuffers[i]
+      c_glDeleteRenderbuffersEXT(n, args)
+      PyMem_Free(args)
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glDeleteRenderbuffersEXT')
+
+def glFramebufferRenderbufferEXT(target, attachment, renderbuffertarget, renderbuffer):
+   if c_GLEW_EXT_framebuffer_object:
+      c_glFramebufferRenderbufferEXT(target, attachment, renderbuffertarget, renderbuffer)
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glFramebufferRenderbufferEXT')
+
+def glFramebufferTexture1DEXT(target, attachment, textarget, texture, level):
+   if c_GLEW_EXT_framebuffer_object:
+      c_glFramebufferTexture1DEXT(target, attachment, textarget, texture, level)
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glFramebufferTexture1DEXT')
+
+def glFramebufferTexture2DEXT(target, attachment, textarget, texture, level):
+   if c_GLEW_EXT_framebuffer_object:
+      c_glFramebufferTexture2DEXT(target, attachment, textarget, texture, level)
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glFramebufferTexture2DEXT')
+
+def glFramebufferTexture3DEXT(target, attachment, textarget, texture, level, zoffset):
+   if c_GLEW_EXT_framebuffer_object:
+      c_glFramebufferTexture3DEXT(target, attachment, textarget, texture, level, zoffset)
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glFramebufferTexture3DEXT')
+
+def glGenFramebuffersEXT(n):
+   cdef GLuint *args
+   cdef int i
+
+   if c_GLEW_EXT_framebuffer_object:
+      args = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      c_glGenFramebuffersEXT(n, args)
+      res = []
+      for i from 0 <= i < n:
+         res.append(args[i])
+      PyMem_Free(args)
+      return res
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glGenFramebuffersEXT')
+
+def glGenRenderbuffersEXT(n):
+   cdef GLuint *args
+   cdef int i
+
+   if c_GLEW_EXT_framebuffer_object:
+      args = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      c_glGenRenderbuffersEXT(n, args)
+      res = []
+      for i from 0 <= i < n:
+         res.append(args[i])
+      PyMem_Free(args)
+      return res
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glGenRenderbuffersEXT')
+
+def glGenerateMipmapEXT(target):
+   if c_GLEW_EXT_framebuffer_object:
+      c_glGenerateMipmapEXT(target)
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glGenerateMipmapEXT')
+
+def glGetFramebufferAttachmentParameterivEXT(target, attachment, pname):
+   cdef GLint params[1]
+
+   if c_GLEW_EXT_framebuffer_object:
+      c_glGetFramebufferAttachmentParameterivEXT(target, attachment, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glGetFramebufferAttachmentParameterivEXT')
+
+def glGetRenderbufferParameterivEXT(target, pname):
+   cdef GLint params[1]
+
+   if c_GLEW_EXT_framebuffer_object:
+      c_glGetRenderbufferParameterivEXT(target, pname, params)
+      return params[0]
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glGetRenderbufferParameterivEXT')
+
+def glIsFramebufferEXT(framebuffer):
+   if c_GLEW_EXT_framebuffer_object:
+      return c_glIsFramebufferEXT(framebuffer)
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glIsFramebufferEXT')
+   
+def glIsRenderbufferEXT(framebuffer):
+   if c_GLEW_EXT_framebuffer_object:
+      return c_glIsRenderbufferEXT(framebuffer)
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glIsRenderbufferEXT')
+
+def glRenderbufferStorageEXT(target, internalformat, width, height):
+   if c_GLEW_EXT_framebuffer_object:
+      c_glRenderbufferStorageEXT(target, internalformat, width, height)
+   else:
+      raise GlewpyError('GL_EXT_framebuffer_object', 'glRenderbufferStorageEXT')
+   
 # ---------------------------- GL_EXT_histogram --------------------------- #
 GL_HISTOGRAM_EXT = 0x8024
 GL_PROXY_HISTOGRAM_EXT = 0x8025
