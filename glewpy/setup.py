@@ -1,6 +1,21 @@
 from distutils.core import setup
 from distutils.extension import Extension
 from Pyrex.Distutils import build_ext
+
+gl_modules = ['threedfx', 'apple', 'arb', 'ati', 'atix', 'ext', 'gl',
+              'hp', 'ibm', 'ingr', 'intel', 'ktx', 'mesa', 'nv', 'oml',
+              'pgi', 'rend', 's3', 'sgis', 'sgix', 'sgi', 'sunx',
+              'sun', 'win']
+
+glew_extensions = [Extension('glew', ['src/glew.pyx'], libraries=['GLEW'])]
+gl_extensions = [Extension('gl.%s' % g,
+                           ['src/gl/%s.pyx' % g],
+                           libraries=['GLEW']) for g in gl_modules]
+
+all_extensions = []
+all_extensions.extend(glew_extensions)
+all_extensions.extend(gl_extensions)
+
 setup(
   name = "glewpy",
   version = '0.7.1',
@@ -15,32 +30,6 @@ setup(
                             'examples/mandelbrot.frag',
                             'examples/oneshot.py',
                             'examples/logo2.jpg']},
-  ext_modules=[
-    Extension('glew', ['src/glew.pyx']),
-    Extension('gl.threedfx', ['src/gl/threedfx.pyx']),
-    Extension('gl.apple', ['src/gl/apple.pyx']),
-    Extension('gl.arb', ['src/gl/arb.pyx']),
-    Extension('gl.ati', ['src/gl/ati.pyx']),
-    Extension('gl.atix', ['src/gl/atix.pyx']),
-    Extension('gl.ext', ['src/gl/ext.pyx']),
-    Extension('gl.gl', ['src/gl/gl.pyx']),
-    Extension('gl.hp', ['src/gl/hp.pyx']),
-    Extension('gl.ibm', ['src/gl/ibm.pyx']),
-    Extension('gl.ingr', ['src/gl/ingr.pyx']),
-    Extension('gl.intel', ['src/gl/intel.pyx']),
-    Extension('gl.ktx', ['src/gl/ktx.pyx']),
-    Extension('gl.mesa', ['src/gl/mesa.pyx']),
-    Extension('gl.nv', ['src/gl/nv.pyx']),
-    Extension('gl.oml', ['src/gl/oml.pyx']),
-    Extension('gl.pgi', ['src/gl/pgi.pyx']),
-    Extension('gl.rend', ['src/gl/rend.pyx']),
-    Extension('gl.s3', ['src/gl/s3.pyx']),
-    Extension('gl.sgis', ['src/gl/sgis.pyx']),
-    Extension('gl.sgix', ['src/gl/sgix.pyx']),
-    Extension('gl.sgi', ['src/gl/sgi.pyx']),
-    Extension('gl.sunx', ['src/gl/sunx.pyx']),
-    Extension('gl.sun', ['src/gl/sun.pyx']),
-    Extension('gl.win', ['src/gl/win.pyx'])
-    ],
+  ext_modules=all_extensions,
   cmdclass = {'build_ext': build_ext}
 )
