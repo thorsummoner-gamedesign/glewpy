@@ -4,5 +4,5 @@ Requirements:
 
 Just run the following commands
 
-> python setup.py build_ext --libraries=GLEW
+> python setup.py build
 > python setup.py install

@@ -1,16 +1,22 @@
+import sys
 from distutils.core import setup
 from distutils.extension import Extension
 from Pyrex.Distutils import build_ext
+
+if sys.platform == 'win32':
+    libs = ['glew32']
+else:
+    libs = ['GLEW']
 
 gl_modules = ['threedfx', 'apple', 'arb', 'ati', 'atix', 'ext', 'gl',
               'hp', 'ibm', 'ingr', 'intel', 'ktx', 'mesa', 'nv', 'oml',
               'pgi', 'rend', 's3', 'sgis', 'sgix', 'sgi', 'sunx',
               'sun', 'win']
 
-glew_extensions = [Extension('glew', ['src/glew.pyx'], libraries=['GLEW'])]
+glew_extensions = [Extension('glew', ['src/glew.pyx'], libraries=libs)]
 gl_extensions = [Extension('gl.%s' % g,
                            ['src/gl/%s.pyx' % g],
-                           libraries=['GLEW']) for g in gl_modules]
+                           libraries=libs) for g in gl_modules]
 
 all_extensions = []
 all_extensions.extend(glew_extensions)
