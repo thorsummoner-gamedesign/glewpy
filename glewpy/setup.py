@@ -24,7 +24,7 @@ all_extensions.extend(gl_extensions)
 
 setup(
   name = "glewpy",
-  version = '0.7.1',
+  version = '0.7.2',
   description = 'Python Wrapping of GLEW',
   author = 'Charles Moad',
   author_email = 'cmoad@indiana.edu',
