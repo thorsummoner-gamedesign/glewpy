@@ -1811,29 +1811,33 @@ def glEndQuery(target):
    else:
       raise GlewpyError('GL_VERSION_1_5', 'glEndQuery')
    
-def glGenBuffers(n, buffers):
+def glGenBuffers(n):
    cdef GLuint *arr
    cdef int i
 
    if c_GLEW_VERSION_1_5:
       arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
-      for i from 0 <= i < n:
-         arr[i] = buffers[i]
       c_glGenBuffers(n, arr)
+      buffers = []
+      for i from 0 <= i < n:
+         buffers.append(arr[i])
       PyMem_Free(arr)
+      return tuple(buffers)
    else:
       raise GlewpyError('GL_VERSION_1_5', 'glGenBuffers')
 
-def glGenQueries(n, ids):
-   cdef GLuint *args
+def glGenQueries(n):
+   cdef GLuint *arr
    cdef int i
 
    if c_GLEW_VERSION_1_5:
-      args = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      c_glGenQueries(n, arr)
+      ids = []
       for i from 0 <= i < n:
-         args[i] = ids[i]
-      c_glGenQueries(n, args)
-      PyMem_Free(args)
+         ids.append(arr[i])
+      PyMem_Free(arr)
+      return tuple(ids)
    else:
       raise GlewpyError('GL_VERSION_1_5', 'glGenQueries')
 
