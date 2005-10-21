@@ -2053,16 +2053,18 @@ def glDeleteBuffersARB(n, buffers):
    else:
       raise GlewpyError('GL_ARB_vertex_buffer_object', 'glDeleteBuffersARB')
 
-def glGenBuffersARB(n, buffers):
-   cdef GLuint *arr
+def glGenBuffersARB(n):
+   cdef GLuint *buffers
    cdef int i
 
    if c_GLEW_ARB_vertex_buffer_object:
-      arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      buffers = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      c_glGenBuffersARB(n, buffers)
+      res = []
       for i from 0 <= i < n:
-         arr[i] = buffers[i]
-      c_glGenBuffersARB(n, arr)
-      PyMem_Free(arr)
+         res.append(buffers[i])
+      PyMem_Free(buffers)
+      return tuple(res)
    else:
       raise GlewpyError('GL_ARB_vertex_buffer_object', 'glGenBuffersARB')
 
