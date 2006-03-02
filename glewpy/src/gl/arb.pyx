@@ -2223,7 +2223,7 @@ def glDeleteProgramsARB(programs):
    if c_GLEW_ARB_vertex_program:
       n = len(programs)
       arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
-      for i in 0 <= i < n:
+      for i from 0 <= i < n:
          arr[i] = programs[i]
       c_glDeleteProgramsARB(n, arr)
       PyMem_Free(arr)
@@ -2237,9 +2237,9 @@ def glGenProgramsARB(n):
    if c_GLEW_ARB_vertex_program:
       arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
       c_glGenProgramsARB(n, arr)
-      reval = []
-      for i in i <= 0 < n:
-         reval.append(arr[i])
+      retval = []
+      for i from 0 <= i < n:
+         retval.append(arr[i])
       PyMem_Free(arr)
       return retval
    else:
@@ -2247,7 +2247,7 @@ def glGenProgramsARB(n):
       
 def glProgramStringARB(target, format, progstring):
    if c_GLEW_ARB_vertex_program:
-      c_glProgramStringARB(target, format, len(progstring), progstring)
+      c_glProgramStringARB(target, format, len(progstring), <void*>progstring)
    else:
       raise GlewpyError('GL_ARB_vertex_program', 'glProgramStringARB')
 
