@@ -2244,6 +2244,12 @@ def glGenProgramsARB(n):
       return retval
    else:
       raise GlewpyError('GL_ARB_vertex_program', 'glGenProgramsARB')
+      
+def glProgramStringARB(target, format, progstring):
+   if c_GLEW_ARB_vertex_program:
+      c_glProgramStringARB(target, format, len(progstring), progstring)
+   else:
+      raise GlewpyError('GL_ARB_vertex_program', 'glProgramStringARB')
 
 # -------------------------- GL_ARB_vertex_shader ------------------------- #
 GL_VERTEX_SHADER_ARB = 0x8B31
