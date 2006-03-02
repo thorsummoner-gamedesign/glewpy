@@ -2203,6 +2203,48 @@ GL_MATRIX29_ARB = 0x88DD
 GL_MATRIX30_ARB = 0x88DE
 GL_MATRIX31_ARB = 0x88DF
 
+cdef extern from "GL/glew.h":
+   void c_glBindProgramARB "glBindProgramARB"(GLenum target, GLuint program)
+   void c_glDeleteProgramsARB "glDeleteProgramsARB"(GLsizei n, GLuint* programs)
+   void c_glGenProgramsARB "glGenProgramsARB"(GLsizei n, GLuint* programs)
+   void c_glProgramStringARB "glProgramStringARB"(GLenum target, GLenum format, GLsizei len, void* string)
+
+def glBindProgramARB(target, program):
+   if c_GLEW_ARB_vertex_program:
+      c_glBindProgramARB(target, program)
+   else:
+      raise GlewpyError('GL_ARB_vertex_program', 'glBindProgramARB')
+
+def glDeleteProgramsARB(programs):
+   cdef GLuint *arr
+   cdef GLsizei n
+   cdef int i
+   
+   if c_GLEW_ARB_vertex_program:
+      n = len(programs)
+      arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      for i in 0 <= i < n:
+         arr[i] = programs[i]
+      c_glDeleteProgramsARB(n, arr)
+      PyMem_Free(arr)
+   else:
+      raise GlewpyError('GL_ARB_vertex_program', 'glDeleteProgramsARB')
+      
+def glGenProgramsARB(n):
+   cdef GLuint* arr
+   cdef int i
+   
+   if c_GLEW_ARB_vertex_program:
+      arr = <GLuint*>PyMem_Malloc(sizeof(GLuint) * n)
+      c_glGenProgramsARB(n, arr)
+      reval = []
+      for i in i <= 0 < n:
+         reval.append(arr[i])
+      PyMem_Free(arr)
+      return retval
+   else:
+      raise GlewpyError('GL_ARB_vertex_program', 'glGenProgramsARB')
+
 # -------------------------- GL_ARB_vertex_shader ------------------------- #
 GL_VERTEX_SHADER_ARB = 0x8B31
 GL_MAX_VERTEX_UNIFORM_COMPONENTS_ARB = 0x8B4A
