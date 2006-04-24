@@ -4,7 +4,7 @@ from distutils.extension import Extension
 from Pyrex.Distutils import build_ext
 
 if sys.platform == 'win32':
-    libs = ['glew32']
+    libs = ['glew32', 'opengl32']
 else:
     libs = ['GLEW']
 
@@ -24,7 +24,7 @@ all_extensions.extend(gl_extensions)
 
 setup(
   name = "glewpy",
-  version = '0.7.3-cvs',
+  version = '0.7.4',
   description = 'Python Wrapping of GLEW',
   author = 'Charles Moad',
   author_email = 'cmoad@indiana.edu',
