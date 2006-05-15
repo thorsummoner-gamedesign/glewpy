@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import sys
+import os, sys
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
@@ -12,7 +12,7 @@ INNER_COLOR = (0.0, 0.0, 0.0)
 OUTER_COLOR_1 = (0.5, 0.0, 1.5)
 OUTER_COLOR_2 = (0.0, 1.5, 0.0)
 
-shaderFile = 'mandelbrot.frag'
+shaderFile = os.sep.join([os.path.dirname(__file__), 'mandelbrot.frag'])
 fragShader = None
 shaderProgram = None
 mouseDragging = False
@@ -186,7 +186,7 @@ def initShader(filename):
    print 'glGetAttachedObjectsARB =', glGetAttachedObjectsARB(shaderProgram)
    print 'glGetInfoLogARB =', glGetInfoLogARB(shaderProgram)
 
-if (__name__ == '__main__'):
+def main():
    # Create a rendering context
    glutInit(sys.argv)
    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA)
@@ -225,3 +225,6 @@ if (__name__ == '__main__'):
    initShader(shaderFile)
    
    glutMainLoop()
+   
+if (__name__ == '__main__'):
+    main()

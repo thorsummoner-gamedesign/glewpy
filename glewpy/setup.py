@@ -30,7 +30,7 @@ setup(
   author_email = 'cmoad@indiana.edu',
   url = 'http://glewpy.sourceforge.net/',
   ext_package = 'glew',
-  packages = ['glew', 'glew.gl', 'glew.glx', 'glew.wgl'],
+  packages = ['glew', 'glew.gl', 'glew.glx', 'glew.wgl', 'glew.examples'],
   package_dir = {'glew' : 'src'},
   package_data = {'glew' : ['examples/mandelbrot.py',
                             'examples/mandelbrot.frag',
