@@ -2085,7 +2085,7 @@ def glGetBufferPointervARB(target, pname):
       c_glGetBufferParameterivARB(target, pname, &size)
       params = <char*>PyMem_Malloc(size)
       c_glGetBufferPointervARB(target, pname, <void**>&params)
-      result = params
+      result = <object>PyString_FromStringAndSize(params, size)
       PyMem_Free(params)
       return result
    else:
@@ -2097,7 +2097,7 @@ def glGetBufferSubDataARB(target, offset, size):
    if c_GLEW_ARB_vertex_buffer_object:
       data = <char*>PyMem_Malloc(size)
       c_glGetBufferSubDataARB(target, offset, size, data)
-      result = data
+      result = <object>PyString_FromStringAndSize(data, size)
       PyMem_Free(data)
       return result
    else:
