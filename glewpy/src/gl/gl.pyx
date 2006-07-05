@@ -558,6 +558,7 @@ cdef extern from "GL/glew.h":
    void c_glGetTexLevelParameterfv "glGetTexLevelParameterfv"(GLenum target, GLint level, GLenum pname, GLfloat *params)
    void c_glGetTexLevelParameteriv "glGetTexLevelParameteriv"(GLenum target, GLint level, GLenum pname, GLint *params)
    void c_glTexImage2D "glTexImage2D"(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, GLvoid *pixels)
+   void c_glVertexPointer "glVertexPointer"(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
 
 def glGetError():
    """glGetError()
@@ -593,6 +594,19 @@ def glTexImage2D(target, level, internalformat, width, height, border, format, t
       c_glTexImage2D(target, level, internalformat, width, height, border, format, type, data)
    else:
       raise GlewpyError('GL_VERSION_1_1', 'glTexImage2D')
+
+def glVertexPointer(size, type, stride, pointer):
+   cdef char *arr
+
+   if GLEW_VERSION_1_1:
+      try:
+         arr = pointer
+      except:
+         arr = <char*>0
+         arr = &arr[pointer]
+      c_glVertexPointer(size, type, stride, arr)
+   else:
+      raise GlewpyError('GL_VERSION_1_1', 'glVertexPointer')
 
 # ----------------------------- GL_VERSION_1_2 ---------------------------- #
 GL_SMOOTH_POINT_SIZE_RANGE = 0x0B12
